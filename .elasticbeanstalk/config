@@ -1,0 +1,6 @@
+[global]
+ApplicationName=My First Elastic Beanstalk Application
+AwsCredentialFile=./elasticbeantalk/aws_credentials
+DevToolsEndpoint=git.elasticbeanstalk.us-west-1-amazonaws.com
+EnvirontmentName=pivotwpsite
+Region=us-west-1
