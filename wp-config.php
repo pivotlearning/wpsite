@@ -23,13 +23,13 @@
 define('DB_NAME', 'pivot');
 
 /** MySQL database username */
-define('DB_USER', 'puffins');
+define('DB_USER', 'pivotdb');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'fr3ckl3s');
+define('DB_PASSWORD', 'pivot731');
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'aa1jz1kqinf2u1u.cg3rmgk8n7ah.us-west-1.rds.amazonaws.com:3306');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
