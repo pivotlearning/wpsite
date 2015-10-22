@@ -29,7 +29,7 @@ define('DB_USER', 'pivotdb');
 define('DB_PASSWORD', 'pivot731');
 
 /** MySQL hostname */
-define('DB_HOST', 'aa1jz1kqinf2u1u.cg3rmgk8n7ah.us-west-1.rds.amazonaws.com:3306');
+define('DB_HOST', 'aa17mnu9pg5mn01.cg3rmgk8n7ah.us-west-1.rds.amazonaws.com:3306');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
