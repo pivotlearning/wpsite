@@ -38,7 +38,7 @@
         <!-- end left section -->
         <div class="right animated eff-fadeInRight delay-150ms">
 			<div class="king-form two">
-				<?php echo do_shortcode( '[contact-form-7 id="95"]' ); ?>
+				<?php echo do_shortcode( '[salesforce form="1"]' ); ?>
 			</div>
         </div>
     </div>
