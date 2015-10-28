@@ -6,3 +6,5 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+wp-content/plugins/linstar-helper/.DS_Store
