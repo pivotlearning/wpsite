@@ -8,4 +8,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </ifmodule>
 # END WordPress
-AddHandler application/x-httpd-php54 .php
+AddHandler application/x-httpd-php56 .php
