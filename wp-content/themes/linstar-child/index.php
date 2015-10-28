@@ -16,9 +16,23 @@ get_header();
 	<div id="primary" class="site-content container-content content ">
 		<div id="content" class="row row-content container">
 			<div class="col-md-9">
-				<?php if ( have_posts() ) : ?>
+				<?php
+					$events = new Eventbrite_Query( apply_filters( 'eventbrite_query_args', array(
+					// 'display_private' => false, // boolean
+					// 'nopaging' => false,        // boolean
+					// 'limit' => null,            // integer
+					// 'organizer_id' => null,     // integer
+					// 'p' => null,                // integer
+					// 'post__not_in' => null,     // array of integers
+					// 'venue_id' => null,         // integer
+					// 'category_id' => null,      // integer
+					// 'subcategory_id' => null,   // integer
+					// 'format_id' => null,        // integer
+				) ) );
 
-					<?php while ( have_posts() ) : the_post(); ?>
+				<?php if ( $events->have_posts() ) : ?>
+
+					<?php while ( $events->have_posts() ) : $events->the_post(); ?>
 						<?php get_template_part( 'content', get_post_format() ); ?>
 					<?php endwhile; ?>
 			
@@ -47,6 +61,7 @@ get_header();
 						</header>
 			
 						<div class="entry-content">
+							<?php eventbrite_ticket_form_widget(); ?>
 							<p><?php _e( 'Apologies, but no results were found. Perhaps searching will help find a related post.', KING_DOMAIN ); ?></p>
 							<?php get_search_form(); ?>
 						</div><!-- .entry-content -->
@@ -63,58 +78,6 @@ get_header();
 					</div><!-- #secondary -->
 				<?php endif; ?>
 			</div>
-			<?php
-				// Set up and call our Eventbrite query.
-				$events = new Eventbrite_Query( apply_filters( 'eventbrite_query_args', array(
-					// 'display_private' => false, // boolean
-					// 'nopaging' => false,        // boolean
-					// 'limit' => null,            // integer
-					// 'organizer_id' => null,     // integer
-					// 'p' => null,                // integer
-					// 'post__not_in' => null,     // array of integers
-					// 'venue_id' => null,         // integer
-					// 'category_id' => null,      // integer
-					// 'subcategory_id' => null,   // integer
-					// 'format_id' => null,        // integer
-				) ) );
-
-				if ( $events->have_posts() ) :
-					while ( $events->have_posts() ) : $events->the_post(); ?>
-
-						<article id="event-<?php the_ID(); ?>" <?php post_class(); ?>>
-							<header class="entry-header">
-								<?php the_post_thumbnail(); ?>
-
-								<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
-
-								<div class="entry-meta">
-									<?php eventbrite_event_meta(); ?>
-								</div><!-- .entry-meta -->
-							</header><!-- .entry-header -->
-
-							<div class="entry-content">
-								<?php eventbrite_ticket_form_widget(); ?>
-							</div><!-- .entry-content -->
-
-							<footer class="entry-footer">
-								<?php eventbrite_edit_post_link( __( 'Edit', 'eventbrite_api' ), '<span class="edit-link">', '</span>' ); ?>
-							</footer><!-- .entry-footer -->
-						</article><!-- #post-## -->
-
-					<?php endwhile;
-
-					// Previous/next post navigation.
-					eventbrite_paging_nav( $events );
-
-				else :
-					// If no content, include the "No posts found" template.
-					get_template_part( 'content', 'none' );
-
-				endif;
-
-				// Return $post to its rightful owner.
-				wp_reset_postdata();
-			?>
 		</div>
 	</div>
 				
