@@ -61,6 +61,7 @@ get_header();
 						</header>
 			
 						<div class="entry-content">
+							BAAAARF SHIT
 							<?php eventbrite_ticket_form_widget(); ?>
 							<p><?php _e( 'Apologies, but no results were found. Perhaps searching will help find a related post.', KING_DOMAIN ); ?></p>
 							<?php get_search_form(); ?>

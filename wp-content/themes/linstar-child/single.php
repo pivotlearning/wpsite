@@ -15,7 +15,7 @@ get_header();
 
 	<div id="primary" class="site-content container-content content ">
 		<div id="content" class="row row-content container">
-			<div class="col-md-9">
+			<div class="col-md-9">BAAAAARF BARAARRFF BARFSHIT
 			<?php
 				// Get our event based on the ID passed by query variable.
 				$event = new Eventbrite_Query( array( 'p' => get_query_var( 'eventbrite_id' ) ) );
