@@ -9,7 +9,7 @@ get_header(); ?>
 	<div id="primary" class="site-content">
 		<div id="content" class="container">
 
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php while ( $event->have_posts() ) : $event->the_post(); ?>
 				<?php get_template_part( 'content', 'page' ); ?>BAAAARF BAARF 
 			<?php endwhile; // end of the loop. ?>
 
