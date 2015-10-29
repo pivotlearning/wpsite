@@ -6,10 +6,8 @@
 *
 */
 
-#Load core of theme
-include 'core/king.define.php';
-#
-#
-#	END of REGISTRATION
-#
-#
+function themeslug_setup() {
+ 
+    add_theme_support( 'eventbrite' );
+}
+add_action( 'after_setup_theme', 'themeslug_setup' );
