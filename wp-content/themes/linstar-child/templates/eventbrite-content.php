@@ -17,6 +17,7 @@ if( is_page() ){
 if( empty( $sidebar ) ){
 	$sidebar = 'sidebar';
 }
+
 get_header();
 
 ?>
@@ -25,13 +26,6 @@ get_header();
 	
 	<div id="primary" class="site-content container-content content ">
 		<div id="content" class="row row-content container">
-			<div class="col-md-3">
-				<?php if ( is_active_sidebar( $sidebar ) ) : ?>
-					<div id="sidebar" class="widget-area king-sidebar">
-						<?php dynamic_sidebar( $sidebar ); ?>
-					</div><!-- #secondary -->
-				<?php endif; ?>
-			</div>
 			<div class="col-md-9">
 				<?php if ( have_posts() ) : ?>
 
@@ -72,6 +66,13 @@ get_header();
 					</article><!-- #post-0 -->
 			
 				<?php endif; // end have_posts() check ?>
+			</div>
+			<div class="col-md-3">
+				<?php if ( is_active_sidebar( $sidebar ) ) : ?>
+					<div id="sidebar" class="widget-area king-sidebar">
+						<?php dynamic_sidebar( $sidebar ); ?>
+					</div><!-- #secondary -->
+				<?php endif; ?>
 				<?php
 				// Get our event based on the ID passed by query variable.
 				$event = new Eventbrite_Query( array( 'p' => get_query_var( 'eventbrite_id' ) ) );
