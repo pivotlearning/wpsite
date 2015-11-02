@@ -62,7 +62,11 @@ get_header();
 							<?php get_search_form(); ?>
 						</div><!-- .entry-content -->
 					<?php endif; // end current_user_can() check ?>
-									<?php
+			
+					</article><!-- #post-0 -->
+			
+				<?php endif; // end have_posts() check ?>
+								<?php
 				// Get our event based on the ID passed by query variable.
 				$event = new Eventbrite_Query( array( 'p' => get_query_var( 'eventbrite_id' ) ) );
 
@@ -102,10 +106,6 @@ get_header();
 				// Return $post to its rightful owner.
 				wp_reset_postdata();
 			?>
-			
-					</article><!-- #post-0 -->
-			
-				<?php endif; // end have_posts() check ?>
 			</div>
 			<div class="col-md-3">
 				<?php if ( is_active_sidebar( $sidebar ) ) : ?>
@@ -113,7 +113,6 @@ get_header();
 						<?php dynamic_sidebar( $sidebar ); ?>
 					</div><!-- #secondary -->
 				<?php endif; ?>
-
 			</div>
 		</div>
 	</div>
