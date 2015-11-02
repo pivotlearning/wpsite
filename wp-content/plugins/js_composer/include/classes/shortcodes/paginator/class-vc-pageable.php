@@ -3,8 +3,7 @@
 /**
  * Class Vc_Pageable
  */
-abstract class WPBakeryShortCodeVc_Pageable extends WPBakeryShortCode {
-
+abstract class WPBakeryShortCode_Vc_Pageable extends WPBakeryShortCode {
 	/**
 	 * @param $settings
 	 */
@@ -77,9 +76,6 @@ abstract class WPBakeryShortCodeVc_Pageable extends WPBakeryShortCode {
 	 * @return string
 	 */
 	public function renderPagination( $grid_style, $settings, $content = '', $css_class = '' ) {
-		//if ( ! isset( $settings['shortcode_hash'] ) ) {
-		//	throw new Exception( 'You must provide shortcode_hash' );
-		//}
 		$css_class .= empty( $css_class ) ? '' : ' ' . 'vc_pageable-wrapper vc_hook_hover';
 		$content_method = vc_camel_case( 'content-' . $grid_style );
 		$content = method_exists( $this, $content_method ) ? $this->$content_method( $grid_style, $settings, $content ) : $content;
@@ -106,4 +102,24 @@ abstract class WPBakeryShortCodeVc_Pageable extends WPBakeryShortCode {
 	 * @return string - rendered content for ajax
 	 */
 	abstract function renderAjax( $vc_request_param );
+
+	/**
+	 * Check is pageable
+	 * @since 4.7.4
+	 * @return bool
+	 */
+	public function isObjectPageable() {
+		return true;
+	}
+
+	/**
+	 * Check can user manage post.
+	 *
+	 * @param int $page_id
+	 *
+	 * @return bool
+	 */
+	public function currentUserCanManage( $page_id ) {
+		return current_user_can( 'edit_post', (int) $page_id );
+	}
 }

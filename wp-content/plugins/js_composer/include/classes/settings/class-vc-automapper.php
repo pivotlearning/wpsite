@@ -247,11 +247,11 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 		 */
 		public function renderListItem( $shortcode ) {
 			echo '<li class="vc_automapper-item" data-item-id="">'
-			     . '<label>' . $shortcode->name . '</label>'
-			     . '<span class="vc_automapper-item-controls">'
-			     . '<a href="#" class="vc_automapper-edit-btn" data-id="' . $shortcode->id . '" data-tag="' . $shortcode->tag . '"></a>'
-			     . '<a href="#" class="vc_automapper-delete-btn" data-id="' . $shortcode->id . '" data-tag="' . $shortcode->tag . '"></a>'
-			     . '</span></li>';
+				. '<label>' . $shortcode->name . '</label>'
+				. '<span class="vc_automapper-item-controls">'
+				. '<a href="#" class="vc_automapper-edit-btn" data-id="' . $shortcode->id . '" data-tag="' . $shortcode->tag . '"></a>'
+				. '<a href="#" class="vc_automapper-delete-btn" data-id="' . $shortcode->id . '" data-tag="' . $shortcode->tag . '"></a>'
+				. '</span></li>';
 		}
 
 		/**
@@ -261,12 +261,13 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 			?>
 			<script type="text/html" id="vc_automapper-add-form-tpl">
 				<label for="vc_atm-shortcode-string"
-				       class="vc_info"><?php _e( 'Shortcode string', 'js_composer' ) ?></label>
+					   class="vc_info"><?php _e( 'Shortcode string', 'js_composer' ) ?></label>
 
 				<div class="vc_wrapper">
 					<div class="vc_string">
-						<input id="vc_atm-shortcode-string" placeholder="<?php _e( 'Please enter valid shortcode' ) ?>"
-						       type="text" class="vc_atm-string">
+						<input id="vc_atm-shortcode-string"
+							   placeholder="<?php _e( 'Please enter valid shortcode', 'js_composer' ) ?>"
+							   type="text" class="vc_atm-string">
 					</div>
 					<div class="vc_buttons">
 						<a href="#" id="vc_atm-parse-string"
@@ -283,9 +284,9 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 					<div class="widget-title-action">
 						<a class="widget-action hide-if-no-js" href="#"></a>
 						<a class="widget-control-edit hide-if-js">
-							<span class="edit vc_automapper-edit-btn">Edit</span>
-							<span class="add vc_automapper-delete-btn">Add</span>
-							<span class="screen-reader-text">Search</span>
+							<span class="edit vc_automapper-edit-btn"><?php _e( 'Edit', 'js_composer' ) ?></span>
+							<span class="add vc_automapper-delete-btn"><?php _e( 'Add', 'js_composer' ) ?></span>
+							<span class="screen-reader-text"><?php _e( 'Search', 'js_composer' ) ?></span>
 						</a>
 					</div>
 					<div class="widget-title"><h4>{{ name }}<span class="in-widget-title"></span></h4></div>
@@ -301,7 +302,7 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 				</div>
 				<div class="vc_line"></div>
 				<div class="vc_wrapper">
-					<h4 class="vc_h"><?php _e( 'General Information' ) ?></h4>
+					<h4 class="vc_h"><?php _e( 'General Information', 'js_composer' ) ?></h4>
 
 					<div class="vc_field vc_tag">
 						<label for="vc_atm-tag"><?php _e( 'Tag:', 'js_composer' ) ?></label>
@@ -314,18 +315,19 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 					<div class="vc_field vc_category">
 						<label for="vc_atm-category"><?php _e( 'Category:', 'js_composer' ) ?></label>
 						<input type="text" name="category" id="vc_atm-category" value="{{ category }}">
-						<span class="description"><?php __( 'Comma separated categories names' ) ?></span>
+						<span
+							class="description"><?php _e( 'Comma separated categories names', 'js_composer' ) ?></span>
 					</div>
 					<div class="vc_field vc_is-container">
 						<label for="vc_atm-is-container"><input type="checkbox" name="is_container"
-						                                        id="vc_atm-is-container"
-						                                        value=""> <?php _e( 'Include content param into shortcode', 'js_composer' ) ?>
+																id="vc_atm-is-container"
+																value=""> <?php _e( 'Include content param into shortcode', 'js_composer' ) ?>
 						</label>
 					</div>
 				</div>
 				<div class="vc_line"></div>
 				<div class="vc_wrapper">
-					<h4 class="vc_h"><?php _e( 'Shortcode Parameters' ) ?></h4>
+					<h4 class="vc_h"><?php _e( 'Shortcode Parameters', 'js_composer' ) ?></h4>
 					<a href="#" id="vc_atm-add-param"
 					   class="button vc_add-param">+ <?php _e( 'Add Param', 'js_composer' ) ?></a>
 
@@ -353,19 +355,19 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 								<div class="vc_fields vc_clearfix">
 									<div class="vc_param_name vc_param-field">
 										<label><?php _e( 'Param name', 'js_composer' ) ?></label>
-										<# if(param_name === 'content'){#>
+										<# if ('content' === param_name) { #>
 											<span class="vc_content"><?php _e( 'Content', 'js_composer' ) ?></span>
 											<input type="text" style="display: none;" name="param_name"
-											       value="{{ param_name }}"
-											       placeholder="<?php _e( 'Required value', 'js_composer' ) ?>"
-											       class="vc_param-name"
-											       data-system="true">
+												   value="{{ param_name }}"
+												   placeholder="<?php _e( 'Required value', 'js_composer' ) ?>"
+												   class="vc_param-name"
+												   data-system="true">
 							<span class="description"
-							      style="display: none;"><?php _e( 'Use only letters, numbers and underscore.', 'js_composer' ) ?></span>
+								  style="display: none;"><?php _e( 'Use only letters, numbers and underscore.', 'js_composer' ) ?></span>
 											<# } else { #>
 												<input type="text" name="param_name" value="{{ param_name }}"
-												       placeholder="<?php _e( 'Required value', 'js_composer' ) ?>"
-												       class="vc_param-name">
+													   placeholder="<?php _e( 'Required value', 'js_composer' ) ?>"
+													   class="vc_param-name">
 								<span
 									class="description"><?php _e( 'Please use only letters, numbers and underscore.', 'js_composer' ) ?></span>
 												<# } #>
@@ -373,8 +375,8 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 									<div class="vc_heading vc_param-field">
 										<label><?php _e( 'Heading', 'js_composer' ) ?></label>
 										<input type="text" name="heading" value="{{ heading }}"
-										       placeholder="<?php _e( 'Input heading', 'js_composer' ) ?>"
-										<# if(type == 'hidden'){ #> disabled="disabled"
+											   placeholder="<?php _e( 'Input heading', 'js_composer' ) ?>"
+										<# if ( 'hidden' === type ) { #> disabled
 											<# } #> >
 						<span
 							class="description"><?php _e( 'Heading for field in shortcode edit form.', 'js_composer' ) ?></span>
@@ -384,32 +386,32 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 										<select name="type">
 											<option value=""><?php _e( 'Select field type', 'js_composer' ) ?></option>
 											<option
-												value="textfield"<?php echo '<# if(type==="textfield") { #> selected="selected"<# } #>' ?>><?php _e( 'Textfield', 'js_composer' ) ?></option>
+												value="textfield"<?php echo '<# if (type === "textfield") { #> selected<# } #>' ?>><?php _e( 'Textfield', 'js_composer' ) ?></option>
 											<option
-												value="dropdown"<?php echo '<# if(type==="dropdown") { #> selected="selected"<# } #>' ?>><?php _e( 'Dropdown', 'js_composer' ) ?></option>
+												value="dropdown"<?php echo '<# if (type === "dropdown") { #> selected<# } #>' ?>><?php _e( 'Dropdown', 'js_composer' ) ?></option>
 											<option
-												value="textarea"<?php echo '<# if(type==="textarea") { #> selected="selected"<# } #>' ?>><?php _e( 'Textarea', 'js_composer' ) ?></option>
-											<# if(param_name === 'content'){#>
+												value="textarea"<?php echo '<# if (type === "textarea") { #> selected<# } #>' ?>><?php _e( 'Textarea', 'js_composer' ) ?></option>
+											<# if ( 'content' === param_name ) { #>
 												<option
-													value="textarea_html"<?php echo '<# if(type==="textarea_html") { #> selected="selected"<# } #>' ?>><?php _e( 'Textarea HTML', 'js_composer' ) ?></option>
+													value="textarea_html"<?php echo '<# if (type === "textarea_html") { #> selected<# } #>' ?>><?php _e( 'Textarea HTML', 'js_composer' ) ?></option>
 												<# } #>
 													<option
-														value="hidden"<?php echo '<# if(type==="hidden") { #> selected="selected"<# } #>' ?>><?php _e( 'Hidden', 'js_composer' ) ?></option>
+														value="hidden"<?php echo '<# if (type === "hidden") { #> selected<# } #>' ?>><?php _e( 'Hidden', 'js_composer' ) ?></option>
 
 										</select>
-							<span
-								class="description"><?php _e( 'Field type for shortcode edit form.', 'js_composer' ) ?></span>
+										<span
+											class="description"><?php _e( 'Field type for shortcode edit form.', 'js_composer' ) ?></span>
 									</div>
 									<div class="vc_value vc_param-field">
 										<label><?php _e( 'Default value', 'js_composer' ) ?></label>
 										<input type="text" name="value" value="{{ value }}" class="vc_param-value">
-						<span
-							class="description"><?php _e( 'Default value or list of values for dropdown type (Note: separate by comma).', 'js_composer' ) ?></span>
+										<span
+											class="description"><?php _e( 'Default value or list of values for dropdown type (Note: separate by comma).', 'js_composer' ) ?></span>
 									</div>
 									<div class="description vc_param-field">
 										<label><?php _e( 'Description', 'js_composer' ) ?></label>
-										<textarea name="description" placeholder=""
-										<# if(type == 'hidden'){ #> disabled="disabled"
+										<textarea name="description"
+										<# if ( 'hidden' === type ) { #> disabled
 											<# } #> >{{ description }}</textarea>
 												<span
 													class="description"><?php _e( 'Enter description for parameter.', 'js_composer' ) ?></span>
@@ -417,7 +419,7 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 								</div>
 							</div>
 			</script>
-		<?php
+			<?php
 		}
 
 		/**
@@ -436,12 +438,14 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 			$this->renderMapFormTpl();
 		}
 
-		// }}
 		// Action methods(CRUD) {{
 		/**
 		 *
 		 */
 		public function goAction() {
+			if ( ! vc_verify_admin_nonce() || ! current_user_can( 'manage_options' ) ) {
+				die();
+			}
 			$action = vc_post_param( 'vc_action' );
 			$this->result( $this->$action() );
 		}
@@ -574,16 +578,7 @@ if ( ! function_exists( 'vc_atm_build_categories_array' ) ) {
 	 * @return array
 	 */
 	function vc_atm_build_categories_array( $string ) {
-		return array_map( 'vc_atm_textdomain_category', explode( ',', preg_replace( '/\,\s+/', ',', trim( $string ) ) ) );
-	}
-
-	/**
-	 * @param $value
-	 *
-	 * @return string|void
-	 */
-	function vc_atm_textdomain_category( $value ) {
-		return __( $value, 'js_composer' );
+		return explode( ',', preg_replace( '/\,\s+/', ',', trim( $string ) ) );
 	}
 }
 if ( ! function_exists( 'vc_atm_build_params_array' ) ) {

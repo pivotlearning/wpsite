@@ -9,7 +9,7 @@ function vc_grid_item_editor_create_post_type() {
 		require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/editor/class-vc-grid-item-editor.php' );
 		Vc_Grid_Item_Editor::createPostType();
 		add_action( 'vc_menu_page_build', 'vc_gitem_add_submenu_page' );
-		// @todo add check vendor is active
+		// TODO: add check vendor is active
 		add_filter( 'vc_vendor_qtranslate_enqueue_js_backend', 'vc_vendor_qtranslate_enqueue_js_backend_grid_editor' );
 	}
 }
@@ -38,6 +38,9 @@ function vc_grid_item_editor_init() {
  * @since 4.4
  */
 function vc_grid_item_render_preview() {
+	if ( ! vc_verify_admin_nonce() || ! current_user_can( 'edit_post', (int) vc_request_param( 'post_id' ) ) ) {
+		die();
+	}
 	require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/class-vc-grid-item.php' );
 	$grid_item = new Vc_Grid_Item();
 	$grid_item->mapShortcodes();
@@ -109,10 +112,10 @@ function vc_grid_item_get_post_type() {
  */
 function vc_grid_item_editor_shortcodes() {
 	require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/editor/class-vc-grid-item-editor.php' );
-	// @todo remove this because mapping can be based on post_type
-	if (
-		vc_request_param( 'vc_grid_item_editor' ) === 'true'
-		|| ( is_admin() && vc_grid_item_get_post_type() === Vc_Grid_Item_Editor::postType() )
+	// TODO: remove this because mapping can be based on post_type
+	if ( ( current_user_can('edit_posts') || current_user_can('edit_pages') ) &&
+		( vc_request_param( 'vc_grid_item_editor' ) === 'true'
+		|| ( is_admin() && vc_grid_item_get_post_type() === Vc_Grid_Item_Editor::postType() ) )
 	) {
 		vc_grid_item_map_shortcodes();
 	}
@@ -264,10 +267,9 @@ add_action( 'admin_head', 'vc_gitem_menu_highlight' );
 
 
 function vc_gitem_set_mapper_check_access() {
-	if ( 'true' === vc_post_param( 'vc_grid_item_editor' ) ) {
+	if ( vc_verify_admin_nonce() && ( current_user_can( 'edit_posts' ) || current_user_can( 'edit_pages' ) ) && 'true' === vc_post_param( 'vc_grid_item_editor' )  ) {
 		vc_mapper()->setCheckForAccess( false );
 	}
 }
 
 add_action( 'wp_ajax_vc_edit_form', 'vc_gitem_set_mapper_check_access' );
-

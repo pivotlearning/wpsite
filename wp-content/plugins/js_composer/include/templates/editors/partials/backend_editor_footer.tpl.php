@@ -7,31 +7,35 @@ $add_element_box->render();
 visual_composer()->editForm()->render();
 
 // Rendering Templates Modal Editor
-visual_composer()->templatesPanelEditor()->render();
-// Rendering Templates Panel (old @deprecated) Editor // will be removed
-//visual_composer()->templatesEditor()->render();
+// visual_composer()->templatesPanelEditor()->render();
+visual_composer()->templatesPanelEditor()->renderUITemplate();
 
 // Post settings
 require_once vc_path_dir( 'EDITORS_DIR', 'popups/class-vc-post-settings.php' );
 $post_settings = new Vc_Post_Settings( $editor );
-$post_settings->render();
+// $post_settings->render();
+$post_settings->renderUITemplate();
 require_once vc_path_dir( 'EDITORS_DIR', 'popups/class-vc-edit-layout.php' );
 $edit_layout = new Vc_Edit_Layout();
-$edit_layout->render();
+$edit_layout->renderUITemplate();
 global $current_user;
 get_currentuserinfo();
+
+require_once vc_path_dir( 'AUTOLOAD_DIR', 'class-vc-settings-presets.php' );
 ?>
 <script type="text/javascript">
 	var vc_user_mapper = <?php echo json_encode(WPBMap::getUserShortCodes()) ?>,
 		vc_mapper = <?php echo json_encode(WPBMap::getShortCodes()) ?>,
+		vc_settings_presets = <?php echo json_encode(Vc_Settings_Preset::listDefaultSettingsPresets()) ?>,
 		vc_roles = <?php echo json_encode( array_merge( array( 'current_user' => $current_user->roles ), (array) vc_settings()->get( 'groups_access_rules' ) ) ); ?>,
 		vc_frontend_enabled = <?php echo vc_enabled_frontend() ? 'true' : 'false' ?>,
-		vc_mode = '<?php echo vc_mode() ?>';
+		vc_mode = '<?php echo vc_mode() ?>',
+		vcAdminNonce = '<?php echo vc_generate_nonce( 'vc-admin-nonce' ); ?>';
 </script>
 
 <script type="text/html" id="vc_settings-image-block">
 	<li class="added">
-		<div class="inner" style="width: 75px; height: 75px; overflow: hidden;text-align: center;">
+		<div class="inner" style="width: 80px; height: 80px; overflow: hidden;text-align: center;">
 			<img rel="<%= id %>" src="<%= url %>"/>
 		</div>
 		<a href="#" class="icon-remove"></a>

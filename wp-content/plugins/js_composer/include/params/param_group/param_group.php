@@ -155,7 +155,6 @@ class Vc_ParamGroup {
  * @return mixed|void rendered template for params in edit form
  */
 function vc_param_group_form_field( $param_settings, $param_value, $tag ) {
-	//print_r($param_settings);
 	$param_group = new Vc_ParamGroup( $param_settings, $param_value, $tag );
 
 	return apply_filters( 'vc_param_group_render_filter', $param_group->render() );
@@ -167,6 +166,9 @@ add_action( 'wp_ajax_vc_param_group_clone', 'vc_param_group_clone' );
  * @since 4.4
  */
 function vc_param_group_clone() {
+	if ( ! vc_verify_admin_nonce() || ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) ) {
+		die();
+	}
 	$param = vc_post_param( 'param' );
 	$value = vc_post_param( 'value' );
 	$tag = vc_post_param( 'shortcode' );

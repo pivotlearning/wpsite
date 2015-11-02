@@ -12,6 +12,7 @@ $menu = array();
 add_thickbox();
 wp_enqueue_media( array( 'post' => $editor->post_id ) );
 require_once( $editor->adminFile( 'admin-header.php' ) );
+require_once vc_path_dir( 'AUTOLOAD_DIR', 'class-vc-settings-presets.php' );
 ?>
 	<div id="vc_preloader"></div>
 	<script type="text/javascript">
@@ -39,27 +40,30 @@ visual_composer()->editForm()->render();
 // Templates manager old panel @deprecated and will be removed
 visual_composer()->templatesEditor()->render();
 // Templates manager new panel
-visual_composer()->templatesPanelEditor()->render();
+// visual_composer()->templatesPanelEditor()->render();
+visual_composer()->templatesPanelEditor()->renderUITemplate();
 
 require_once vc_path_dir( 'EDITORS_DIR', 'popups/class-vc-post-settings.php' );
 $post_settings = new Vc_Post_Settings( $editor );
-$post_settings->render();
+$post_settings->renderUITemplate();
 require_once vc_path_dir( 'EDITORS_DIR', 'popups/class-vc-edit-layout.php' );
 $edit_layout = new Vc_Edit_Layout();
-$edit_layout->render();
+$edit_layout->renderUITemplate();
 vc_include_template( 'editors/partials/frontend_controls.tpl.php' );
 ?>
 	<input type="hidden" name="vc_post_custom_css" id="vc_post-custom-css"
 	       value="<?php echo esc_attr( $editor->post_custom_css ); ?>" autocomplete="off"/>
 	<script type="text/javascript">
-		var vc_user_mapper = <?php echo json_encode(WPBMap::getUserShortCodes()) ?>,
-			vc_mapper = <?php echo json_encode(WPBMap::getShortCodes()) ?>,
-			vc_roles = <?php echo json_encode( array_merge( array( 'current_user' => $editor->current_user->roles ), (array) vc_settings()->get( 'groups_access_rules' ) ) ) ?>;
+		var vc_user_mapper = <?php echo json_encode( WPBMap::getUserShortCodes() ) ?>,
+			vc_mapper = <?php echo json_encode( WPBMap::getShortCodes() ) ?>,
+			vc_settings_presets = <?php echo json_encode( Vc_Settings_Preset::listDefaultSettingsPresets() ) ?>,
+			vc_roles = <?php echo json_encode( array_merge( array( 'current_user' => $editor->current_user->roles ), (array) vc_settings()->get( 'groups_access_rules' ) ) ) ?>,
+			vcAdminNonce = '<?php echo vc_generate_nonce( 'vc-admin-nonce' ); ?>';
 	</script>
 
 	<script type="text/html" id="vc_settings-image-block">
 		<li class="added">
-			<div class="inner" style="width: 75px; height: 75px; overflow: hidden;text-align: center;">
+			<div class="inner" style="width: 80px; height: 80px; overflow: hidden;text-align: center;">
 				<img rel="<%= id %>" src="<%= url %>"/>
 			</div>
 			<a href="#" class="icon-remove"></a>
@@ -67,13 +71,17 @@ vc_include_template( 'editors/partials/frontend_controls.tpl.php' );
 	</script>
 	<div style="height: 1px; visibility: hidden; overflow: hidden;">
 		<?php
-		// fix missed meta boxes see: #1252
+
+		// Disable notice in edit-form-advanced.php
+		$is_IE = false;
+
 		require_once ABSPATH . 'wp-admin/edit-form-advanced.php';
+
 		// Fix: WP 4.0
 		wp_dequeue_script( 'editor-expand' );
-		?>
-		<?php
+
 		do_action( 'vc_frontend_editor_render_template' );
+
 		?>
 	</div>
 <?php require_once( $editor->adminFile( 'admin-footer.php' ) ); ?>
