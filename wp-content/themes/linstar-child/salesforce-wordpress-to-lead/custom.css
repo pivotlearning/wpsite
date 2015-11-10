@@ -28,12 +28,14 @@
     clear: left;
     margin: .25em 0;
     width: 50%;
+    font: 14px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 .salesforce_w2l_lead .w2linput.text {
     width: 50%;
     height: auto;
     margin: .25em 0;
+    color: #fff;
 }
 
 .salesforce_w2l_lead .w2linput.textarea {
@@ -41,6 +43,11 @@
     height: 6em;
     margin: .75em 0;
     background: none;
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    padding: 9px 12px;
+    border: none;
 }
 
 .salesforce_w2l_lead .w2lsubmit {
@@ -60,7 +67,8 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 3px 0px;
+    padding: 7px 7px;
+    box-shadow: inset 0px 0px 1px 0px rgba(255,255,255,1);
 }
 
 .salesforce_w2l_lead .w2llabel.checkbox,
