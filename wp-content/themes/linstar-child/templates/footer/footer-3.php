@@ -36,8 +36,8 @@
             <!-- end section -->
         
         <!-- end left section -->
-        <div class="right animated eff-fadeInRight delay-150ms">
-			<a name="newsletter"></a><div class="king-form two">
+        <div name="newsletter" class="right animated eff-fadeInRight delay-150ms">
+			<div class="king-form two">
 				<?php echo do_shortcode( '[salesforce form="1"]' ); ?>
 			
         
