@@ -1285,21 +1285,6 @@ section.recent-posts .other-recent-posts li::after {
 	
 }
 
-
-.salesforce_w2l_lead .w2linput.submit {
-	float: left;
-	padding: 10px 25px 10px 25px;
-	background-color: #5076bb;
-	border: 0px;
-	font-size: 14px;
-	font-weight: normal;
-	color: #fff;
-	text-transform: uppercase;
-	transition: all 0.3s;
-	border-radius: 3px;
-	margin-top: 10px;
-}
-
 .yamm-content .row ul.no-padding {
 	padding: 5px !important;
 }
