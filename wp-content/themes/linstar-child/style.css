@@ -1301,5 +1301,5 @@ section.recent-posts .other-recent-posts li::after {
 }
 
 .yamm-content .row ul.no-padding {
-	margin: 5px !important;
+	padding: 5px !important;
 }
