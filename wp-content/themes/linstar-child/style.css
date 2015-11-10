@@ -1299,3 +1299,7 @@ section.recent-posts .other-recent-posts li::after {
 	border-radius: 3px;
 	margin-top: 10px;
 }
+
+.rimg .marb1 {
+	margin: 5px !important;
+}
