@@ -32,10 +32,17 @@
 }
 
 .salesforce_w2l_lead .w2linput.text {
-    width: 50%;
+    width: 100%;
     height: auto;
     margin: .25em 0;
     color: #fff;
+    background: none;
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    padding: 9px 12px;
+    border: none;
+    box-shadow: inset 0px 0px 1px 0px rgba(255,255,255,1);
 }
 
 .salesforce_w2l_lead .w2linput.textarea {
@@ -48,6 +55,7 @@
     width: 100%;
     padding: 9px 12px;
     border: none;
+    box-shadow: inset 0px 0px 1px 0px rgba(255,255,255,1);
 }
 
 .salesforce_w2l_lead .w2lsubmit {
