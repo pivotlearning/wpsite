@@ -25,26 +25,26 @@
                 <?php if ( is_active_sidebar( 'footer3' ) ) : ?>
 					<div id="footer3" class="widget-area" role="complementary">
 						<?php dynamic_sidebar( 'footer3' ); ?>
-					</div><!-- #secondary -->
+					<!-- #secondary -->
 				<?php endif; ?>
-            </div>
+            
             <!-- end section -->
             <div class="one_half last">
                 <h6 class="white uline">Get in Touch</h6>
                 <?php $king->socials('footer_social_links3'); ?>
-            </div>
+            
             <!-- end section -->
-        </div>
+        
         <!-- end left section -->
         <div class="right animated eff-fadeInRight delay-150ms">
-			<div class="king-form two">
+			<a name="newsletter"></a><div class="king-form two">
 				<?php echo do_shortcode( '[salesforce form="1"]' ); ?>
-			</div>
-        </div>
-    </div>
+			
+        
+    
     <!-- end footer -->
 </footer>
-<div class="clearfix"></div>
+<div class="clearfix">
 <div class="copyright_info3">
 	<div class="container">
 		<?php echo king::esc_js( $king->cfg['footerText'] ); ?>
@@ -55,5 +55,5 @@
     	<a href="<?php echo esc_url( $king->cfg['footerPrivacy'] ); ?>">
     		<?php _e('Privacy Policy', KING_DOMAIN ); ?>
     	</a>
-	</div>
-</div>
+	
+
