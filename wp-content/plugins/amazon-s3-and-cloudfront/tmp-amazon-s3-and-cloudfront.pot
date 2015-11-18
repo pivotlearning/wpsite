@@ -1,21 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Copyright (C) 2015 WP Offload S3
+# This file is distributed under the same license as the WP Offload S3 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: amazon-s3-and-cloudfront\n"
-"Report-Msgid-Bugs-To: nom@deliciousbrains.com\n"
-"POT-Creation-Date: 2015-11-12 09:07+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Project-Id-Version: WP Offload S3 0.9.9\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-s3-and-"
+"cloudfront\n"
+"POT-Creation-Date: 2015-11-12 09:09:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: classes/amazon-s3-and-cloudfront.php:100
 msgid "Offload S3"
@@ -30,17 +26,14 @@ msgid "Upload aborted by filter 'as3cf_pre_upload_attachment'"
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:577
-#, php-format
 msgid "File %s does not exist"
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:588
-#, php-format
 msgid "Mime type %s is not allowed"
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:668
-#, php-format
 msgid "Error uploading %s to S3: %s"
 msgstr ""
 
@@ -61,7 +54,6 @@ msgid "Error Getting Bucket Region"
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:1857
-#, php-format
 msgid "There was an error attempting to get the region of the bucket %s: %s"
 msgstr ""
 
@@ -72,7 +64,6 @@ msgid ""
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:2009
-#, php-format
 msgid ""
 "There was an error attempting to check the permissions of the bucket %s: %s"
 msgstr ""
@@ -126,7 +117,6 @@ msgid "Support"
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:2389
-#, php-format
 msgid "The file %s has been given %s permissions on Amazon S3."
 msgstr ""
 
@@ -143,7 +133,6 @@ msgid "Quick Start Guide"
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:2933
-#, php-format
 msgid ""
 "Looks like we don't have write access to this bucket. It's likely that the "
 "user you've provided access keys for hasn't been granted the correct "
@@ -152,7 +141,6 @@ msgid ""
 msgstr ""
 
 #: classes/amazon-s3-and-cloudfront.php:2935
-#, php-format
 msgid ""
 "Looks like we don't have access to the buckets. It's likely that the user "
 "you've provided access keys for hasn't been granted the correct permissions. "
@@ -176,7 +164,6 @@ msgid "compatibility addons"
 msgstr ""
 
 #: classes/as3cf-plugin-compatibility.php:178
-#, php-format
 msgid ""
 "To get WP Offload S3 to work with certain 3rd party plugins, you might need "
 "to install and activate some of our %s. We've detected the following addons "
@@ -185,7 +172,6 @@ msgid ""
 msgstr ""
 
 #: classes/as3cf-plugin-compatibility.php:184
-#, php-format
 msgid ""
 "You will need to purchase a license to get access to these addons. If you're "
 "having trouble determining whether or not you need the addons, send an email "
@@ -198,12 +184,10 @@ msgstr ""
 
 #: classes/as3cf-plugin-compatibility.php:624
 #: classes/upgrades/as3cf-meta-wp-error.php:72
-#, php-format
 msgid "There was an error attempting to download the file %s from S3: %s"
 msgstr ""
 
 #: classes/as3cf-upgrade.php:279
-#, php-format
 msgid ""
 "<strong>Running %s Update</strong> &mdash; We&#8217;re going through all the "
 "Media Library items uploaded to S3 %s This will be done quietly in the "
@@ -217,7 +201,6 @@ msgid "Pause Update"
 msgstr ""
 
 #: classes/as3cf-upgrade.php:284
-#, php-format
 msgid ""
 "<strong>%s Update Paused</strong> &mdash; Updating Media Library %s has been "
 "paused."
@@ -228,7 +211,6 @@ msgid "Restart Update"
 msgstr ""
 
 #: classes/as3cf-upgrade.php:288
-#, php-format
 msgid ""
 "<strong>Error Updating %s</strong> &mdash; We ran into some errors "
 "attempting to update the %s for all your Media Library items that have been "
@@ -240,7 +222,6 @@ msgid "Try Run It Again"
 msgstr ""
 
 #: classes/as3cf-upgrade.php:391
-#, php-format
 msgid "Every %d Minutes"
 msgstr ""
 
@@ -268,12 +249,10 @@ msgid "deactivate"
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:311
-#, php-format
 msgid "You can %s the %s plugin to get rid of this notice."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:314
-#, php-format
 msgid "%s has been disabled as it requires the %s plugin."
 msgstr ""
 
@@ -291,24 +270,20 @@ msgid "Activate it now."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:329
-#, php-format
 msgid "<a href=\"%s\">Install</a> and activate it."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:340
-#, php-format
 msgid ""
 "%s has been disabled as it requires version %s or later of the %s plugin."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:343
-#, php-format
 msgid "You currently have version %s installed."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:350
 #: classes/wp-aws-compatibility-check.php:388
-#, php-format
 msgid "A valid license for %s is required to update."
 msgstr ""
 
@@ -317,26 +292,22 @@ msgid "Update to the latest version"
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:370
-#, php-format
 msgid ""
 "%1$s has been disabled because it is not a supported addon of the %2$s "
 "plugin."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:379
-#, php-format
 msgid ""
 "%1$s has been disabled because it will not work with the version of the %2$s "
 "plugin installed. %1$s %3$s or later is required."
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:382
-#, php-format
 msgid "Update %s to the latest version"
 msgstr ""
 
 #: classes/wp-aws-compatibility-check.php:451
-#, php-format
 msgid "The %s plugin has been deactivated."
 msgstr ""
 
@@ -352,13 +323,11 @@ msgstr ""
 msgid "Existing bucket name"
 msgstr ""
 
-#: view/bucket-select.php:7
-#: view/bucket-select.php:12
+#: view/bucket-select.php:7 view/bucket-select.php:12
 msgid "Saving..."
 msgstr ""
 
-#: view/bucket-select.php:7
-#: view/bucket-select.php:12
+#: view/bucket-select.php:7 view/bucket-select.php:12
 msgid "Save Bucket"
 msgstr ""
 
@@ -366,14 +335,12 @@ msgstr ""
 msgid "Browse existing buckets"
 msgstr ""
 
-#: view/bucket-select.php:9
-#: view/bucket-select.php:26
+#: view/bucket-select.php:9 view/bucket-select.php:26
 #: view/bucket-select.php:31
 msgid "Create new bucket"
 msgstr ""
 
-#: view/bucket-select.php:13
-#: view/bucket-select.php:21
+#: view/bucket-select.php:13 view/bucket-select.php:21
 #: view/bucket-select.php:67
 msgid "Cancel"
 msgstr ""
@@ -386,8 +353,7 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: view/bucket-select.php:22
-#: view/bucket-select.php:27
+#: view/bucket-select.php:22 view/bucket-select.php:27
 msgid "Refresh"
 msgstr ""
 
@@ -408,7 +374,6 @@ msgid "Region:"
 msgstr ""
 
 #: view/bucket-select.php:60
-#, php-format
 msgid "%s (defined in wp-config.php)"
 msgstr ""
 
@@ -573,14 +538,11 @@ msgid ""
 "URLs</strong> to use the S3 URLs."
 msgstr ""
 
-#: view/settings.php:154
-#: view/settings.php:175
-#: view/settings.php:188
+#: view/settings.php:154 view/settings.php:175 view/settings.php:188
 msgid "More info"
 msgstr ""
 
 #: view/settings.php:155
-#, php-format
 msgid ""
 "<strong>Warning</strong> &mdash; Some plugins depend on the file being "
 "present on the local server and may not work when the file is removed. %s"
@@ -612,7 +574,6 @@ msgid "Copy HiDPI (@2x) Images"
 msgstr ""
 
 #: view/settings.php:199
-#, php-format
 msgid ""
 "When uploading a file to S3, checks if there's a file of the same name with "
 "an @2x suffix and copies it to S3 as well. Works with the <a href=\"%s\">WP "
@@ -660,7 +621,6 @@ msgid "Get 20% Off!"
 msgstr ""
 
 #: view/sidebar.php:29
-#, php-format
 msgid ""
 "Submit your name and email and we’ll send you a coupon for 20% off your "
 "upgrade."
@@ -693,7 +653,6 @@ msgid "As this is a free plugin, we do not provide support."
 msgstr ""
 
 #: view/wordpress-org-support.php:4
-#, php-format
 msgid ""
 "You may ask the WordPress community for help by posting to the <a href=\"%s"
 "\">WordPress.org support forum</a>. Response time can range from a few days "
@@ -701,14 +660,34 @@ msgid ""
 msgstr ""
 
 #: view/wordpress-org-support.php:6
-#, php-format
 msgid ""
 "If you want a <strong>timely response via email from a developer</strong> "
 "who works on this plugin, <a href=\"%s\">upgrade</a> and send us an email."
 msgstr ""
 
 #: view/wordpress-org-support.php:8
-#, php-format
 msgid ""
 "If you've found a bug, please <a href=\"%s\">submit an issue on GitHub</a>."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Offload S3"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/amazon-s3-and-cloudfront/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Automatically copies media uploads to Amazon S3 for storage and delivery. "
+"Optionally configure Amazon CloudFront for even faster delivery."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Delicious Brains"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://deliciousbrains.com/"
 msgstr ""
