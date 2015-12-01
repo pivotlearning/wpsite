@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the WP Offload S3 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Offload S3 0.9.9\n"
+"Project-Id-Version: WP Offload S3 0.9.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-s3-and-"
 "cloudfront\n"
-"POT-Creation-Date: 2015-11-12 09:09:31+00:00\n"
+"POT-Creation-Date: 2015-11-26 14:10:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,106 +21,106 @@ msgstr ""
 msgid "S3 and CloudFront"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:566
+#: classes/amazon-s3-and-cloudfront.php:567
 msgid "Upload aborted by filter 'as3cf_pre_upload_attachment'"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:577
+#: classes/amazon-s3-and-cloudfront.php:578
 msgid "File %s does not exist"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:588
+#: classes/amazon-s3-and-cloudfront.php:589
 msgid "Mime type %s is not allowed"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:668
+#: classes/amazon-s3-and-cloudfront.php:670
 msgid "Error uploading %s to S3: %s"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:1571
+#: classes/amazon-s3-and-cloudfront.php:1608
 msgid "Cheatin&#8217; eh?"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:1575
+#: classes/amazon-s3-and-cloudfront.php:1612
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:1581
+#: classes/amazon-s3-and-cloudfront.php:1618
 msgid "No bucket name provided."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:1856
+#: classes/amazon-s3-and-cloudfront.php:1903
 msgid "Error Getting Bucket Region"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:1857
+#: classes/amazon-s3-and-cloudfront.php:1904
 msgid "There was an error attempting to get the region of the bucket %s: %s"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:1977
+#: classes/amazon-s3-and-cloudfront.php:2024
 msgid ""
 "This is a test file to check if the user has write permission to S3. Delete "
 "me if found."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2009
+#: classes/amazon-s3-and-cloudfront.php:2056
 msgid ""
 "There was an error attempting to check the permissions of the bucket %s: %s"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2066
+#: classes/amazon-s3-and-cloudfront.php:2113
 msgid "Error creating bucket"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2067
+#: classes/amazon-s3-and-cloudfront.php:2114
 msgid "Bucket name too short."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2068
+#: classes/amazon-s3-and-cloudfront.php:2115
 msgid "Bucket name too long."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2069
+#: classes/amazon-s3-and-cloudfront.php:2116
 msgid ""
 "Invalid character. Bucket names can contain lowercase letters, numbers, "
 "periods and hyphens."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2070
+#: classes/amazon-s3-and-cloudfront.php:2117
 msgid "Error saving bucket"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2071
+#: classes/amazon-s3-and-cloudfront.php:2118
 msgid "Error fetching buckets"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2072
+#: classes/amazon-s3-and-cloudfront.php:2119
 msgid "Error getting URL preview: "
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2073
+#: classes/amazon-s3-and-cloudfront.php:2120
 msgid "The changes you made will be lost if you navigate away from this page"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2133
+#: classes/amazon-s3-and-cloudfront.php:2180
 msgid "Cheatin' eh?"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2236
+#: classes/amazon-s3-and-cloudfront.php:2283
 msgctxt "Show the media library tab"
 msgid "Media Library"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2237
+#: classes/amazon-s3-and-cloudfront.php:2284
 msgctxt "Show the support tab"
 msgid "Support"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2389
+#: classes/amazon-s3-and-cloudfront.php:2436
 msgid "The file %s has been given %s permissions on Amazon S3."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2401
+#: classes/amazon-s3-and-cloudfront.php:2448
 msgid ""
 "<strong>Image Manipulation Library Missing</strong> &mdash; Looks like you "
 "don't have an image manipulation library installed on this server and "
@@ -128,11 +128,11 @@ msgid ""
 "Please setup GD or ImageMagick."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2931
+#: classes/amazon-s3-and-cloudfront.php:2978
 msgid "Quick Start Guide"
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2933
+#: classes/amazon-s3-and-cloudfront.php:2980
 msgid ""
 "Looks like we don't have write access to this bucket. It's likely that the "
 "user you've provided access keys for hasn't been granted the correct "
@@ -140,7 +140,7 @@ msgid ""
 "correctly."
 msgstr ""
 
-#: classes/amazon-s3-and-cloudfront.php:2935
+#: classes/amazon-s3-and-cloudfront.php:2982
 msgid ""
 "Looks like we don't have access to the buckets. It's likely that the user "
 "you've provided access keys for hasn't been granted the correct permissions. "
@@ -155,15 +155,15 @@ msgstr ""
 msgid "Invalid notice ID."
 msgstr ""
 
-#: classes/as3cf-plugin-compatibility.php:175
+#: classes/as3cf-plugin-compatibility.php:180
 msgid "WP Offload S3 Compatibility Addons"
 msgstr ""
 
-#: classes/as3cf-plugin-compatibility.php:177
+#: classes/as3cf-plugin-compatibility.php:182
 msgid "compatibility addons"
 msgstr ""
 
-#: classes/as3cf-plugin-compatibility.php:178
+#: classes/as3cf-plugin-compatibility.php:183
 msgid ""
 "To get WP Offload S3 to work with certain 3rd party plugins, you might need "
 "to install and activate some of our %s. We've detected the following addons "
@@ -171,18 +171,18 @@ msgid ""
 "about each addon to determine if you need it or not."
 msgstr ""
 
-#: classes/as3cf-plugin-compatibility.php:184
+#: classes/as3cf-plugin-compatibility.php:189
 msgid ""
 "You will need to purchase a license to get access to these addons. If you're "
 "having trouble determining whether or not you need the addons, send an email "
 "to %s."
 msgstr ""
 
-#: classes/as3cf-plugin-compatibility.php:185
+#: classes/as3cf-plugin-compatibility.php:190
 msgid "View Licenses"
 msgstr ""
 
-#: classes/as3cf-plugin-compatibility.php:624
+#: classes/as3cf-plugin-compatibility.php:629
 #: classes/upgrades/as3cf-meta-wp-error.php:72
 msgid "There was an error attempting to download the file %s from S3: %s"
 msgstr ""
