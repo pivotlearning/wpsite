@@ -471,7 +471,7 @@ function king_staff_fields_meta_box( $post ) {
 	<table>
 		<tr>
 			<td>
-				<label><?php _e('Position',KING_DOMAIN); ?>: </label>
+				<label><?php _e('BURUUUURPP',KING_DOMAIN); ?>: </label>
 			</td>
 			<td>	
 				<input type="text" name="king_staff_position" value="<?php echo esc_attr( $staff['position'] );	?>" />
