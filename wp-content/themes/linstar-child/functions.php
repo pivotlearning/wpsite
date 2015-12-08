@@ -17,4 +17,4 @@ add_image_size( 'frontpage-thumb', 275, 220, true ); //Theme-specific fp
 add_image_size( 'front-thumb2', 359, 220, true );  // Holy crap, another one
 add_image_size( 'full width', 960, 600, true ); //Larger size
 
-include 'core/king.actions.php';
+include 'core/king.define.php';
