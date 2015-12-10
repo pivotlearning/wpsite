@@ -479,7 +479,7 @@ function king_staff_fields_meta_box( $post ) {
 		</tr>
 		<tr>
 			<td>
-				<label><?php _e('Twitter',KING_DOMAIN); ?>: </label>
+				<label><?php _e('E-Mail',KING_DOMAIN); ?>: </label>
 			</td>
 			<td>
 				<input type="text" name="king_staff_mail" value="<?php echo esc_attr( $staff['staffmail'] );	?>" />
