@@ -247,7 +247,7 @@ if ( $posts->have_posts() ){
 							echo '<img src="'.king_createLinkImage( $img, '190x190xc' ).'" alt="" />';
 						?>
 		                 <strong><?php the_title(); ?> <em>- <?php echo esc_attr( $options['website'] ); ?> -</em></strong>
-		                 <p><?php echo wp_trim_words( $post->post_content ); ?></p>
+		                 <p><?php echo wp_trim_words( $post->post_content, $words ); ?></p>
 		            </div>
 
 		        <?php
