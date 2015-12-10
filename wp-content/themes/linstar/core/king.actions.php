@@ -62,6 +62,7 @@ function king_save_page_layout_template( $post_id, $post ) {
 		$twitter = !empty($_POST['king_staff_twitter']) ? $_POST['king_staff_twitter'] : '';
 		$gplus = !empty($_POST['king_staff_gplus']) ? $_POST['king_staff_gplus'] : '';
 		$skype = !empty($_POST['king_staff_skype']) ? $_POST['king_staff_skype'] : '';
+		$staffmail = !empty($_POST['king_staff_mail']) ? $_POST['king_staff_mail'] : '';
 		
 		if( !update_post_meta( $post->ID , 'king_staff' , array( 'position' => $position, 'facebook' => $facebook , 'twitter' => $twitter, 'gplus' => $gplus ) ) ){
 			add_post_meta( $post->ID , 'king_staff' , array( 'position' => $position, 'facebook' => $facebook , 'twitter' => $twitter, 'gplus' => $gplus ) );
@@ -474,6 +475,14 @@ function king_staff_fields_meta_box( $post ) {
 			</td>
 			<td>	
 				<input type="text" name="king_staff_position" value="<?php echo esc_attr( $staff['position'] );	?>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label><?php _e('Twitter',KING_DOMAIN); ?>: </label>
+			</td>
+			<td>
+				<input type="text" name="king_staff_mail" value="<?php echo esc_attr( $staff['staffmail'] );	?>" />
 			</td>
 		</tr>
 		<tr>
