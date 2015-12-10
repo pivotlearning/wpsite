@@ -23,7 +23,7 @@
 		        <span class="bdate"><a href="<?php the_permalink(); ?>"><?php the_time( 'M <\s\t\r\o\n\g>d</\s\t\r\o\n\g> Y' ); ?></a></span>
 			    <h4 title="<?php echo esc_attr($post->post_title); ?>">
 			    	<a href="<?php the_permalink(); ?>">
-			    		<?php echo wp_trim_words($post->post_title, 3); ?>
+			    		<?php echo wp_trim_words($post->post_title, 10); ?>
 			    	</a> 	
 			    </h4>
 				<p><?php echo wp_trim_words($post->post_content, 12); ?></p>
