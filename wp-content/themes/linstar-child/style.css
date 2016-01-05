@@ -1288,9 +1288,3 @@ section.recent-posts .other-recent-posts li::after {
 .yamm-content .row ul.no-padding {
 	padding: 5px !important;
 }
-
-/** Hiding stuff on typed blog posts **/
-
-.type-our-team .sharepost .about_author .related_posts {
-	display: none !important;
-}
