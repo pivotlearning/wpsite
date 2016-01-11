@@ -20,6 +20,14 @@ if ( ! isset( $content_width ) ) $content_width = 1170;
 ?>
 </head>
 <body <?php body_class('bg-cover'); ?>>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=286148241411530";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="main" class="layout-<?php 	
 		$mclass =  $king->cfg['layout']; 
 		if( !empty( $post->post_name ) ){
