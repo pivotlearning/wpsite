@@ -87,3 +87,6 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
+
+/* Turn off auto-updates to keep site in sync with repo */
+define( 'AUTOMATIC_UPDATER_DISABLED', true );
