@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
 
 function vc_vc_grid_item_form_field( $settings, $value ) {
 	require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/editor/class-vc-grid-item-editor.php' );
@@ -22,7 +25,7 @@ function vc_vc_grid_item_form_field( $settings, $value ) {
 	$grid_item_posts = get_posts( array(
 		'posts_per_page' => '-1',
 		'orderby' => 'post_title',
-		'post_type' => Vc_Grid_Item_Editor::postType()
+		'post_type' => Vc_Grid_Item_Editor::postType(),
 	) );
 	foreach ( $grid_item_posts as $post ) {
 		$output .= '<option  data-vc-link="' . esc_url( get_edit_post_link( $post->ID ) ) . '"value="' . $post->ID . '"'
@@ -37,8 +40,7 @@ function vc_vc_grid_item_form_field( $settings, $value ) {
 function vc_load_vc_grid_item_param() {
 	vc_add_shortcode_param(
 		'vc_grid_item',
-		'vc_vc_grid_item_form_field',
-		vc_asset_url( 'js/params/vc_grid_item/param.js' )
+		'vc_vc_grid_item_form_field'
 	);
 }
 
@@ -86,8 +88,12 @@ function vc_gitem_create_link_real( $atts, $post, $default_class = '', $title = 
 	$link = '';
 	$target = '';
 	$title_attr = '';
+	$link_css_class = 'vc_gitem-link';
 	if ( isset( $atts['link'] ) ) {
 		$link_css_class = 'vc_gitem-link' . ( strlen( $default_class ) > 0 ? ' ' . $default_class : '' );
+		if ( strlen( $atts['el_class'] ) > 0 ) {
+			$link_css_class .= $atts['el_class'];
+		}
 		if ( 'custom' === $atts['link'] && ! empty( $atts['url'] ) ) {
 			$link = vc_build_link( $atts['url'] );
 			if ( strlen( $link['target'] ) ) {
@@ -108,7 +114,7 @@ function vc_gitem_create_link_real( $atts, $post, $default_class = '', $title = 
 		} elseif ( 'image_lightbox' === $atts['link'] ) {
 			$link = 'a' . vc_gitem_template_attribute_post_image_url_attr_prettyphoto( '', array(
 					'post' => $post,
-					'data' => $link_css_class
+					'data' => esc_attr( $link_css_class ),
 				) );
 		}
 	}
