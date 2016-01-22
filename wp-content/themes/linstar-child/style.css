@@ -1290,5 +1290,10 @@ section.recent-posts .other-recent-posts li::after {
 }
 
 .featurequote {
-	font-size: 2em;
+	font-size: 1.5em;
+	margin: 0 200 0 200;
+}
+
+.featurequotecredit {
+	float: right;
 }
