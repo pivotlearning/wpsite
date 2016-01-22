@@ -1288,3 +1288,7 @@ section.recent-posts .other-recent-posts li::after {
 .yamm-content .row ul.no-padding {
 	padding: 5px !important;
 }
+
+.featurequote {
+	font-size: 2em;
+}
