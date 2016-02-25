@@ -357,7 +357,7 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 	 * @param null|string $interval Defaults to hook if not supplied
 	 * @param array       $args
 	 */
-	public function schedule_event( $hook, $interval = null, $args = array() ) {
+	function schedule_event( $hook, $interval = null, $args = array() ) {
 		if ( is_null( $interval ) ) {
 			$interval = $hook;
 		}
@@ -371,7 +371,7 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 	 *
 	 * @param string $hook
 	 */
-	public function clear_scheduled_event( $hook ) {
+	function clear_scheduled_event( $hook ) {
 		$timestamp = wp_next_scheduled( $hook );
 		if ( $timestamp ) {
 			wp_unschedule_event( $timestamp, $hook );
@@ -433,28 +433,21 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 	 * @param bool   $return_on_error
 	 * @param bool   $force_new_s3_client if we are deleting in bulk, force new S3 client
 	 *                                    to cope with possible different regions
-	 *
-	 * @return bool
 	 */
 	function delete_s3_objects( $region, $bucket, $objects, $log_error = false, $return_on_error = false, $force_new_s3_client = false ) {
-		$chunks = array_chunk( $objects, 1000 );
-
 		try {
-			foreach ( $chunks as $chunk ) {
-				$this->get_s3client( $region, $force_new_s3_client )->deleteObjects( array(
-					'Bucket'  => $bucket,
-					'Objects' => $chunk,
-				) );
-			}
+			$this->get_s3client( $region, $force_new_s3_client )->deleteObjects( array(
+				'Bucket'  => $bucket,
+				'Objects' => $objects,
+			) );
 		} catch ( Exception $e ) {
 			if ( $log_error ) {
 				error_log( 'Error removing files from S3: ' . $e->getMessage() );
 			}
-
-			return false;
+			if ( $return_on_error ) {
+				return;
+			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -651,25 +644,16 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 		$s3client = $this->get_s3client( $region, $force_new_s3_client );
 
 		$args = array(
-			'Bucket'      => $bucket,
-			'Key'         => $prefix . $file_name,
-			'SourceFile'  => $file_path,
-			'ACL'         => $acl,
-			'ContentType' => $type,
+			'Bucket'     => $bucket,
+			'Key'        => $prefix . $file_name,
+			'SourceFile' => $file_path,
+			'ACL'        => $acl,
 		);
 
 		// If far future expiration checked (10 years)
 		if ( $this->get_setting( 'expires' ) ) {
 			$args['CacheControl'] = 'max-age=315360000';
 			$args['Expires']      = date( 'D, d M Y H:i:s O', time() + 315360000 );
-		}
-
-		// Handle gzip on supported items
-		if ( $this->should_gzip_file( $file_path, $type ) && false !== ( $gzip_body = gzencode( file_get_contents( $file_path ) ) ) ) {
-			unset( $args['SourceFile'] );
-
-			$args['Body']            = $gzip_body;
-			$args['ContentEncoding'] = 'gzip';
 		}
 		$args = apply_filters( 'as3cf_object_meta', $args, $post_id );
 
@@ -785,51 +769,6 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 		}
 
 		return $s3object;
-	}
-
-	/**
-	 * Should gzip file
-	 *
-	 * @param string $file_path
-	 * @param string $type
-	 *
-	 * @return bool
-	 */
-	protected function should_gzip_file( $file_path, $type ) {
-		$mimes = $this->get_mime_types_to_gzip( true );
-
-		if ( in_array( $type, $mimes ) && is_readable( $file_path ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Get mime types to gzip
-	 *
-	 * @param bool $media_library
-	 *
-	 * @return array
-	 */
-	protected function get_mime_types_to_gzip( $media_library = false ) {
-		$mimes = apply_filters( 'as3cf_gzip_mime_types', array(
-			'css'   => 'text/css',
-			'eot'   => 'application/vnd.ms-fontobject',
-			'html'  => 'text/html',
-			'ico'   => 'image/x-icon',
-			'js'    => 'application/javascript',
-			'json'  => 'application/json',
-			'otf'   => 'application/x-font-opentype',
-			'rss'   => 'application/rss+xml',
-			'svg'   => 'image/svg+xml',
-			'ttf'   => 'application/x-font-ttf',
-			'woff'  => 'application/font-woff',
-			'woff2' => 'application/font-woff2',
-			'xml'   => 'application/xml',
-		), $media_library );
-
-		return $mimes;
 	}
 
 	/**
@@ -3183,39 +3122,5 @@ class Amazon_S3_And_CloudFront extends AWS_Plugin_Base {
 		}
 
 		return $attachment_counts;
-	}
-
-	/**
-	 * Throw error
-	 *
-	 * @param string $code
-	 * @param string $message
-	 *
-	 * @return WP_Error
-	 */
-	public function _throw_error( $code, $message = '' ) {
-		return new WP_Error( $code, $message );
-	}
-
-	/**
-	 * More info link
-	 *
-	 * @param string $url
-	 * @param string $hash
-	 * @param bool   $append_campaign
-	 *
-	 * @return string
-	 */
-	public function more_info_link( $url, $hash = '', $append_campaign = true ) {
-		if ( $append_campaign ) {
-			$campaign = $this->is_pro() ? 'os3-pro-plugin' : 'os3-free-plugin';
-			$url .= '?utm_source=insideplugin&utm_medium=web&utm_content=more-info&utm_campaign=' . $campaign;
-		}
-
-		if ( ! empty( $hash ) ) {
-			$url .= '#' . $hash;
-		}
-
-		return sprintf( '<a class="more-info" href="%s">%s</a> &raquo;', esc_url( $url ), __( 'More info', 'amazon-s3-and-cloudfront' ) );
 	}
 }
