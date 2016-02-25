@@ -39,8 +39,10 @@ class EasyOptInsActivity {
 			'period' => __( 'Last %d days' ),
 			'all_time' => __( 'All time' )
 		);
-
-		add_filter( 'request', array( $this, 'track_activity' ) );
+		
+		if ( !defined ( 'FCA_EOI_DISABLE_STATS_TRACKING' )) {
+			add_filter( 'request', array( $this, 'track_activity' ) );
+		}	
 	}
 
 	public function get_text( $name, $category = null, $parameters = array() ) {
@@ -102,8 +104,10 @@ class EasyOptInsActivity {
 				
 			}
 		}
-
+		
 		exit;
+
+		
 	}
 
 	public function format_column_text( $column_name, $value ) {
@@ -219,15 +223,20 @@ class EasyOptInsActivity {
 	}
 
 	private function add_activity( $form_id, $activity_type ) {
-		global $wpdb;
+	
+		if ( !defined ( 'FCA_EOI_DISABLE_STATS_TRACKING' )) {
+		
+			global $wpdb;
 
-		$time = current_time( 'mysql', 1 );
-		$wpdb->insert( $this->table_name, array(
-			'form_id'   => $form_id,
-			'type'      => $activity_type,
-			'timestamp' => $time,
-			'day'       => $time
-		), array( '%d', '%s', '%s', '%s' ) );
+			$time = current_time( 'mysql', 1 );
+			$wpdb->insert( $this->table_name, array(
+				'form_id'   => $form_id,
+				'type'      => $activity_type,
+				'timestamp' => $time,
+				'day'       => $time
+			), array( '%d', '%s', '%s', '%s' ) );
+		
+		}
 	}
 
 	private function get_form_stats_query( $activity_type, $day_interval ) {

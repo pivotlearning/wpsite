@@ -28,7 +28,7 @@ function cptui_post_type_enqueue_scripts() {
 		$types[] = $type['name'];
 	}*/
 
-	wp_enqueue_script( 'cptui', plugins_url( 'js/cptui.js', dirname(__FILE__) ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion' ), CPT_VERSION, true );
+	wp_enqueue_script( 'cptui', plugins_url( 'js/cptui.js', dirname(__FILE__) ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion' ), CPTUI_VERSION, true );
 	wp_localize_script(	'cptui', 'cptui_type_data',
 		array(
 			'confirm' => __( 'Are you sure you want to delete this?', 'custom-post-type-ui' ),
@@ -470,8 +470,8 @@ function cptui_manage_post_types() {
 									array( 'attr' => '1', 'text' => __( 'True', 'custom-post-type-ui' ), 'default' => 'true' )
 								)
 							);
-							$selected           = ( isset( $current ) ) ? disp_boolean( $current['show_in_nav_menus'] ) : '';
-							$select['selected'] = ( ! empty( $selected ) ) ? $current['show_in_nav_menus'] : '';
+							$selected = ( isset( $current ) && ! empty( $current['show_in_nav_menus'] ) ) ? disp_boolean( $current['show_in_nav_menus'] ) : '';
+							$select['selected'] = ( ! empty( $selected ) && ! empty( $current['show_in_nav_menus'] ) ) ? $current['show_in_nav_menus'] : '';
 							echo $ui->get_select_input( array(
 								'namearray'  => 'cpt_custom_post_type',
 								'name'       => 'show_in_nav_menus',
@@ -490,8 +490,8 @@ function cptui_manage_post_types() {
 									array( 'attr' => '1', 'text' => __( 'True', 'custom-post-type-ui' ) )
 								)
 							);
-							$selected = ( isset( $current ) ) ? disp_boolean( $current['show_in_rest'] ) : '';
-							$select['selected'] = ( !empty( $selected ) ) ? $current['show_in_rest'] : '';
+							$selected = ( isset( $current ) && ! empty( $current['show_in_rest'] ) ) ? disp_boolean( $current['show_in_rest'] ) : '';
+							$select['selected'] = ( !empty( $selected ) && ! empty( $current['show_in_rest'] ) ) ? $current['show_in_rest'] : '';
 							echo $ui->get_select_input( array(
 								'namearray'     => 'cpt_custom_post_type',
 								'name'          => 'show_in_rest',

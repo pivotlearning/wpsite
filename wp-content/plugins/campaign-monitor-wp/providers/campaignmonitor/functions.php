@@ -129,9 +129,8 @@ function campaignmonitor_add_user( $settings, $user_data, $list_id ) {
 	if ( empty( $helper ) ) {
 		return false;
 	}
-
-	$eoi_form_meta = K::get_var( 'eoi_form_meta', $settings, array() );
-	$api_key = K::get_var( 'campaignmonitor_api_key', $eoi_form_meta );
+	
+	$api_key = $user_data[campaignmonitor_api_key];
 
 	// Subscribe user
 	$auth = array( 'api_key' => $api_key );
@@ -142,7 +141,7 @@ function campaignmonitor_add_user( $settings, $user_data, $list_id ) {
 		'Resubscribe' => true,
 	) );
 
-	return $result->was_successful() ? true : false;
+	return $result->was_successful() ? true : $result->http_status_code;
 }
 
 function campaignmonitor_ajax_get_lists() {

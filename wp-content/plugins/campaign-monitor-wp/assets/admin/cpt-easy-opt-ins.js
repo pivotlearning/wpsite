@@ -1,9 +1,11 @@
 jQuery( document ).ready( function( $ ) {
-
-	// How long to throttle
-	var t = 100;
-
-	// Used to decide weither to show a message on beforeunload or not
+	
+	// Apply select2
+	$( '.select2' ).select2();
+	
+	// Change buttons texts 
+	$('#publish').val('Save');
+	// Used to decide whether to show a message on beforeunload or not
 	var ts = time();
 
 	// Is this a new opt-in form
@@ -48,6 +50,39 @@ jQuery( document ).ready( function( $ ) {
 		.find( ' > :not(.inside)' )
 		.remove()
 	;
+	
+	// Show/hide animations checkbox
+	
+	if (document.getElementById("fca_eoi_show_animation_checkbox")) {
+			if (!($('#fca_eoi_show_animation_checkbox')[0].checked)) {
+				$( '#fca_eoi_animations_div' ).hide();
+			}
+		}
+		
+	// Add toggle to animations checkbox
+			
+	$('#fca_eoi_show_animation_checkbox').click(function () {
+		$("#fca_eoi_animations_div").toggle('fast');
+	});
+	
+	//Display change text when you pick a new animation
+		
+	$( '#fca_eoi_animations' ).select2().on("select2-open", function() {
+		$( "#fca_eoi_animations_choice_text" ).removeClass();
+	});
+		
+	$( '#fca_eoi_animations' ).select2().on("select2-close", function() {
+		if (this.value != 'None') {
+		
+			$( "#fca_eoi_animations_choice_text" ).addClass( 'animated ' + this.value );
+			$( "#fca_eoi_animations_choice_text" ).text( "Solid choice!  You've selected a great entrance effect.");
+			
+		}else{
+		
+			$( "#fca_eoi_animations_choice_text" ).text('');
+		}
+	});
+		
 
 	// Show only the selected provider
 	$( '[name="fca_eoi[provider]"]' )
@@ -113,9 +148,6 @@ jQuery( document ).ready( function( $ ) {
 	// Hide Tabs
 	$( '#fca_eoi_meta_box_nav' ).hide();
 
-	// Apply select2
-	$( '.select2' ).select2();
-
 	// Switch layout when screenshot clicked
 	$( '.fca_eoi_layout' ).click( function( e ) {
 		// Determine the layout that was clicked
@@ -134,37 +166,6 @@ jQuery( document ).ready( function( $ ) {
 		$( '#fca_eoi_publish_' + fca_eoi_layout_type( fca_eoi_current_layout_id() ) ).show();
 		
 	
-		//Display change text when you pick a new animation
-		
-		$( '#fca_eoi_animations' ).select2().on("select2-open", function() {
-			$( "#fca_eoi_animations_choice_text" ).removeClass();
-		});
-		
-		$( '#fca_eoi_animations' ).select2().on("select2-close", function() {
-			if (this.value != 'None') {
-			
-				$( "#fca_eoi_animations_choice_text" ).addClass( 'animated ' + this.value );
-				$( "#fca_eoi_animations_choice_text" ).text( "Solid choice!  You've selected a great entrance effect.");
-				
-			}else{
-			
-				$( "#fca_eoi_animations_choice_text" ).text('');
-			}
-		});
-			
-		if (document.getElementById("fca_eoi_show_animation_checkbox")) {
-			if (!($('#fca_eoi_show_animation_checkbox')[0].checked)) {
-				$( '#fca_eoi_animations_div' ).hide();
-			}
-		}
-		
-		// Show/hide animations checkbox
-		
-		
-		$('#fca_eoi_show_animation_checkbox').click(function () {
-			$("#fca_eoi_animations_div").toggle(this.checked);
-		});
-		
 		// Go back to the build tab, unless we are in a new form and the switcher was not clicked
 		if( fca_eoi_new_post && ! layout_button_clicked ) {
 			layout_button_clicked = true;
@@ -172,7 +173,6 @@ jQuery( document ).ready( function( $ ) {
 		} else {
 			$( 'a[href="#fca_eoi_meta_box_build"]' ).click();
 		}
-		
 				
 		//Hide the animations unless the lightbox/popup layout type is selected
 		if ( layout_id.indexOf('lightbox') != -1 ) {
@@ -185,11 +185,9 @@ jQuery( document ).ready( function( $ ) {
 			}else {
 				$( '.eoi-custom-animation-form' ).hide();
 			}
-		}
-
-		
-		
+		}		
 	} );
+	
 
 	// Handle "Switch layout button"
 	$( document ).on( 'click', '#fca_eoi_show_setup', function( e ) {
@@ -433,12 +431,8 @@ jQuery( document ).ready( function( $ ) {
 					error_tooltip.show( error_id );
 				} );
 			};
-
-			if ( immediate ) {
-				refresh();
-			} else {
-				setTimeout( refresh, t * 2 );
-			}
+			
+			refresh();
 		},
 
 		update_for_current_section: function( immediate ) {
@@ -447,6 +441,20 @@ jQuery( document ).ready( function( $ ) {
 			}
 		}
 	};
+	
+	// Expand working fieldset		
+	var expand_fieldset = function ( fieldset_id ) {		
+		$( '#fca_eoi_fieldset_' + fieldset_id + '.accordion-section:not(.open) .accordion-section-title').click();		
+	};		
+		
+	$( '#fca_eoi_preview' ).click( function( event ) {		
+		var $element = $( document.elementFromPoint( event.clientX, event.clientY ) ).closest( '[data-fca-eoi-fieldset-id]' );		
+		if ( $element.length > 0 ) {		
+			expand_fieldset( $element.data( 'fca-eoi-fieldset-id' ) );		
+		} else {		
+			expand_fieldset( 'form' );		
+		}		
+	} );		
 
 
 	// Rebuild preview when an element is changed,
@@ -517,32 +525,17 @@ jQuery( document ).ready( function( $ ) {
 			error_tooltip.update_for_current_section( true );
 
 			// console.log( 'Template Rebuilt (in ' + ( new Date().getMilliseconds() - start_time) + 'ms)' )
-		} , t ) );
+		} , 100 ) );
 	;
 
-	// Detect remote change
-	$( 'input, textarea' ).each( function() {
-		var $this = $( this );
 
-		$this.data( 'value', $this.val() );
-		setInterval( function() {
-			if( $this.val() !== $this.data( 'value' ) ) {
-				// Trigger a change only if the element is not currently focused
-				if( $this.not( ':focus' ) ) {
-					$this.change();
-				}
-				$this.data( 'value', $this.val() );
-			}
-		}, t );
-	} );
-
-	$( '[id^="fca_eoi_fieldset_"].accordion-section .accordion-section-title' ).live('click', function() {
+	$( document ).on('click', '[id^="fca_eoi_fieldset_"].accordion-section .accordion-section-title', function() {
 		var $this = $( this );
 		var $parent = $this.closest( '[id^="fca_eoi_fieldset_"]' );
 		var field_id = $parent.attr('id');
 
 		if ( field_id == 'fca_eoi_fieldset_error_text' && $parent.hasClass('open') ) {
-      error_tooltip.update();
+			error_tooltip.update();
 		} else {
 			error_tooltip.hide_all();
 		}
@@ -550,30 +543,12 @@ jQuery( document ).ready( function( $ ) {
 
 	$( '[name^="fca_eoi[error_text_"]' ).change( error_tooltip.update );
 
-	// Expand working fieldset
-	var expand_fieldset = function ( fieldset_id ) {
-		$( '#fca_eoi_fieldset_' + fieldset_id + '.accordion-section:not(.open) .accordion-section-title').click();
-	};
-
-	$( '#fca_eoi_preview' ).click( function( event ) {
-		var $element = $( document.elementFromPoint( event.clientX, event.clientY ) ).closest( '[data-fca-eoi-fieldset-id]' );
-		if ( $element.length > 0 ) {
-			expand_fieldset( $element.data( 'fca-eoi-fieldset-id' ) );
-		} else {
-			expand_fieldset( 'form' );
-		}
-	} );
-
-	setTimeout( function() {
-		expand_fieldset( 'form' );
-	}, t );
-
 	// Highlight current preview element
-	setInterval( function() {
-
-		$( '.fca_eoi_highlighted', '#fca_eoi_preview' ).removeClass( 'fca_eoi_highlighted' );
-		$( '#fca_eoi_settings .accordion-section.open' ).each( function() {
-			
+	
+	$( '#fca_eoi_settings .accordion-section' ).each( function() {
+	
+		$(this).click( function() {
+			$( '.fca_eoi_highlighted', '#fca_eoi_preview' ).removeClass( 'fca_eoi_highlighted' );
 			var $fieldset = $( this );
 			var $fieldset_id = $fieldset.attr( 'id' ).replace( 'fca_eoi_fieldset_', '' );
 			var $element = $( '[data-fca-eoi-fieldset-id=' + $fieldset_id + ']', '#fca_eoi_preview' );
@@ -584,8 +559,14 @@ jQuery( document ).ready( function( $ ) {
 			} else {
 				$element.closest( 'p, div, h1, h2, h3, h4, h5, h6' ).addClass( 'fca_eoi_highlighted' );
 			}
-		} );
-	}, t );
+			
+			// If nothing else was highlighted, highlight the whole form
+			if ( $( '.fca_eoi_highlighted' ).length === 0 ) {
+				$( '#fca_eoi_preview_form' ).addClass( 'fca_eoi_highlighted' );
+			}
+				
+		});
+	});
 
 	// Disable submit of from the preview form
 	$( document ).on( 'keypress', '#fca_eoi_preview input', function( e ) {
@@ -599,34 +580,6 @@ jQuery( document ).ready( function( $ ) {
 		e.preventDefault();
 	} );
 
-	// Detect change on WordPress editors
-	setInterval( function() {
-
-		$( '.wp-editor-wrap' ).each( function() {
-			
-			var $this = $( this );
-			var $iframe = $( 'iframe', $this );
-			var value = $iframe.contents().find('body').html();
-			var value_old = $this.data('value');
-
-
-			// Exit if the iframe was not added yet
-			if( ! $iframe.length ) {
-				return;
-			}
-
-			// Ignore <p></p>
-			if( - 1 != [ '<p>&nbsp;</p>', '<p><br data-mce-bogus="1"></p>' ].indexOf( value ) ) {
-				value = '';
-			}
-
-			// Value changed? Update textarea
-			if( value !== value_old ) {
-				$this.data( 'value', value );
-				$( '.wp-editor-area', $this ).val( value ).change();
-			}
-		} );
-	}, t );
 
 	// Generates editables fields html 
 	function fca_eoi_property_field_html( property, property_name, property_label, property_field, property_value ){
@@ -695,20 +648,10 @@ jQuery( document ).ready( function( $ ) {
 	;
 
 	// If adding a new opt-in form, focus on the title
-	setTimeout( 
-		function() {
-			if( $( '#title' ).val() ) {
-				return;
-			}
+	if( $( '#title' ).val() === "Enter name here" ) {
 			$( '#title' ).focus();
 			$( '#title-prompt-text' ).removeClass( 'screen-reader-text' );
-		} , 500
-	);
-
-	// Make sure the form is updated once (headline size would't update if we don't)
-	setTimeout( function() { jQuery( '[name="fca_eoi[name_placeholder]"]' ).change(); } , 500 );
-	setTimeout( function() { jQuery( '[name="fca_eoi[name_placeholder]"]' ).change(); } , 1500 );
-	setTimeout( function() { jQuery( '[name="fca_eoi[name_placeholder]"]' ).change(); } , 2500 );
+	}
 
 	// Handle jscolor's #transparent link
 	$( 'a[href="#transparent"]' ).click( function( e ) {
@@ -781,6 +724,34 @@ jQuery( document ).ready( function( $ ) {
 		.bind( 'click focus mouseenter', function() { $( this ).select() } )
 		.mouseup( function( e ) { e.preventDefault } )
 	;
+	
+	// Show/hide Thank you page modes
+	currentThanksSetting = $( 'input[name="fca_eoi[thankyou_page_mode]"]:checked' ).val();
+	if (currentThanksSetting == 'ajax') {
+		$('#fca_eoi_thankyou_redirect').hide();
+	} else {
+		$('#fca_eoi_thankyou_ajax_msg').hide();		
+	}
+	
+	//Turn on redirect mode as default
+	if (currentThanksSetting == undefined) {
+		$( 'input[name="fca_eoi[thankyou_page_mode]"]' ).first().prop("checked", true);
+	}
+	
+	$( 'input[name="fca_eoi[thankyou_page_mode]"]' )
+		.on( 'click change', function() {
+			var $this = $( this );
+			var mode = $this.val();
+			
+			if (mode == 'ajax') {
+				$('#fca_eoi_thankyou_redirect').hide( 'fast' );
+				$('#fca_eoi_thankyou_ajax_msg').show( 'fast' );
+			} else {
+				$('#fca_eoi_thankyou_redirect').show( 'fast' );
+				$('#fca_eoi_thankyou_ajax_msg').hide( 'fast' );		
+			}
+					
+		} );
 
 	// Show/hide popup publication modes
 	$( 'input[name="fca_eoi[publish_lightbox_mode]"]' )
@@ -859,5 +830,5 @@ jQuery( window ).load( function( $ ) {
 	jQuery( '#fca_eoi_layout_select' ).change();
 	
 	// Fake triggers to load template
-	jQuery( '#poststuff' ).fadeTo( 'fast', '1' );
+	jQuery( '#poststuff' ).fadeTo( 1, '1' );
 } );

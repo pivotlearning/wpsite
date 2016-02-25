@@ -12,5 +12,5 @@ $layout = fca_eoi_layout_descriptor_1( 'Postbox 1', 'postbox_1', array(
 	'name_placeholder' => 'Name',
 	'email_placeholder' => 'Email',
 	'button_copy' => 'Join Now',
-	'privacy_copy' => "100% Privacy. We don't spam.",
+	'privacy_copy' => "We respect your privacy.",
 ) );

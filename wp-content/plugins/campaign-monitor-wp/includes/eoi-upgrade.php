@@ -146,12 +146,13 @@ class EasyOptInsUpgrade {
                         <ul>
                             <li><div class="dashicons dashicons-yes"></div> Mobile-friendly Popups</li>
                             <li><div class="dashicons dashicons-yes"></div> Smart Popup Targeting</li>
-                            <li><div class="dashicons dashicons-yes"></div> More Layouts</li>
+                            <li><div class="dashicons dashicons-yes"></div> 7 Additional Layouts</li>
                             <li><div class="dashicons dashicons-yes"></div> Two-Step Optins</li>
                             <li><div class="dashicons dashicons-yes"></div> Optin Bait Delivery</li>
                             <li><div class="dashicons dashicons-yes"></div> Exit Intervention Popups</li>
                             <li><div class="dashicons dashicons-yes"></div> Attention Grabbing Popup Effects</li>
-                            <li><div class="dashicons dashicons-yes"></div> Priority Email Support</li>
+							<li><div class="dashicons dashicons-yes"></div> AJAX Success Message</li>
+							<li><div class="dashicons dashicons-yes"></div> Priority Email Support</li>
                             <?php if ( $is_mailchimp ): ?>
                                 <li><div class="dashicons dashicons-yes"></div> Mailchimp Single Optin</li>
                             <?php endif ?>
@@ -175,7 +176,7 @@ class EasyOptInsUpgrade {
         $script = basename( $_SERVER['SCRIPT_NAME'] );
         if ( $script == 'post.php' || $script == 'post-new.php' ) { ?>
             <script>
-                jQuery( function( $ ) {
+                jQuery(document).ready( function($) {
                     var layouts_message = <?php echo json_encode( str_replace(
                         array( '__class__', '__text__' ),
                         array( 'fca_eoi_upgrade_bar fca_eoi_upgrade_bar_inner', 'Upgrade to Premium for more layouts & design options' ),
@@ -207,6 +208,23 @@ class EasyOptInsUpgrade {
                             $template
                         ) ) ?> );
                     }
+					
+					var publication_message = <?php echo json_encode( str_replace(
+                        array( '__class__', '__text__' ),
+                        array( 'fca_eoi_upgrade_bar fca_eoi_upgrade_bar_inner', 'Want better targeting options, e.g. based on pages/categories visited, exit intervention and more? Upgrade to Premium' ),
+                        $template
+                    ) ) ?>;
+
+                    $( '#fca_eoi_publish_lightbox' ).children().last().after( publication_message );
+					
+					var thanks_redirect_message = <?php echo json_encode( str_replace(
+                        array( '__class__', '__text__' ),
+                        array( 'fca_eoi_upgrade_bar fca_eoi_upgrade_bar_inner', 'Wanna display a "Thank You" message immediately upon submission using AJAX (without page reload or redirect)? Upgrade to Premium' ),
+                        $template
+                    ) ) ?>;
+
+                    $( '#fca_eoi_thankyou_ajax_msg' ).after( thanks_redirect_message );
+					
                 } );
             </script>
         <?php }

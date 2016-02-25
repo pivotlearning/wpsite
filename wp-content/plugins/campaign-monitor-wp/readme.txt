@@ -6,8 +6,8 @@ Tags: campaign monitor, campaignmonitor, campaign monitor forms, campaignmonitor
 Author URI: https://fatcatapps.com/
 Plugin URI: https://fatcatapps.com/optincat/upgrade/?utm_campaign=description%2Bcta&utm_source=https%3A%2F%2Fwordpress.org%2Fplugins%2Fcampaign-monitor-wp%2F&utm_medium=referral
 Requires at least: 3.9.1
-Tested up to: 4.4
-Stable tag: 1.4.2
+Tested up to: 4.4.2
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,10 +87,22 @@ In order to use this plugin you'll need a Campaign Monitor account + Campaign Mo
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. In your sidebar, select 'Optin Cat -> Add New' to create a new table
 
+== Frequently Asked Questions ==
+
+= How to disable impression & conversion tracking? =
+Simply add `define( 'FCA_EOI_DISABLE_STATS_TRACKING', TRUE);` to your theme's functions.php file.
+
+
 == Changelog ==
 
-= Campaign Monitor Forms by Optin Cat 1.4.2 =
-* Fixed a bug that stopped the optin form validation to work and/or caused the custom Error Text to not be displayed correctly in some cases.
+= Campaign Monitor Forms by Optin Cat 1.5.1 =
+* Fixed a JS bug introduced with 1.5.0
+
+= Campaign Monitor Forms by Optin Cat 1.5.0 =
+* Improved performance of Optin Cat form editor in the WP backend (it now loads faster)
+* Impression tracking can now be disabled
+* Small UI improvements to Optin Cat form editor
+* Numerous bug fixes
 
 = Campaign Monitor Forms by Optin Cat 1.4.1 =
 * Bugfix: Fixed a conflict with the Beaver Builder plugin

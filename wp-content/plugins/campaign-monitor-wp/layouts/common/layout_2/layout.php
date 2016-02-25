@@ -1,6 +1,7 @@
 <?php
 
 function fca_eoi_layout_descriptor_2( $name, $layout_id, $texts ) {
+	require_once FCA_EOI_PLUGIN_DIR . 'includes/eoi-layout.php';
 	$layout = new EasyOptInsLayout( $layout_id );
 	$class = $layout->layout_class;
 

@@ -36,7 +36,7 @@ class EasyOptInsPostTypes {
 		add_action( 'init', array( $this, 'more_settings' ) );
 
 		// Handle AJAX submission (unused)
-		add_action( 'init', array( $this, 'handle_submission' ) );
+		//add_action( 'init', array( $this, 'handle_submission' ) );
 
 		// Initiate action hooks
 		add_action( 'save_post', array( $this, 'save_meta_box_content' ), 1, 2 );
@@ -57,12 +57,13 @@ class EasyOptInsPostTypes {
 		// add_action( 'admin_footer', array( $this, 'disable_metabox_toggle' ) );
 
 		add_action( 'wp_ajax_fca_eoi_subscribe', array( $this, 'ajax_subscribe' ) );
-
+		add_action( 'wp_ajax_nopriv_fca_eoi_subscribe', array( $this, 'ajax_subscribe' ) );
+		
 		add_filter( 'get_user_option_screen_layout_easy-opt-ins', array( $this, 'force_one_column' ) );
 
 		add_filter( 'get_user_option_meta-box-order_easy-opt-ins', array( $this, 'order_columns' ) );
 
-		add_filter( 'gettext', array( $this, 'override_text' ) );
+		add_filter( 'post_updated_messages', array( $this, 'override_text' ) );
 
 		add_filter( 'bulk_actions-edit-easy-opt-ins', array( $this, 'disable_bulk_edit' ) );
 
@@ -75,11 +76,16 @@ class EasyOptInsPostTypes {
 		add_filter( 'init', array( $this, 'bind_content_filter' ), 10 );
 
 		add_filter( 'template_redirect', array( $this, 'parse_tc_condition_request' ), 1 );
-
+	
 		//ADD ACTIONS TO GET THE ENTIRE PAGE OUTPUT IN BUFFER
-		add_action('wp_head', array( $this, 'fca_eoi_buffer_start' ));
-		add_action('wp_footer', array( $this, 'fca_eoi_buffer_end' ));
-
+	
+		if ( wp_get_theme() == 'Customizr' ) {
+			add_filter( 'the_content', array( $this, 'scan_for_shortcodes' ) );
+		} else {
+			add_action('wp_head', array( $this, 'fca_eoi_buffer_start' ));
+			add_action('wp_footer', array( $this, 'fca_eoi_buffer_end' ));	
+		}
+		
 		add_filter( 'init', array( $this, 'request_prepare_lightbox' ) );
 
 		add_filter( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -97,7 +103,7 @@ class EasyOptInsPostTypes {
 
 		// Handle licensing
 		if( count( $providers_available ) > 1 ) {
-			require $this->settings[ 'plugin_dir' ] . 'includes/licensing.php';
+			require_once $this->settings[ 'plugin_dir' ] . 'includes/licensing.php';
 			new  EasyOptInsLicense( $this->settings );
 		}
 	}
@@ -262,9 +268,15 @@ class EasyOptInsPostTypes {
 	}
 
 	public function dashboard_setup() {
+		
+		if ( defined ( 'FCA_EOI_DISABLE_STATS_TRACKING' )) {
+			$title = 'Optin Cat Summary (TRACKING DISABLED)';
+		} else {
+			$title = 'Optin Cat Summary';
+		}
 		add_meta_box(
 			'fca_eoi_dashboard_widget',
-			'Optin Cat Summary',
+			$title,
 			array( $this, 'add_dashboard_widget' ),
 			'dashboard',
 			'normal',
@@ -400,7 +412,7 @@ class EasyOptInsPostTypes {
 		);
 		add_meta_box(
 			'fca_eoi_meta_box_thanks',
-			__( 'Thank You Page' ),
+			__( 'Thank You Message' ),
 			array( &$this, 'meta_box_content_thanks' ),
 			'easy-opt-ins',
 			'side',
@@ -452,7 +464,6 @@ class EasyOptInsPostTypes {
 
 		$fca_eoi = get_post_meta( $post->ID, 'fca_eoi', true );
 
-		echo '<h2>' . __( 'Choose a Layout' ) . '</h2>';
 		echo '<script id="fca_eoi_texts" type="application/json">{ "headline_copy": "Headline Copy", "description_copy": "Description Copy", "name_placeholder": "Name Placeholder", "email_placeholder": "Email Placeholder", "button_copy": "Button Copy", "privacy_copy": "Privacy Copy" }</script>';
 			
 		// Build the layouts array
@@ -484,10 +495,16 @@ class EasyOptInsPostTypes {
 			);
 		}
 		echo '</ul>';
-	
+		
+		$file = plugin_dir_path( __FILE__ ) . "cache";
+		$fca_eoi_global_scss_array = unserialize (file_get_contents($file)); 
+
 		// Layout types
 		foreach ( $layouts_types as $layout_type ) {
+			
 			echo '<div class="fca_eoi_accordion_tab" id="layouts_type_' . $layout_type . '">';
+			
+
 			
 			foreach ( glob( $this->settings[ 'plugin_dir' ] . "layouts/$layout_type/*", GLOB_ONLYDIR ) as $layout_path ) {
 				// Grab layout details
@@ -503,6 +520,7 @@ class EasyOptInsPostTypes {
 				$screenshot_url  = $layout_helper->url_to_resource( 'screenshot', 'png' );
 
 				include $php_path;
+				
 				if ( EasyOptInsLayout::uses_new_css() ) {
 					$layout[ 'css' ] = file_exists( $scss_path )
 						? '#fca_eoi_preview_form_container {' .
@@ -524,8 +542,14 @@ class EasyOptInsPostTypes {
 				$layout[ 'css' ] = sprintf( '$ltr: %s;', is_rtl() ? 'false' : 'true' )
 					. $layout[ 'css' ]
 				;
-				$scss = $layout_helper->new_scss_compiler();
-				$layout[ 'css' ] = $scss->compile( $layout[ 'css' ] );
+				
+				//$scss = $layout_helper->new_scss_compiler();  //fix these two lines
+				//$layout[ 'css' ] = $scss->compile( $layout[ 'css' ] );  //fix these two lines
+				$name = $layout[ 'css' ];						
+				$layout[ 'css' ] = $fca_eoi_global_scss_array[$name];
+				
+				
+				
 				if ( EasyOptInsLayout::uses_new_css() ) {
 					$layout[ 'template' ] = str_replace(
 						'{{{layout}}}',
@@ -663,6 +687,7 @@ class EasyOptInsPostTypes {
 				}
 
 				echo $layout_output;
+				
 			}
 			echo '</div>';
 		}
@@ -1429,7 +1454,7 @@ class EasyOptInsPostTypes {
 					'checked' => K::get_var( 'show_fatcatapps_link', $fca_eoi ),
 				),
 				array(
-					'format' => '<p><label>:input Show <a href="http://fatcatapps.com/" target="_blank">Easy Opt-ins</a> Branding</label></p>'
+					'format' => '<p><label>:input Show <a href="http://fatcatapps.com/" target="_blank">Optin Cat</a> Branding</label></p>'
 				)
 			)
 		) );
@@ -1441,7 +1466,7 @@ class EasyOptInsPostTypes {
 				),
 				array(
 					'format' => '<p><label><span class="control-title">Field Required</span><br />:textarea</label></p>',
-					'value' => K::get_var( 'error_text_field_required', $fca_eoi, esc_html( $this->settings['error_text']['field_required'] ) )
+					'value' => K::get_var( 'error_text_field_required', $fca_eoi, '' )
 				)
 			),
 			array( 'textarea', 'fca_eoi[error_text_invalid_email]',
@@ -1450,7 +1475,7 @@ class EasyOptInsPostTypes {
 				),
 				array(
 					'format' => '<p><label><span class="control-title">Invalid Email</span><br />:textarea</label></p>',
-					'value' => K::get_var( 'error_text_invalid_email', $fca_eoi, esc_html( $this->settings['error_text']['invalid_email'] ) )
+					'value' => K::get_var( 'error_text_invalid_email', $fca_eoi, '' )
 				)
 			)
 		) );
@@ -1486,7 +1511,36 @@ class EasyOptInsPostTypes {
 		foreach ( $pages_objects as $page_obj ) {
 			$pages[ $page_obj->ID ] = $page_obj->post_title;
 		}
-
+		K::input( 'fca_eoi[thankyou_page_mode]'
+				, array(
+					'type' => 'radio',
+					'value' => 'redirect',
+					'checked' => 'redirect' === K::get_var( 'thankyou_page_mode', $fca_eoi ),
+				)
+				, array(
+					'format' => '<p><label>:input Redirect to "Thank You" page</label></p>',
+				)
+		);
+		
+		if ( $this->settings['distribution'] === 'premium' ) {
+		
+			K::input( 'fca_eoi[thankyou_page_mode]'
+					, array(
+						'type' => 'radio',
+						'value' => 'ajax',
+						'checked' => 'ajax' === K::get_var( 'thankyou_page_mode', $fca_eoi ),
+					)
+					, array(
+						'format' => '<p><label>:input Display "Thank You" message using AJAX (Immediately after form submission.  No page reload or redirect).</label></p>',
+					)
+			);
+		
+		}
+		
+		echo "<hr>";
+		
+		echo "<div id='fca_eoi_thankyou_redirect'>";
+		
 		K::wrap( 'Redirect user to the following page after submitting the form:'
 			, null
 			, array( 'in' => 'p' )
@@ -1516,6 +1570,20 @@ class EasyOptInsPostTypes {
 				'html_after' => '</p>',
 			)
 		);
+		
+		echo "</div>";
+		
+		echo "<div id='fca_eoi_thankyou_ajax_msg'>";
+			K::textarea( 'fca_eoi[thankyou_ajax]'
+				, array(
+					'class' => 'fca-eoi-thank-you-ajax',
+				)
+				, array(
+					'value' => htmlentities ( K::get_var( 'thankyou_ajax', $fca_eoi, 'Thank you! Please check your inbox for your confirmation email.' )),
+					'format' => '<label> Display this message after submitting the form:</label><br><br />:textarea',
+				)
+			);
+		echo "</div>";
 	}
 
 	public function meta_box_content_powerups() {
@@ -1544,7 +1612,7 @@ class EasyOptInsPostTypes {
 		delete_post_meta( $post->ID, 'fca_eoi' );
 
 		$animation  = isset($_POST['fca_eoi_animations']) ? $_POST['fca_eoi_animations'] : '';
-		$animationValue = $_POST['fca_eoi_show_animation_checkbox'];
+		$animationValue = isset($_POST['fca_eoi_show_animation_checkbox']) ? $_POST['fca_eoi_show_animation_checkbox'] : '';
 		if ($animationValue != 'on') {
 			$animation = '';
 		}
@@ -1584,7 +1652,7 @@ class EasyOptInsPostTypes {
 				}
 			}
 
-			// Make sure emtpy value for publish_postbox or publish_lightbox are saved as array(-1)
+			// Make sure empty value for publish_postbox or publish_lightbox are saved as array(-1)
 			if( ! K::get_var( 'publish_postbox' , $meta, array() ) ) {
 				$meta[ 'publish_postbox' ] = array(-1);
 			}
@@ -1601,7 +1669,7 @@ class EasyOptInsPostTypes {
 				$meta = $on_save_function( $meta );
 			}
 			
-			
+		
 
 			add_post_meta( $post->ID, 'fca_eoi', $meta );
 			add_post_meta( $post->ID, 'fca_eoi_layout', $meta[ 'layout' ] );
@@ -1634,7 +1702,14 @@ class EasyOptInsPostTypes {
 		
 		if ( ( ! empty( $_REQUEST['page'] ) && $_REQUEST['page'] == 'eoi_powerups' ) || has_action( 'fca_eoi_powerups' ) ) {
 			wp_enqueue_style( 'fca_eoi_powerups', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerups.css' );
+						
 		}
+		
+		if ( ( ! empty( $_REQUEST['page'] ) && $_REQUEST['page'] == 'eoi_powerups' ) ) {
+			wp_enqueue_script('fca_eoi_powerups_javascript', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerup.js');
+						
+		}
+		
 
 		$screen = get_current_screen();
 		if( 'easy-opt-ins' === $screen->id ){
@@ -1665,6 +1740,8 @@ class EasyOptInsPostTypes {
 			wp_enqueue_style( 'font-awesome', $protocol . '://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css' );
 			wp_enqueue_style( 'select2', $protocol . '://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css' );
 			wp_enqueue_script('bootstrap-js', $protocol . '://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js');
+			
+			
 			if ( has_action( 'fca_eoi_powerups' ) ) {
 				wp_enqueue_script('fca_eoi_powerups', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerups.js');
 			}
@@ -1773,25 +1850,36 @@ class EasyOptInsPostTypes {
 	/**
 	 * Override some strings to match our likings
 	 */
-	public function override_text( $text ) {
+	public function override_text( $messages ) {
+		
+		global $post;
 
-		if( $post = K::get_var( 'post', $GLOBALS ) ) {
-			if ( 'easy-opt-ins' === $post->post_type ) {
-				switch ( $text ) {
-				case 'Post published. <a href="%s">View post</a>':
-				case 'Post updated. <a href="%s">View post</a>':
-					$text = __( 'Opt-In Form saved.' );
-					break;
-				case 'Publish':
-					$text = __( 'Save' );
-					break;
-				case 'Update':
-					$text = __( 'Save' );
-					break;
-				}
-			}
+        $post_ID = $post->ID;
+        $post_type = get_post_type( $post_ID );
+
+        $obj = get_post_type_object( $post_type );
+        $singular = $obj->labels->singular_name;
+		
+		if ( 'easy-opt-ins' === $post->post_type ) {
+
+		        $messages[$post_type] = array(
+                0 => '', // Unused. Messages start at index 1.
+                1 => __( 'Opt-In Form updated.' ),
+                2 => __( 'Opt-In Form updated.' ),
+                3 => __( 'Opt-In Form deleted.' ),
+                4 => __( 'Opt-In Form updated.' ),
+                5 => isset( $_GET['revision']) ? sprintf( __('%2$s restored to revision from %1$s' ), wp_post_revision_title( (int) $_GET['revision'], false ), esc_attr( $singular ) ) : false,
+                6 => __( 'Opt-In Form saved.' ),
+                7 => sprintf( __( '%s saved.' ), esc_attr( $singular ) ),
+                8 => sprintf( __( '%s submitted. <a href="%s" target="_blank">Preview %s</a>'), $singular, esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ), strtolower( $singular ) ),
+                9 => sprintf( __( '%s scheduled for: <strong>%s</strong>. <a href="%s" target="_blank">Preview %s</a>' ), $singular, date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ), strtolower( $singular ) ),
+                10 => sprintf( __( '%s draft updated. <a href="%s" target="_blank">Preview %s</a>'), $singular, esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ), strtolower( $singular ) )
+			);
+
 		}
-		return $text;
+
+        return $messages;
+
 	}
 	
 	public function force_published( $post ) {
@@ -1835,53 +1923,28 @@ class EasyOptInsPostTypes {
 	 * Handle Adding a subscriber with Ajax
 	 */
 	public function ajax_subscribe() {
-
-		// Check a list_id is provided
-		$list_id = K::get_var( 'list_id' , $_POST );
-		if( ! $list_id ) {
-			echo '✗';
-			exit;
-		}
-
-		// Subscribe user
-		$status = call_user_func( $this->settings[ 'provider' ] . '_add_user' , $this->settings , $_POST , $list_id );
-                // Output ✓ or ✗
-		if( $status ) {
-                        $fca_eoi = get_post_meta( K::get_var( 'form_id' , $_POST ), 'fca_eoi', true );
-                        $double_opt_in = K::get_var( 'mailchimp_double_opt_in', $fca_eoi, '' );
-						do_action('fca_eoi_after_submission'
-							, $fca_eoi
-							, $_POST
-						);
-			echo '✓';
-		} else {
-			echo '✗';
-		}
-		exit;
-	}
-
-	/**
-	 * Handle form submissions
-	 */
-	public function handle_submission() {
-
-		// Check that we have a form submission
-		if ( ! K::get_var( 'fca_eoi', $_POST ) ) {
-			return;
-		}
-
-		// Check that we have a valid form
-		$id = K::get_var( 'id', $_POST );
-		$post = get_post( $id );
-		if ( $post && 'easy-opt-ins' === $post->post_type ) {
-			// Nothing, we're good
-		} else {
-			return;
-		}
-
+		$error = '';
 		// Get meta
+		$id = $_REQUEST['form_id'];
+		
+		if (empty ($id)){
+			$error .= "Couldn't find form ID";
+		}
+		
+		$nonce = $_REQUEST['nonce'];
+		$nonceVerified =  wp_verify_nonce( $nonce, 'fca_eoi_submit_form' );
+		if ($nonceVerified === FALSE) {
+			$error .= " Couldn't verify form submission";
+		}
+		
 		$fca_eoi = get_post_meta( $id, 'fca_eoi', true );
+		
+		if (empty ($fca_eoi)){
+			$error .= " Couldn't find post meta";
+		}		
+		
 		$provider = K::get_var( 'provider' , $fca_eoi );
+		
 
 		// Check a list_id is provided
 		$list_id = K::get_var( $provider . '_list_id' , $fca_eoi );
@@ -1907,7 +1970,19 @@ class EasyOptInsPostTypes {
 			);
 			$provider = 'campaignmonitor';
 		}
+		if ( $provider == 'campaignmonitor' ) {
+			$_POST['campaignmonitor_api_key'] = $fca_eoi['campaignmonitor_api_key'];
+		}
 		// End of Hack
+		
+		
+		// Hack for drip 
+		if ( $provider == 'drip' ) {
+			$_POST['drip_api_token'] = $fca_eoi['drip_api_token'];
+			$_POST['drip_account_id'] = $fca_eoi['drip_account_id'];
+			$_POST['drip_action'] = $fca_eoi['drip_action'];
+			$_POST['drip_list_id'] = $fca_eoi['drip_list_id'];
+		}
 
         // Hack for mailchimp upgrade
         if( empty( $fca_eoi[ 'provider' ] ) ) {
@@ -1929,8 +2004,21 @@ class EasyOptInsPostTypes {
             );
             $provider = 'customform';
         }
+		if ( $provider == 'customform' ) {
+			$_POST['customform_request'] = $fca_eoi['customform_request'];
+		}
+		
         // End of Hack
-
+		
+		
+		if (empty ($provider)){
+			$error .= " Couldn't find provider";
+		}	
+		
+		if (empty ($list_id)){
+			$error .= " Couldn't find list ID";
+		}	
+		
         // Subscribe user
 		if( $list_id ) {
 			$status = call_user_func( $provider . '_add_user' , $this->settings , $_POST , $list_id );
@@ -1941,14 +2029,17 @@ class EasyOptInsPostTypes {
 			);
 		}
 
-		// Go to thank you page if any
-		$thank_you_page = K::get_var( 'thank_you_page', $fca_eoi );
-		$thank_you_page_url = ( $thank_you_page && '~' !== $thank_you_page )
-	        ? get_permalink( $thank_you_page )
-	        : get_home_url()
-		;
-		EasyOptInsActivity::get_instance()->add_conversion( K::get_var( 'fca_eoi_form_id', $_POST ) );
-		wp_redirect( $thank_you_page_url );
+		if ($status !== TRUE) {
+			$error .= " Error: $status";
+		}		
+		
+		
+		if ( $status !== FALSE && $error === '' ) {
+			echo '✓';
+			EasyOptInsActivity::get_instance()->add_conversion( $id );
+		} else {
+			echo '✗' . $error;
+		}		
 		exit;
 	}
 
@@ -2372,11 +2463,11 @@ class EasyOptInsPostTypes {
 
 		?>
 		<script>
-			jQuery( function( $ ) {
-				$( '[data-optin-cat]' ).live( 'click', function( e ) {
-					var lightbox_id = $( this ).data( 'optin-cat' );
+			jQuery( function() {
+				jQuery( document ).on( 'click', '[data-optin-cat]', function( e ) {
+					var lightbox_id = jQuery( this ).data( 'optin-cat' );
 					<?php echo EasyOptInsActivity::get_instance()->get_tracking_code( 'lightbox_id', false ) ?>
-					$.featherlight( $( '#fca_eoi_lightbox_' + lightbox_id ), <?php echo $this->get_featherlight_options() ?> );
+					jQuery.featherlight( jQuery( '#fca_eoi_lightbox_' + lightbox_id ), <?php echo $this->get_featherlight_options() ?> );
 					e.preventDefault();
 				} );
 			} );
@@ -2390,7 +2481,11 @@ class EasyOptInsPostTypes {
 		if ( empty( $lightbox_ids ) ) {
 			return false;
 		}
-	
+		
+		wp_enqueue_script( 'fca_eoi_script_js', $this->settings[ 'plugin_url' ].'/assets/script.js' );
+		wp_enqueue_script( 'fca_eoi_featherlight_js', $this->settings[ 'plugin_url' ].'/assets/vendor/featherlight/release/featherlight.min.js' );
+		wp_enqueue_style( 'fca_eoi_featherlight_css', $this->settings[ 'plugin_url' ].'/assets/vendor/featherlight/release/featherlight.min.css' );
+		
 		?>
 		<script type="text/javascript" src="<?php echo $this->settings['plugin_url'] . '/' . $this->targeting_cat_path ?>"></script>
 		<script>
@@ -2464,7 +2559,7 @@ class EasyOptInsPostTypes {
 							return;
 						}
 
-						var t = 7,
+						var t = 4,
 							<?php echo $v['url'] ?> = <?php echo json_encode( $this->settings[ 'plugin_url' ] . '/assets/' ) ?>,
 							<?php echo $v['vendor_url'] ?> = <?php echo $v['url'] ?> + 'vendor/',
 							<?php echo $v['done'] ?> = function() {
@@ -2476,15 +2571,13 @@ class EasyOptInsPostTypes {
 
 						<?php echo $v['load_style'] ?>( '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css', <?php echo $v['done'] ?> );
 
-						<?php echo $v['load_script'] ?>( <?php echo $v['url'] ?> + 'script.js', <?php echo $v['done'] ?> );
+						
 						<?php echo $v['load_style'] ?>( <?php echo $v['url'] ?> + 'style<?php echo EasyOptInsLayout::uses_new_css() ? '-new' : '' ?>.css', <?php echo $v['done'] ?> );
 
 						<?php echo $v['load_script'] ?>( <?php echo $v['vendor_url'] ?> + 'tooltipster/jquery.tooltipster.min.js', <?php echo $v['done'] ?> );
 						<?php echo $v['load_style'] ?>( <?php echo $v['vendor_url'] ?> + 'tooltipster/tooltipster.min.css', <?php echo $v['done'] ?> );
 
-						<?php echo $v['load_script'] ?>( <?php echo $v['vendor_url'] ?> + 'featherlight/release/featherlight.min.js', <?php echo $v['done'] ?> );
-						<?php echo $v['load_style'] ?>( <?php echo $v['vendor_url'] ?> + 'featherlight/release/featherlight.min.css', <?php echo $v['done'] ?> );
-						
+													
 						<?php 
 						
 						$loadAnim = false;
@@ -2494,6 +2587,10 @@ class EasyOptInsPostTypes {
 								$loadAnim = true;
 								break;
 							}
+						}
+						global $fca_eoi_animation_enabled;
+						if (!$fca_eoi_animation_enabled) {
+							$loadAnim = false;
 						}
 						
 						if ( $loadAnim ) {
@@ -2518,7 +2615,7 @@ class EasyOptInsPostTypes {
 					$.post( <?php echo $v['window.location.href'] ?>, {
 						fca_eoi_prepare_lightbox: <?php echo $v['form_id'] ?>
 					}, function( html ) {
-						<?php echo $v['document'] ?>.body.innerHTML += html;
+						$( 'body' ).append( html );
 						<?php echo $v['done'] ?>();
 					} );
 

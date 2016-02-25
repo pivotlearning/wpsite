@@ -108,9 +108,10 @@ class EasyOptInsInit {
 	public function show_notifications() {
 		$current_user_id = $GLOBALS['current_user']->ID;
 
-		if ( ! $this->is_new_css_notification_dismissed() ) {
-			$this->show_new_css_notification();
-		}
+		/* RN NOTE:  DISABLE NEW CSS NOTIFICATIONS, EVERYONE IS GOING TO NEW CSS @SINCE 1.5.0 */
+//		if ( ! $this->is_new_css_notification_dismissed() ) {
+//			$this->show_new_css_notification();
+//		}
 
 		$flash_notification_id = get_user_meta( $current_user_id, $this->keys['flash_notification_id'] );
 

@@ -12,5 +12,5 @@ $layout = fca_eoi_layout_descriptor_2( 'Layout 2', 'layout_2', array(
 	'name_placeholder' => 'Name',
 	'email_placeholder' => 'Email',
 	'button_copy' => 'Sign Up Now',
-	'privacy_copy' => "100% Privacy. We don't spam.",
+	'privacy_copy' => "We respect your privacy.",
 ) );

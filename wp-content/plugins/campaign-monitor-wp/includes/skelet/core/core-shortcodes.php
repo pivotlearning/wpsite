@@ -71,6 +71,7 @@ add_filter( 'mce_buttons', 'skelet_tinyMCE_buttons' );
 function skelet_tinyMCE_buttons( $buttons ) {
 
 	$shortcodes = K::get_var( 'paf_shortcodes', $GLOBALS, array() );
+	
 	if (is_array ( $shortcodes )){
 		return array_merge( $buttons, array_keys( $shortcodes ) );
 	} else {

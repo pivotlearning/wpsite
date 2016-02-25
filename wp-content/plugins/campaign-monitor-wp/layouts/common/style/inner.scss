@@ -91,6 +91,7 @@ div.fca_eoi_layout_field_wrapper input:focus {
 
 div.fca_eoi_layout_submit_button_wrapper {
 	clear: both;
+	transition: background 350ms linear, border-color 350ms linear;
 }
 
 div.fca_eoi_layout_fatcatapps_link_wrapper a {

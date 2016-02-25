@@ -5,6 +5,6 @@ jQuery( document ).ready(function( $ ){
 		var $this = $( this );
 		$( 'input[name="eoi_power_ups_settings['+ $this.attr( 'id' ) +']"]' ).click();
 	} );
-    
+	
     $( 'input[name*="send_test_mail"]' ).hide();
 })

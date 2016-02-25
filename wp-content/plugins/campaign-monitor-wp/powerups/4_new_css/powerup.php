@@ -9,7 +9,7 @@ function powerup_new_css() {
 			),
 			'page' => 'eoi_powerups',
 			'title' => __( 'New CSS' ),
-			'description' => sprintf( '<p class="description eoi_powerup_description">%s</p>', __( 'Enhances the base CSS for responsiveness and compatibility.' ) ),
+			'description' => sprintf( '<p id="fca_eoi_new_css_toggle" class="description eoi_powerup_description">%s</p>', __( 'Enhances the base CSS for responsiveness and compatibility.' ) ),
 		)
 	) );
 }
@@ -46,15 +46,15 @@ function powerup_new_css_dismiss_notification() {
 }
 
 function powerup_new_css_on_activate() {
-	$new_css = new EoiNewCssMigration();
-	$new_css->migrate( 'old', 'new' );
+	$new_css_obj = new EoiNewCssMigration();
+	$new_css_obj->migrate( 'old', 'new' );
 
 	add_action( 'admin_init', 'powerup_new_css_dismiss_notification' );
 }
 
 function powerup_new_css_on_deactivate() {
-	$new_css = new EoiNewCssMigration();
-	$new_css->migrate( 'new', 'old' );
+	$new_css_obj = new EoiNewCssMigration();
+	$new_css_obj->migrate( 'new', 'old' );
 }
 
 class EoiNewCssMigration {

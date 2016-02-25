@@ -271,7 +271,7 @@ class EasyOptInsShortcodes {
 		wp_enqueue_script( 'jquery' );
 
 		wp_enqueue_style( 'fca_eoi', $this->settings[ 'plugin_url' ].'/assets/style' . ( EasyOptInsLayout::uses_new_css() ? '-new' : '' ) . '.css' );
-		wp_enqueue_script( 'fca_eoi', $this->settings[ 'plugin_url' ].'/assets/script.js' );
+		wp_enqueue_script( 'fca_eoi_script_js', $this->settings[ 'plugin_url' ].'/assets/script.js' );
 
 		wp_enqueue_style( 'fontawesome', $protocol . '://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css' );
 
@@ -280,9 +280,9 @@ class EasyOptInsShortcodes {
 
 		wp_enqueue_script( 'featherlight', $this->settings[ 'plugin_url' ] . '/assets/vendor/featherlight/release/featherlight.min.js' );
 		wp_enqueue_style( 'featherlight', $this->settings[ 'plugin_url' ] . '/assets/vendor/featherlight/release/featherlight.min.css' );
-		
-			
-		wp_localize_script( 'fca_eoi', 'fca_eoi', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
+		//PASS VARIABLES TO JAVASCRIPT
+		wp_localize_script( 'fca_eoi_script_js', 'fca_eoi', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );		
 	}
 
 	public function shortcode_content( $atts ) {
@@ -340,8 +340,20 @@ class EasyOptInsShortcodes {
 		}
 		
 		$errorTexts = fca_eoi_get_error_texts($form_id);
-				
-			
+		
+		//determine if ajax or thank you page redirect
+		$thanks_mode = fca_eoi_get_thanks_mode($form_id);
+		if ($thanks_mode == 'ajax') {
+			$thanks_page =  K::get_var( 'thankyou_ajax', $fca_eoi_meta, '' );
+		} else {
+			$thanks_page =  get_permalink( K::get_var( 'thank_you_page', $fca_eoi_meta ) );
+		}
+		
+		if (empty ($thanks_page)) {
+			$thanks_mode = 'redirect';
+			$thanks_page =	get_site_url();
+		}
+		
 		// Fill template with our formatting stuff
 		$template = str_replace(
 			array(
@@ -360,9 +372,9 @@ class EasyOptInsShortcodes {
 					$form_wrapper .
 					'<div id="fca_eoi_form_%s" class="fca_eoi_form_content">' .
 						'<form method="post" action="#" class="fca_eoi_form %s %s" ' .
-							'data-fca_eoi_list_id="%s" data-fca_eoi_thank_you_page="%s" novalidate' .
+							'data-fca_eoi_list_id="%s" data-fca_eoi_thank_you_page="%s" data-fca_eoi_thank_you_mode="%s" novalidate' .
 						'>' .
-							'<input type="hidden" name="fca_eoi_form_id" value="%s" />'
+							'<input type="hidden" id="fca_eoi_form_id" name="fca_eoi_form_id" value="%s" />'
 					, $form_id
 					, EasyOptInsLayout::uses_new_css()
 						? 'fca_eoi_layout_' . $layout->layout_number
@@ -371,9 +383,8 @@ class EasyOptInsShortcodes {
 						? $layout->layout_class
 						: 'fca_eoi_' . $layout_id
 					, K::get_var( 'list_id', $fca_eoi_meta )
-					, get_permalink( K::get_var( 'thank_you_page', $fca_eoi_meta ) )
-						? get_permalink( K::get_var( 'thank_you_page', $fca_eoi_meta ) )
-						: ''
+					, $thanks_page
+					, $thanks_mode
 					, $post->ID
 				),
 				'<div>{{{description_copy}}}</div>',
@@ -387,7 +398,7 @@ class EasyOptInsShortcodes {
 					? '<input class="fca_eoi_form_input_element" type="email" name="email" placeholder="{{{email_placeholder}}}">'
 					: '<input type="email" name="email" placeholder="{{{email_placeholder}}}" 	/>',
 				EasyOptInsLayout::uses_new_css()
-					? '<input class="fca_eoi_form_button_element" type="submit" value="{{{button_copy}}}">'
+					? '<span class="fca_eoi_loading_spinner"></span><input class="fca_eoi_form_button_element" type="submit" value="{{{button_copy}}}">'
 					: '<input type="submit" value="{{{button_copy}}}" />',
 				EasyOptInsLayout::uses_new_css()
 					? '<div>{{{privacy_copy}}}</div>'
@@ -398,7 +409,7 @@ class EasyOptInsShortcodes {
 				'<input type="hidden" name="id" value="' . $form_id . '"><input type="hidden" name="fca_eoi" value="1">
 				 <input type="hidden" name="fca_eoi_error_texts_email" class="fca_eoi_error_texts_email" value="' . htmlspecialchars ($errorTexts['invalid_email']) . '">
 				<input type="hidden" name="fca_eoi_error_texts_required" class="fca_eoi_error_texts_required" value="' . htmlspecialchars ($errorTexts['field_required']) . '">
-		</form></div>' . $form_wrapper_end,
+		</form></div>' .  wp_nonce_field( 'fca_eoi_submit_form', 'fca_eoi_nonce' ) . $form_wrapper_end,
 			),
 			$template
 		);
@@ -423,7 +434,8 @@ class EasyOptInsShortcodes {
 			, $output
 			, $fca_eoi_meta
 		);
-		
+
+
 		$prerequisites = $this->get_prerequisites_for_form( $form_id );
 		$prerequisites = str_replace('<style', '<style scoped', $prerequisites);
 

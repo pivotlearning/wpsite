@@ -9,13 +9,27 @@ class EasyOptInsCompatibilityMode {
     public function __construct( $settings = array() ) {
 
 		$this->settings = $settings;
-                // import  compatibility-lib file
-                include_once plugin_dir_path( __FILE__ ) . 'compatibility-lib.php';
-                
+                                               
                  $this->css_frontend = '';
                  $this->css_backend = '';
                  
                  $active_plugins_arr = get_option('active_plugins');
+				 
+				 /*
+				 * this array provides name, plugin dir ,is_front_end, css of a conflicted plugin
+				 */
+				 $compatibility_items = array (
+					'MiniMax-Page-Layout-Builder' => array(
+															'plugin_dir' => 'page-layout-builder/page-layout-builder.php' ,
+															'is_front_end' => false ,
+															'css' => '.fca_eoi_settings_layout_2 p {
+																								overflow: inherit;
+																								visibility: inherit;
+																								width: inherit;
+																								height: inherit;
+																								}'                                         
+												) );
+
                  foreach ($compatibility_items as $item ) {
                      
                      if( in_array( $item['plugin_dir'] , $active_plugins_arr ) ) {

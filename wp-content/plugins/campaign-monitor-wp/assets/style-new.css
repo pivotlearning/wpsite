@@ -1,3 +1,6 @@
+.tooltipster-content {
+	border-radius: 5px;
+}
 .tooltipster-default {
 	background: #DE607C !important;
 	border: #DE607C !important;
@@ -60,6 +63,47 @@
 .fca_eoi_layout_popup {
 	display: inline-block;
 	position: relative;
+}
+
+/* Spinner Circle Rotation */
+.fca_eoi_loading_spinner {
+	float: left;
+	visibility: hidden;
+	width: 28px;
+	height: 28px;
+	position: relative;
+	top: 32px;
+	left: 15px;
+	margin-top: -28px;
+	border: 4px rgba(0, 0, 0, 0.25) solid;
+	border-top: 4px white solid;
+	border-radius: 50%;
+	-webkit-animation: spCircRot .6s infinite linear;
+	animation: spCircRot .6s infinite linear;
+}
+
+@-webkit-keyframes spCircRot {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@keyframes spCircRot {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@media ( max-width: 320px ), ( max-height: 320px ) {
+	.fca_eoi_featherlight-inner {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 @media ( max-width: 320px ), ( max-height: 320px ) {
