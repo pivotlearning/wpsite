@@ -12,9 +12,10 @@ jQuery( document ).ready(function(){
 		var name = $name_field.val();
 		var email = $email_field.val();
 		var list_id = $this.data( 'fca_eoi_list_id' );
-		//var url = 'https://api.createsend.com/api/v3.1/subscribers/' + list_id + '.json';
 		var $button = jQuery( '[type=submit]', $this );
+		var $input_div = jQuery( '.fca_eoi_layout_submit_button_wrapper', $this );
 		var $spinner = jQuery( '.fca_eoi_loading_spinner', $this );
+		var $div = jQuery( '.fca_eoi_spiner_div', $this );
 		var button_initial_val;
 		var highlight_interval = false;
 		var thank_you_mode = $this.data( 'fca_eoi_thank_you_mode' );
@@ -22,7 +23,7 @@ jQuery( document ).ready(function(){
 		var has_error = false;
 		var form_id = jQuery( '[name=fca_eoi_form_id]', $this ).val();
 		var nonceValue = jQuery( '#fca_eoi_nonce' ).val();
-				
+		
 		// Attach tooltips
 		jQuery( '[name=email], [name=name]', jQuery( this ) ).each( function() {
 
@@ -91,45 +92,56 @@ jQuery( document ).ready(function(){
 		if( has_error ) {
 			return false;
 		}
+		
 		//DISABLE BUTTON CLICK EVENT
 		$button.click(function(event) {
 			event.preventDefault(); 
 		});	
 		
 		
-		if (thank_you_mode != 'redirect') {
-		
-			// Run function to scale spinner based on button size
-			scaleSpinnerSize($button, $spinner);
 			
-			$spinner.css("visibility", "visible");
-		
-			$button.attr('style', 'cursor: default; transition: none !important; background-color: #808080 !important; border: 1px solid #808080 !important; color: white !important;');
+		if ( $button.closest('.fca_eoi_form').hasClass('fca_eoi_layout_1') ) {
+			//without extra border
+			scaleSpinnerDiv($button, $div);
 			
-			if ( $button.closest('.fca_eoi_form').hasClass('fca_eoi_layout_1') ) {
-				//do nothing for this layout, we don't want the extra gray button wrapper
-			} else {
-				$spinner.parent('.fca_eoi_layout_submit_button_wrapper').attr('style', 'transition: none !important; background-color: #808080 !important; border: 1px solid #808080 !important;');
-			}
+		} else {
+			//width extra border
+			scaleSpinnerDiv($input_div, $div);
 		}
-		 
+		scaleSpinnerSize($button, $spinner);
+						
+		//animate out the button and in the spinner div
 		
+		$div.animate({ width: '100%'});
+		
+		$spinner.css("display", "block");
+		$button.attr('style', 'cursor: default' );
+					
 		jQuery.ajax( {
-			url: fca_eoi.ajax_url
-			, data: { 'email': email, 'name': name, 'action': 'fca_eoi_subscribe', 'list_id': list_id ,'form_id': form_id, 'nonce': nonceValue }
-			, type: 'POST'
-			, datatype: 'text'
-		} ).done( function( data ) {
-			// Stop highlighting and add an icon for success/failure
-			$button.val( data + ' ' + button_initial_val );
-			
-			$spinner.css("visibility", "hidden"); 
-			clearInterval( highlight_interval );
-			if ( thank_you_page && '✓' === data ) {
-				
-				if ( thank_you_mode == 'redirect' ) {
-					window.location.href = thank_you_page;
+		
+			url: fca_eoi.ajax_url,
+			data: { 'email': email, 'name': name, 'action': 'fca_eoi_subscribe', 'list_id': list_id ,'form_id': form_id, 'nonce': nonceValue },
+			type: 'POST',
+			datatype: 'text',
+			timeout: 15000
+		}).done( function( data ) {
+		
+			if ( thank_you_mode == 'ajax' ) {
+		
+				// Stop highlighting and add an icon for success/failure
+				if ( data === '✓' ) {
+					$button.val( data + ' ' + button_initial_val );
 				} else {
+					$button.val( data );
+				}
+			
+			
+				$spinner.css("display", "none"); 
+				$div.animate({ width: '0', padding: '0', left: '100%' });
+
+			
+				clearInterval( highlight_interval );
+				if ( thank_you_page && '✓' === data ) {
 					tooltipWidth = $button.width();
 					$button.tooltipster( {
 						contentAsHTML: true,
@@ -139,6 +151,7 @@ jQuery( document ).ready(function(){
 						maxWidth: tooltipWidth,
 						arrowColor: '#148544'
 					} );
+					
 					$button.tooltipster( 'content', thank_you_page );
 					$button.tooltipster( 'show' );
 					$email_field.prop('disabled', true);
@@ -146,20 +159,38 @@ jQuery( document ).ready(function(){
 					
 					jQuery('.tooltipster-content').css("background-color", "#148544");
 									
+				
 				}
+			} else {
+				window.location.href = thank_you_page;
 			}
-		} );
-	} );
+		});				
+	});
 } );
+
+
+//set height, top and (-)margin top to same size as the fca_eoi_layout_submit_button_wrapper height
+
+function scaleSpinnerDiv ($button, $div){
+
+	var h = $button.outerHeight();
+	
+	$div.css('height', h + 'px');
+	$div.css('top', h + 'px');
+	$div.css('margin-top', '-' + h + 'px');
+	$div.css('z-index', '1');
+	
+}
+
 
 function scaleSpinnerSize( $button, $spinner ) {
 	var h = $button.outerHeight();
-	
+	var w = $button.outerWidth();
 	h = h - 8; //account for borders
-	var newTop = h + 4;
 	
-	$spinner.css('margin-top', '-' + h + 'px' );	
-	$spinner.css('top', newTop );	
+	var newWidth = ( w / 2 ) - ( h / 2);
+	
+	$spinner.css('margin-left', newWidth + 'px' );	
 	$spinner.css('height', h + 'px');
 	$spinner.css('width', h + 'px');
 	

@@ -2030,7 +2030,7 @@ class EasyOptInsPostTypes {
 		}
 
 		if ($status !== TRUE) {
-			$error .= " Error: $status";
+			$error .= " Can't add user";
 		}		
 		
 		
@@ -2038,7 +2038,7 @@ class EasyOptInsPostTypes {
 			echo '✓';
 			EasyOptInsActivity::get_instance()->add_conversion( $id );
 		} else {
-			echo '✗' . $error;
+			echo '✗' . " Error:" . $error;
 		}		
 		exit;
 	}

@@ -51,6 +51,25 @@ jQuery( document ).ready( function( $ ) {
 		.remove()
 	;
 	
+	// Hide AJAX thank you mode for customform
+	$('[name="fca_eoi[provider]"]').change(function(){
+		var value = $( this ).val();
+		var first = $( '[name="fca_eoi[thankyou_page_mode]"]' ).get(0);
+		var second = $( '[name="fca_eoi[thankyou_page_mode]"]' ).get(1);
+				
+		if ( value == 'customform' ) {
+			$(first).attr("checked", true);
+			$(second).attr("checked", false);
+			$('#fca_eoi_thankyou_redirect').show();
+			$('#fca_eoi_thankyou_ajax_msg').hide();	
+			$(second).parent().addClass('disabledButton');	
+		
+			
+		} else {
+			$(second).parent().removeClass('disabledButton');	
+		}
+	});
+	
 	// Show/hide animations checkbox
 	
 	if (document.getElementById("fca_eoi_show_animation_checkbox")) {

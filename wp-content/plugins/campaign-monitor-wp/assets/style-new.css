@@ -66,21 +66,33 @@
 }
 
 /* Spinner Circle Rotation */
+.fca_eoi_spiner_div {
+    width: 0;
+    height: 0px;
+    float: left;
+    position: relative;
+    top: 0px;
+	margin-top: 0px;
+	z-index: -1;
+	text-align: center;
+	padding-left: 0%;
+	
+	background-color: #AAA;
+}
+
 .fca_eoi_loading_spinner {
-	float: left;
-	visibility: hidden;
-	width: 28px;
-	height: 28px;
-	position: relative;
-	top: 32px;
-	left: 15px;
-	margin-top: -28px;
+	display: none;
+	width: 0px;
+	height: 0px;
+	margin-top: 4px;
 	border: 4px rgba(0, 0, 0, 0.25) solid;
 	border-top: 4px white solid;
 	border-radius: 50%;
 	-webkit-animation: spCircRot .6s infinite linear;
 	animation: spCircRot .6s infinite linear;
 }
+
+
 
 @-webkit-keyframes spCircRot {
   from {

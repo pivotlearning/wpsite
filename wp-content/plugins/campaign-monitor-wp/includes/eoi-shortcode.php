@@ -398,7 +398,7 @@ class EasyOptInsShortcodes {
 					? '<input class="fca_eoi_form_input_element" type="email" name="email" placeholder="{{{email_placeholder}}}">'
 					: '<input type="email" name="email" placeholder="{{{email_placeholder}}}" 	/>',
 				EasyOptInsLayout::uses_new_css()
-					? '<span class="fca_eoi_loading_spinner"></span><input class="fca_eoi_form_button_element" type="submit" value="{{{button_copy}}}">'
+					? '<div class="fca_eoi_spiner_div"><span class="fca_eoi_loading_spinner"></span></div><input class="fca_eoi_form_button_element" type="submit" value="{{{button_copy}}}">'
 					: '<input type="submit" value="{{{button_copy}}}" />',
 				EasyOptInsLayout::uses_new_css()
 					? '<div>{{{privacy_copy}}}</div>'

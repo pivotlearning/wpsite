@@ -4,7 +4,7 @@
     Plugin URI: https://fatcatapps.com/optincat
     Description: Campaign Monitor Optin Cat Helps You Get More Email Subscribers. Create Beautiful Campaign Monitor Opt-In Forms In Less Than 2 Minutes.
     Author: Fatcat Apps
-    Version: 1.5.1
+    Version: 1.5.2
     Author URI: https://fatcatapps.com/
 */
 // define( 'FCA_EOI_DEBUG', true );
@@ -52,7 +52,7 @@ if ( ! class_exists ( 'Mobile_Detect' ) ) {
 if( ! class_exists( 'DhEasyOptIns' ) ) {
 class DhEasyOptIns {
 
-    var $ver = '1.5.1';
+    var $ver = '1.5.2';
     var $distro = '';
     var $shortcode = 'optin-cat';
     var $shortcode_aliases = array(
