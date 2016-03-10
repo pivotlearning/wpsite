@@ -38,7 +38,19 @@
         <!-- end left section -->
         <div class="right animated eff-fadeInRight delay-150ms">
 			<div class="king-form two">
-				<a name="newsletter"></a><?php echo do_shortcode( '[salesforce form="1"]' ); ?>
+				<a name="newsletter"></a><form action="http://pivotlearningpartners.createsend.com/t/i/s/krss/" method="post" id="subForm">
+    <p>
+        <label for="fieldName">Name</label><br />
+        <input id="fieldName" name="cm-name" type="text" />
+    </p>
+    <p>
+        <label for="fieldEmail">Email</label><br />
+        <input id="fieldEmail" name="cm-krss-krss" type="email" required />
+    </p>
+    <p>
+        <button type="submit">Subscribe</button>
+    </p>
+</form>
 			</div>
         </div>
     </div>
