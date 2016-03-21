@@ -27,7 +27,7 @@ function campaignmonitor_require_library( $settings ) {
 	} else {
 		foreach ( $classes as $class => $file ) {
 			if ( ! class_exists( $class ) ) {
-				require_once $settings['plugin_dir'] . 'providers/campaignmonitor/campaignmonitor/' . $file . '.php';
+				require_once FCA_EOI_PLUGIN_DIR . 'providers/campaignmonitor/campaignmonitor/' . $file . '.php';
 			}
 		}
 	}

@@ -66,7 +66,7 @@ class EoiCustomCssBox {
 	}
 
 	public function enqueue_admin_scripts() {
-		wp_enqueue_style( 'powerups-css', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerups.css' );
+		wp_enqueue_style( 'powerups-css', FCA_EOI_PLUGIN_URL . '/assets/powerups/fca_eoi_powerups.css' );
 
 		$protocol = is_ssl() ? 'https' : 'http';
 		$screen = get_current_screen();

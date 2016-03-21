@@ -41,15 +41,15 @@ function powerup_new_css_set_active( $active ) {
 }
 
 function powerup_new_css_dismiss_notification() {
-	require_once dirname( __FILE__ ) . '/../../includes/eoi-init.php';
-	EasyOptInsInit::get_instance()->set_new_css_notification_dismissed( true );
+	//require_once dirname( __FILE__ ) . '/../../includes/eoi-init.php';
+	//EasyOptInsInit::get_instance()->set_new_css_notification_dismissed( true );
 }
 
 function powerup_new_css_on_activate() {
 	$new_css_obj = new EoiNewCssMigration();
 	$new_css_obj->migrate( 'old', 'new' );
 
-	add_action( 'admin_init', 'powerup_new_css_dismiss_notification' );
+	//add_action( 'admin_init', 'powerup_new_css_dismiss_notification' );
 }
 
 function powerup_new_css_on_deactivate() {

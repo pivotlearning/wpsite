@@ -103,7 +103,7 @@ class EasyOptInsPostTypes {
 
 		// Handle licensing
 		if( count( $providers_available ) > 1 ) {
-			require_once $this->settings[ 'plugin_dir' ] . 'includes/licensing.php';
+			require_once FCA_EOI_PLUGIN_DIR . 'includes/licensing.php';
 			new  EasyOptInsLicense( $this->settings );
 		}
 	}
@@ -164,11 +164,11 @@ class EasyOptInsPostTypes {
 			'menu_name' => __('Optin Cat')
 		);
 		$args = array(
-			'menu_icon' => "{$this->settings['plugin_url']}/icon.png",
+			'menu_icon' => FCA_EOI_PLUGIN_URL . '/icon.png',
 			'labels' => $labels,
 			'public' => false,
 			'exclude_from_search' => true,
-			'publicly_queryable' => true,
+			'publicly_queryable' => false,
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'query_var' => true,
@@ -191,7 +191,7 @@ class EasyOptInsPostTypes {
 	}
 
 	private function enqueue_activity_style() {
-		wp_enqueue_style( 'admin-cpt-easy-opt-ins-activity', $this->settings['plugin_url'] . '/assets/admin/cpt-easy-opt-ins-activity.css' );
+		wp_enqueue_style( 'admin-cpt-easy-opt-ins-activity', FCA_EOI_PLUGIN_URL . '/assets/admin/cpt-easy-opt-ins-activity.css' );
 	}
 
 	public function add_new_columns( $columns ) {
@@ -285,9 +285,9 @@ class EasyOptInsPostTypes {
 	}
 
 	public function add_dashboard_widget() {
-		wp_enqueue_script( 'd3_js', $this->settings['plugin_url'] . '/assets/vendor/nvd3/d3.min.js' );
-		wp_enqueue_script( 'nvd3_js', $this->settings['plugin_url'] . '/assets/vendor/nvd3/nv.d3.min.js' );
-		wp_enqueue_style( 'nvd3_css', $this->settings['plugin_url'] . '/assets/vendor/nvd3/nv.d3.min.css' );
+		wp_enqueue_script( 'd3_js', FCA_EOI_PLUGIN_URL . '/assets/vendor/nvd3/d3.min.js' );
+		wp_enqueue_script( 'nvd3_js', FCA_EOI_PLUGIN_URL . '/assets/vendor/nvd3/nv.d3.min.js' );
+		wp_enqueue_style( 'nvd3_css', FCA_EOI_PLUGIN_URL . '/assets/vendor/nvd3/nv.d3.min.css' );
 		$this->enqueue_activity_style();
 
 		$day_interval = $this->activity_day_interval['dashboard_widget'];
@@ -468,7 +468,7 @@ class EasyOptInsPostTypes {
 			
 		// Build the layouts array
 		$layouts = $layouts_types = $layouts_types_found = array();
-		foreach ( glob( $this->settings[ 'plugin_dir' ] . 'layouts/*', GLOB_ONLYDIR ) as $v) {
+		foreach ( glob( FCA_EOI_PLUGIN_DIR . 'layouts/*', GLOB_ONLYDIR ) as $v) {
 			$layouts_types_found[] = basename( $v );
 		}
 
@@ -506,7 +506,7 @@ class EasyOptInsPostTypes {
 			
 
 			
-			foreach ( glob( $this->settings[ 'plugin_dir' ] . "layouts/$layout_type/*", GLOB_ONLYDIR ) as $layout_path ) {
+			foreach ( glob( FCA_EOI_PLUGIN_DIR . "layouts/$layout_type/*", GLOB_ONLYDIR ) as $layout_path ) {
 				// Grab layout details
 				$layout_id = basename( $layout_path );
 
@@ -521,44 +521,33 @@ class EasyOptInsPostTypes {
 
 				include $php_path;
 				
-				if ( EasyOptInsLayout::uses_new_css() ) {
-					$layout[ 'css' ] = file_exists( $scss_path )
-						? '#fca_eoi_preview_form_container {' .
-						    file_get_contents( $scss_path ) .
-						    '.fca_eoi_layout_popup_close {' .
-						      'display: none;' .
-						    '}' .
-						  '}'
-						: ''
-					;
-				} else {
-					$layout[ 'css' ] = file_exists( $scss_path )
-						? file_get_contents( $scss_path)
-						: ''
-					;
-				}
-
+				
+				$layout[ 'css' ] = file_exists( $scss_path )
+					? '#fca_eoi_preview_form_container {' .
+						file_get_contents( $scss_path ) .
+						'.fca_eoi_layout_popup_close {' .
+						  'display: none;' .
+						'}' .
+					  '}'
+					: '';
+				
 				// Add $ltr SASS variable
 				$layout[ 'css' ] = sprintf( '$ltr: %s;', is_rtl() ? 'false' : 'true' )
 					. $layout[ 'css' ]
 				;
 				
-				//$scss = $layout_helper->new_scss_compiler();  //fix these two lines
-				//$layout[ 'css' ] = $scss->compile( $layout[ 'css' ] );  //fix these two lines
 				$name = $layout[ 'css' ];						
 				$layout[ 'css' ] = $fca_eoi_global_scss_array[$name];
 				
 				
 				
-				if ( EasyOptInsLayout::uses_new_css() ) {
-					$layout[ 'template' ] = str_replace(
+				
+				$layout[ 'template' ] = str_replace(
 						'{{{layout}}}',
 						file_get_contents( $html_path ),
 						file_get_contents( $html_wrap_path )
 					);
-				} else {
-					$layout[ 'template' ] = file_get_contents( $html_path );
-				}
+				
 				$layout[ 'template' ] = str_replace(
 					array(
 						'<form',
@@ -572,36 +561,21 @@ class EasyOptInsPostTypes {
 						'{{{fatcatapps_link}}}'
 					)
 					, array(
-						EasyOptInsLayout::uses_new_css()
-							? '<div id="fca_eoi_preview_form_container">' .
+						'<div id="fca_eoi_preview_form_container">' .
 							    '<div id="fca_eoi_preview_form_wrapper">' .
 							      '<div id="fca_eoi_preview_form" class="' .
 							        'fca_eoi_layout_' . $layout_helper->layout_number . ' ' .
 							        $layout_helper->layout_class .
-							      '"'
-							: '<div id="fca_eoi_preview_form" class="fca_eoi_' . $layout_id . '"',
-						EasyOptInsLayout::uses_new_css()
-							? '/div></div></div'
-							: '/div',
+							      '"',
+						'/div></div></div',
+						
 						'<div data-fca-eoi-fieldset-id ="description">{{{description_copy}}}</div>',
-						EasyOptInsLayout::uses_new_css()
-							? '<div data-fca-eoi-fieldset-id ="headline" id="fca_eoi_preview_headline_copy">{{{headline_copy}}}</div>'
-							: '<span data-fca-eoi-fieldset-id ="headline" id="fca_eoi_preview_headline_copy">{{{headline_copy}}}</span>',
-						EasyOptInsLayout::uses_new_css()
-							? '<input class="fca_eoi_form_input_element" type="text" placeholder="{{{name_placeholder}}}">'
-							: '<input data-fca-eoi-fieldset-id ="name_field" type="text" placeholder="{{{name_placeholder}}}" />',
-						EasyOptInsLayout::uses_new_css()
-							? '<input class="fca_eoi_form_input_element" type="email" placeholder="{{{email_placeholder}}}">'
-							: '<input data-fca-eoi-fieldset-id ="email_field" type="email" placeholder="{{{email_placeholder}}}" />',
-						EasyOptInsLayout::uses_new_css()
-							? '<input class="fca_eoi_form_button_element" data-fca-eoi-fieldset-id ="button" type="submit" value="{{{button_copy}}}">'
-							: '<input data-fca-eoi-fieldset-id ="button" type="submit" value="{{{button_copy}}}" />',
-						EasyOptInsLayout::uses_new_css()
-							? '<div data-fca-eoi-fieldset-id="privacy">{{{privacy_copy}}}</div>'
-							: '<span data-fca-eoi-fieldset-id ="privacy">{{{privacy_copy}}}</span>',
-						EasyOptInsLayout::uses_new_css()
-							? '{{#show_fatcatapps_link}}<div class="fca_eoi_layout_fatcatapps_link_wrapper fca_eoi_form_text_element"><span data-fca-eoi-fieldset-id ="fatcatapps"><a href="#" onclick="javascript:return false">Powered by Optin Cat</a></span></div>{{/show_fatcatapps_link}}'
-							: '{{#show_fatcatapps_link}}<p class="fca_eoi_' . $layout_id . '_fatcatapps_link_wrapper"><span data-fca-eoi-fieldset-id ="fatcatapps"><a href="#" onclick="javascript:return false">Powered by Optin Cat</a></span></p>{{/show_fatcatapps_link}}',
+						'<div data-fca-eoi-fieldset-id ="headline" id="fca_eoi_preview_headline_copy">{{{headline_copy}}}</div>',
+						'<input class="fca_eoi_form_input_element" type="text" placeholder="{{{name_placeholder}}}">',
+						'<input class="fca_eoi_form_input_element" type="email" placeholder="{{{email_placeholder}}}">',
+						'<input class="fca_eoi_form_button_element" data-fca-eoi-fieldset-id ="button" type="submit" value="{{{button_copy}}}">',
+						'<div data-fca-eoi-fieldset-id="privacy">{{{privacy_copy}}}</div>',
+						'{{#show_fatcatapps_link}}<div class="fca_eoi_layout_fatcatapps_link_wrapper fca_eoi_form_text_element"><span data-fca-eoi-fieldset-id ="fatcatapps"><a href="#" onclick="javascript:return false">Powered by Optin Cat</a></span></div>{{/show_fatcatapps_link}}',
 					)
 					, $layout[ 'template' ]
 				);
@@ -635,7 +609,7 @@ class EasyOptInsPostTypes {
 						$layout[ 'name' ],
 						file_exists( $screenshot_path )
 							? $screenshot_url
-							: $this->settings[ 'plugin_url' ] . '/layouts/no-image.jpg'
+							: FCA_EOI_PLUGIN_URL . '/layouts/no-image.jpg'
 						,
 						$layout[ 'template' ],
 						! empty( $layout[ 'editables' ] )
@@ -1669,7 +1643,52 @@ class EasyOptInsPostTypes {
 				$meta = $on_save_function( $meta );
 			}
 			
+			//COMPILE SCSS AND SAVE INTO META
+			$head = '';
+
+			$layout_id = $meta[ 'layout' ];
 		
+			$layout    = new EasyOptInsLayout( $layout_id );
+			$scss_path = $layout->path_to_resource( 'layout', 'scss' );
+		
+			$scss = $layout->new_scss_compiler();
+			$form_id = $post->ID;
+			if ( file_exists( $scss_path ) ) {
+				$head .=
+					'<style>' .
+					'.fca_eoi_form p { width: auto; }' . $scss->compile(
+						sprintf( '$ltr: %s;', is_rtl() ? 'false' : 'true' ) .
+						'#fca_eoi_form_' . $form_id . '{' .
+							'input{ max-width: 9999px; }' .
+							file_get_contents( $scss_path ) .
+						'}'
+					) .
+					'</style>';
+			}
+			
+			// Add per form CSS
+			$head .= '<style>.fca_eoi_form{ margin: auto; }</style>';
+			$css_for_scss = '';
+			if ( ! empty( $meta[ $layout_id ] ) ) {
+				$head .= '<style>';
+				$css_for_scss .= "#fca_eoi_form_$form_id {";
+				foreach ( $meta[ $layout_id ] as $selector => $declarations ) {
+					$css_for_scss .= "$selector{";
+					foreach ( $declarations as $property => $value ) {
+						if ( strlen( $value ) ) {
+							$css_for_scss .= "$property:$value !important;";
+						}
+					}
+					$css_for_scss .= '}';
+				}
+				$css_for_scss .= '}';
+				$head .= $scss->compile( $css_for_scss ) . '</style>';
+			}
+			if ( $layout->layout_type != 'lightbox' ) {
+				$head .= '<script>' . EasyOptInsActivity::get_instance()->get_tracking_code( $form_id ) . '</script>';
+			}
+
+			
 
 			add_post_meta( $post->ID, 'fca_eoi', $meta );
 			add_post_meta( $post->ID, 'fca_eoi_layout', $meta[ 'layout' ] );
@@ -1677,6 +1696,9 @@ class EasyOptInsPostTypes {
 		
 			delete_post_meta( $post->ID, 'fca_eoi_animation' );
 			add_post_meta( $post->ID, 'fca_eoi_animation', $animation );
+			
+			delete_post_meta( $post->ID, 'fca_eoi_head' );
+			add_post_meta( $post->ID, 'fca_eoi_head', $head );
 			
 			
 		}
@@ -1701,49 +1723,45 @@ class EasyOptInsPostTypes {
 		
 		
 		if ( ( ! empty( $_REQUEST['page'] ) && $_REQUEST['page'] == 'eoi_powerups' ) || has_action( 'fca_eoi_powerups' ) ) {
-			wp_enqueue_style( 'fca_eoi_powerups', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerups.css' );
+			wp_enqueue_style( 'fca_eoi_powerups', FCA_EOI_PLUGIN_URL . '/assets/powerups/fca_eoi_powerups.css' );
 						
 		}
 		
 		if ( ( ! empty( $_REQUEST['page'] ) && $_REQUEST['page'] == 'eoi_powerups' ) ) {
-			wp_enqueue_script('fca_eoi_powerups_javascript', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerup.js');
+			wp_enqueue_script('fca_eoi_powerups_javascript', FCA_EOI_PLUGIN_URL . '/assets/powerups/fca_eoi_powerup.js');
 						
 		}
 		
 
 		$screen = get_current_screen();
 		if( 'easy-opt-ins' === $screen->id ){
-			wp_enqueue_script( 'tooltipster', $this->settings[ 'plugin_url' ] . '/assets/vendor/tooltipster/jquery.tooltipster.min.js' );
-			wp_enqueue_style( 'tooltipster', $this->settings[ 'plugin_url' ] . '/assets/vendor/tooltipster/tooltipster.css' );
+			wp_enqueue_script( 'tooltipster', FCA_EOI_PLUGIN_URL . '/assets/vendor/tooltipster/jquery.tooltipster.min.js' );
+			wp_enqueue_style( 'tooltipster', FCA_EOI_PLUGIN_URL . '/assets/vendor/tooltipster/tooltipster.css' );
 			wp_enqueue_script( 'mustache', $protocol . '://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js' );
 			wp_enqueue_script( 'select2', $protocol . '://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.js' );
 			wp_enqueue_script( 'tinycolor', $protocol . '://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.0.0/tinycolor.min.js' );
-			wp_enqueue_script( 'jscolor', $this->settings['plugin_url'] . '/assets/vendor/jscolor/jscolor.js' );
-			wp_enqueue_script( 'admin-cpt-easy-opt-ins-providers', $this->settings['plugin_url'] . '/assets/admin/eoi-providers.js' );
-			wp_enqueue_style( 'admin-cpt-easy-opt-ins-providers', $this->settings['plugin_url'] . '/assets/admin/eoi-providers.css' );
-			wp_enqueue_script( 'admin-cpt-easy-opt-ins', $this->settings['plugin_url'] . '/assets/admin/cpt-easy-opt-ins.js' );
-			wp_enqueue_style( 'fca_eoi', $this->settings[ 'plugin_url' ].'/assets/style' . ( EasyOptInsLayout::uses_new_css() ? '-new' : '' ) . '.css' );
+			wp_enqueue_script( 'jscolor', FCA_EOI_PLUGIN_URL . '/assets/vendor/jscolor/jscolor.js' );
+			wp_enqueue_script( 'admin-cpt-easy-opt-ins-providers', FCA_EOI_PLUGIN_URL . '/assets/admin/eoi-providers.js' );
+			wp_enqueue_style( 'admin-cpt-easy-opt-ins-providers', FCA_EOI_PLUGIN_URL . '/assets/admin/eoi-providers.css' );
+			wp_enqueue_script( 'admin-cpt-easy-opt-ins', FCA_EOI_PLUGIN_URL . '/assets/admin/cpt-easy-opt-ins.js' );
+			wp_enqueue_style( 'fca_eoi', FCA_EOI_PLUGIN_URL .'/assets/style-new.css' );
 			foreach ( $providers_available as $provider ) {
-				wp_enqueue_script( 'admin-cpt-easy-opt-ins-' . $provider, $this->settings['plugin_url'] . '/providers/' . $provider . '/cpt-easy-opt-ins.js' );
+				wp_enqueue_script( 'admin-cpt-easy-opt-ins-' . $provider, FCA_EOI_PLUGIN_URL . '/providers/' . $provider . '/cpt-easy-opt-ins.js' );
 
 				$css_path = '/providers/' . $provider . '/cpt-easy-opt-ins.css';
-				if ( is_readable( $this->settings['plugin_dir'] . $css_path ) ) {
-					wp_enqueue_style( 'admin-cpt-easy-opt-ins-' . $provider, $this->settings['plugin_url'] . $css_path );
+				if ( is_readable( FCA_EOI_PLUGIN_URL . $css_path ) ) {
+					wp_enqueue_style( 'admin-cpt-easy-opt-ins-' . $provider, FCA_EOI_PLUGIN_URL . $css_path );
 				}
 			}
-			wp_enqueue_style( 'admin-cpt-easy-opt-ins', $this->settings['plugin_url'] . '/assets/admin/cpt-easy-opt-ins.css' );
-			if ( EasyOptInsLayout::uses_new_css() ) {
-				wp_enqueue_style( 'admin-cpt-easy-opt-ins-new', $this->settings['plugin_url'] . '/assets/admin/cpt-easy-opt-ins-new.css' );
-			} else {
-				wp_enqueue_style( 'admin-cpt-easy-opt-ins-old', $this->settings['plugin_url'] . '/assets/admin/cpt-easy-opt-ins-old.css' );
-			}
+			wp_enqueue_style( 'admin-cpt-easy-opt-ins', FCA_EOI_PLUGIN_URL . '/assets/admin/cpt-easy-opt-ins.css' );
+			wp_enqueue_style( 'admin-cpt-easy-opt-ins-new', FCA_EOI_PLUGIN_URL . '/assets/admin/cpt-easy-opt-ins-new.css' );
 			wp_enqueue_style( 'font-awesome', $protocol . '://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css' );
 			wp_enqueue_style( 'select2', $protocol . '://cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.min.css' );
 			wp_enqueue_script('bootstrap-js', $protocol . '://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js');
 			
 			
 			if ( has_action( 'fca_eoi_powerups' ) ) {
-				wp_enqueue_script('fca_eoi_powerups', $this->settings['plugin_url'] . '/assets/powerups/fca_eoi_powerups.js');
+				wp_enqueue_script('fca_eoi_powerups', FCA_EOI_PLUGIN_URL . '/assets/powerups/fca_eoi_powerups.js');
 			}
 		}
 		if( 'widgets' === $screen->id ){
@@ -2482,12 +2500,12 @@ class EasyOptInsPostTypes {
 			return false;
 		}
 		
-		wp_enqueue_script( 'fca_eoi_script_js', $this->settings[ 'plugin_url' ].'/assets/script.js' );
-		wp_enqueue_script( 'fca_eoi_featherlight_js', $this->settings[ 'plugin_url' ].'/assets/vendor/featherlight/release/featherlight.min.js' );
-		wp_enqueue_style( 'fca_eoi_featherlight_css', $this->settings[ 'plugin_url' ].'/assets/vendor/featherlight/release/featherlight.min.css' );
+		wp_enqueue_script( 'fca_eoi_script_js', FCA_EOI_PLUGIN_URL.'/assets/script.js' );
+		wp_enqueue_script( 'fca_eoi_featherlight_js', FCA_EOI_PLUGIN_URL.'/assets/vendor/featherlight/release/featherlight.min.js' );
+		wp_enqueue_style( 'fca_eoi_featherlight_css', FCA_EOI_PLUGIN_URL.'/assets/vendor/featherlight/release/featherlight.min.css' );
 		
 		?>
-		<script type="text/javascript" src="<?php echo $this->settings['plugin_url'] . '/' . $this->targeting_cat_path ?>"></script>
+		<script type="text/javascript" src="<?php echo FCA_EOI_PLUGIN_URL . '/' . $this->targeting_cat_path ?>"></script>
 		<script>
 			(function() {
 				if ( typeof fca_eoi === "undefined" ) {
@@ -2560,7 +2578,7 @@ class EasyOptInsPostTypes {
 						}
 
 						var t = 4,
-							<?php echo $v['url'] ?> = <?php echo json_encode( $this->settings[ 'plugin_url' ] . '/assets/' ) ?>,
+							<?php echo $v['url'] ?> = <?php echo json_encode( FCA_EOI_PLUGIN_URL . '/assets/' ) ?>,
 							<?php echo $v['vendor_url'] ?> = <?php echo $v['url'] ?> + 'vendor/',
 							<?php echo $v['done'] ?> = function() {
 								if ( ! --t ) {
@@ -2572,7 +2590,7 @@ class EasyOptInsPostTypes {
 						<?php echo $v['load_style'] ?>( '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css', <?php echo $v['done'] ?> );
 
 						
-						<?php echo $v['load_style'] ?>( <?php echo $v['url'] ?> + 'style<?php echo EasyOptInsLayout::uses_new_css() ? '-new' : '' ?>.css', <?php echo $v['done'] ?> );
+						<?php echo $v['load_style'] ?>( <?php echo $v['url'] ?> + 'style-new.css', <?php echo $v['done'] ?> );
 
 						<?php echo $v['load_script'] ?>( <?php echo $v['vendor_url'] ?> + 'tooltipster/jquery.tooltipster.min.js', <?php echo $v['done'] ?> );
 						<?php echo $v['load_style'] ?>( <?php echo $v['vendor_url'] ?> + 'tooltipster/tooltipster.min.css', <?php echo $v['done'] ?> );
@@ -2723,7 +2741,7 @@ class EasyOptInsPostTypes {
 		$animation = get_post_meta( $id, 'fca_eoi_animation', true );
 		
 				
-		$featherlight_class = EasyOptInsLayout::uses_new_css() ? 'fca_eoi_featherlight' : 'featherlight';
+		$featherlight_class = 'fca_eoi_featherlight';
 		$content = do_shortcode( "[easy-opt-in id=$id]" );
 
 		?>
@@ -2735,67 +2753,64 @@ class EasyOptInsPostTypes {
 	}
 
 	private function get_featherlight_options() {
-		if ( EasyOptInsLayout::uses_new_css() ) {
-			$is_iphone = preg_match('/(?:iPhone|iPod);/i', $_SERVER['HTTP_USER_AGENT']);
-			$is_ios = preg_match( '/(?:iPhone|iPad|iPod).* OS ([\d])_.* Safari/', $_SERVER['HTTP_USER_AGENT'], $matches );
 
-			if ( $is_ios ) {
-				$ios_specific_options = ',
-					beforeOpen: function() {
-						var viewport = jQuery( "meta[name=viewport]" );
-						if ( viewport.length == 0 ) {
-							viewport = jQuery( "<meta name=\"viewport\" content=\"\"/>" );
-							jQuery( "head" ).append( viewport );
-						}
+		$is_iphone = preg_match('/(?:iPhone|iPod);/i', $_SERVER['HTTP_USER_AGENT']);
+		$is_ios = preg_match( '/(?:iPhone|iPad|iPod).* OS ([\d])_.* Safari/', $_SERVER['HTTP_USER_AGENT'], $matches );
 
-						var viewport_content = viewport.attr( "content" );
-						this.fca_eoi_viewport_content = viewport_content;
-						viewport.attr( "content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" );
+		if ( $is_ios ) {
+			$ios_specific_options = ',
+				beforeOpen: function() {
+					var viewport = jQuery( "meta[name=viewport]" );
+					if ( viewport.length == 0 ) {
+						viewport = jQuery( "<meta name=\"viewport\" content=\"\"/>" );
+						jQuery( "head" ).append( viewport );
+					}
 
-						this.fca_eoi_orientation_change_listener = function() {
-							window.scrollTo( 0, 0 );
-							jQuery( ".fca_eoi_form input" ).each( function() {
-								this.blur();
-							} );
-						};
-						window.addEventListener( "orientationchange", this.fca_eoi_orientation_change_listener, false );
+					var viewport_content = viewport.attr( "content" );
+					this.fca_eoi_viewport_content = viewport_content;
+					viewport.attr( "content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" );
 
-						this.fca_eoi_touch_move_listener = function( event ) {
-							event.preventDefault();
-						};
-						window.addEventListener( "touchmove", this.fca_eoi_touch_move_listener, false );
-					},
-					afterOpen: function() {
-						jQuery( "body" ).append( "<div class=\"fca_eoi_featherlight_pad\" style=\"display: block; height: 1000px;\"/>" );
-					},
-					beforeClose: function() {
-						jQuery( ".fca_eoi_featherlight_pad" ).remove();
-					},
-					afterClose: function() {
-						if ( this.hasOwnProperty( "fca_eoi_viewport_content" ) ) {
-							jQuery( "meta[name=viewport]" ).attr( "content", this.fca_eoi_viewport_content );
-						}
+					this.fca_eoi_orientation_change_listener = function() {
+						window.scrollTo( 0, 0 );
+						jQuery( ".fca_eoi_form input" ).each( function() {
+							this.blur();
+						} );
+					};
+					window.addEventListener( "orientationchange", this.fca_eoi_orientation_change_listener, false );
 
-						if ( this.hasOwnProperty( "fca_eoi_orientation_change_listener" ) ) {
-							window.removeEventListener( "orientationchange", this.fca_eoi_orientation_change_listener );
-						}
+					this.fca_eoi_touch_move_listener = function( event ) {
+						event.preventDefault();
+					};
+					window.addEventListener( "touchmove", this.fca_eoi_touch_move_listener, false );
+				},
+				afterOpen: function() {
+					jQuery( "body" ).append( "<div class=\"fca_eoi_featherlight_pad\" style=\"display: block; height: 1000px;\"/>" );
+				},
+				beforeClose: function() {
+					jQuery( ".fca_eoi_featherlight_pad" ).remove();
+				},
+				afterClose: function() {
+					if ( this.hasOwnProperty( "fca_eoi_viewport_content" ) ) {
+						jQuery( "meta[name=viewport]" ).attr( "content", this.fca_eoi_viewport_content );
+					}
 
-						if ( this.hasOwnProperty( "fca_eoi_touch_move_listener" ) ) {
-							window.removeEventListener( "touchmove", this.fca_eoi_touch_move_listener );
-						}
-					}';
-			} else {
-				$ios_specific_options = '';
-			}
+					if ( this.hasOwnProperty( "fca_eoi_orientation_change_listener" ) ) {
+						window.removeEventListener( "orientationchange", this.fca_eoi_orientation_change_listener );
+					}
 
-			return '{
-				namespace: "fca_eoi_featherlight",
-				otherClose: ".fca_eoi_layout_popup_close"' . $ios_specific_options . ',
-				variant: ' . ( $is_iphone ? '"fca_eoi_device_iphone"' : 'null' ) . '
-			}';
+					if ( this.hasOwnProperty( "fca_eoi_touch_move_listener" ) ) {
+						window.removeEventListener( "touchmove", this.fca_eoi_touch_move_listener );
+					}
+				}';
 		} else {
-			return 'undefined';
+			$ios_specific_options = '';
 		}
+
+		return '{
+			namespace: "fca_eoi_featherlight",
+			otherClose: ".fca_eoi_layout_popup_close"' . $ios_specific_options . ',
+			variant: ' . ( $is_iphone ? '"fca_eoi_device_iphone"' : 'null' ) . '
+		}';
 	}
 }
 

@@ -90,7 +90,7 @@ class EasyOptInsActivity {
 			return $request;
 		}
 
-		require_once $this->settings['plugin_dir'] . 'includes/classes/RobotDetector/RobotDetector.php';
+		require_once FCA_EOI_PLUGIN_DIR . 'includes/classes/RobotDetector/RobotDetector.php';
 
 		$form_id = (int) $_REQUEST['fca_eoi_track_form_id'];
 		if ( get_post($form_id) ) {

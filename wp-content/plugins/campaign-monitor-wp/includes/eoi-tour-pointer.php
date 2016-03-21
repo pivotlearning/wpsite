@@ -80,7 +80,7 @@ class EOITourPointer {
 
 		global  $pagenow;
 
-		$this->plugin_data = get_plugin_data( $this->settings[ 'plugin_dir' ] . 'easy-opt-ins.php' );
+		$this->plugin_data = get_plugin_data( FCA_EOI_PLUGIN_DIR . 'easy-opt-ins.php' );
 
 		// Ajax request template
 
@@ -97,7 +97,7 @@ class EOITourPointer {
 
 		// if there is more than 1 layout the number will be 6 , otherwise 5
 		$init_pointer_number = 5;
-		if ( count( glob( $this->settings[ 'plugin_dir' ] . 'layouts/*', GLOB_ONLYDIR ) ) > 1 ) {
+		if ( count( glob( FCA_EOI_PLUGIN_DIR . 'layouts/*', GLOB_ONLYDIR ) ) > 1 ) {
 			$init_pointer_number += 1;
 		};
 

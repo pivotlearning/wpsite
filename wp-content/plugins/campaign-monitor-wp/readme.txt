@@ -6,8 +6,8 @@ Tags: campaign monitor, campaignmonitor, campaign monitor forms, campaignmonitor
 Author URI: https://fatcatapps.com/
 Plugin URI: https://fatcatapps.com/optincat/upgrade/?utm_campaign=description%2Bcta&utm_source=https%3A%2F%2Fwordpress.org%2Fplugins%2Fcampaign-monitor-wp%2F&utm_medium=referral
 Requires at least: 3.9.1
-Tested up to: 4.4.2
-Stable tag: 1.5.2
+Tested up to: 4.5.0
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ Simply add `define( 'FCA_EOI_DISABLE_STATS_TRACKING', TRUE);` to your theme's fu
 
 
 == Changelog ==
+= Campaign Monitor Forms by Optin Cat 1.5.4 =
+* Performance improvements: optin forms (particularily widgets) now load much faster
+
 = Campaign Monitor Forms by Optin Cat 1.5.2 =
 * Added spinning animation after form submission 
 * Changed ajax error message (inside of button) into something more humanly readable
