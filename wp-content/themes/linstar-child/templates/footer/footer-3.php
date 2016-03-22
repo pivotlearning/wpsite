@@ -37,6 +37,7 @@
         </div>
         <!-- end left section -->
         <div class="right animated eff-fadeInRight delay-150ms">
+            <h3 class="white">Sign up for our mailing list</h3>
 			<div class="king-form two">
 				<a name="newsletter"></a><form action="http://pivotlearningpartners.createsend.com/t/i/s/krss/" method="post" id="subForm">
     <p>
