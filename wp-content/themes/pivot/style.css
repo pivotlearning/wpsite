@@ -1297,3 +1297,10 @@ section.recent-posts .other-recent-posts li::after {
 .featurequotecredit {
 	float: right;
 }
+
+/* hp cm form */
+
+.king-form input[type=field] {
+width: 50%;
+}
+
