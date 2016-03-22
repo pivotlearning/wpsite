@@ -1304,3 +1304,6 @@ section.recent-posts .other-recent-posts li::after {
 width: 50%;
 }
 
+.king-form input[type=email] {
+width: 50%;
+}
