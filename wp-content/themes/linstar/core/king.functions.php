@@ -16,7 +16,7 @@ function king_themeSetup() {
 
     add_theme_support( 'eventbrite' );
     add_theme_support( 'post-thumbnails' );
-}
+    
 add_action( 'after_setup_theme', 'themeslug_setup' );
 add_image_size( 'square', 50, 50, true ); // Square for linked items
 add_image_size( 'sidebar-thumb', 272, 124, true ); // Theme-specific Mode
