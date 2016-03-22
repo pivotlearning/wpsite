@@ -1282,3 +1282,10 @@ section.recent-posts .other-recent-posts li::after {
 .pagination-comments .prev,.pagination-comments .next {
 	
 }
+
+/* hp cm form */
+
+.king-form input[type=field] {
+width: 50%;
+}
+
