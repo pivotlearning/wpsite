@@ -1285,7 +1285,7 @@ section.recent-posts .other-recent-posts li::after {
 
 /* hp cm form */
 
-.king-form input[type=field] {
+.king-form input[type=text] {
 width: 50%;
 }
 
