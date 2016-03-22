@@ -1307,3 +1307,10 @@ width: 50%;
 .king-form input[type=email] {
 width: 50%;
 }
+
+.king-form input[type=submit] {
+	margin-top: 10px;
+	background-color: #1ba79b;
+	color: #fff;
+	padding: 2px 5px;
+}
