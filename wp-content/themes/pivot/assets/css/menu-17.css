@@ -1,13 +1,13 @@
 ul.nav>li>a.active, ul.nav>li.current-menu-parent>a {
-	color:#50c9d4;
+	color:#1ba79b;
 }
 
 ul.nav>li>a:hover.active {
-	color:#50c9d4;
+	color:#1ba79b;
 }
 
 ul.nav>li>a:hover, ul.nav>li.current-menu-parent>a {
-	color:#50c9d4;
+	color:#1ba79b;
 	transition: all 0.3s ease;
 }
 

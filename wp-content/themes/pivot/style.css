@@ -92,6 +92,10 @@ blockquote::before, blockquote::after, q::before, q::after {
 blockquote, q {
 }
 
+a {
+	color: #1ba79b;
+}
+
 a img {
 	border: 0px none;
 }
@@ -1317,6 +1321,6 @@ width: 50%;
 
 .equalitystatement {
 	font-family: 'Lato', Arial, sans-serif;
-	margin-top: 50px;
+	margin-top: 100px;
 	font-weight: bolder;
 }
