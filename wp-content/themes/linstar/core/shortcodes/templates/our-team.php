@@ -36,7 +36,7 @@ switch( $style ){
 
 	<div class="one_half <?php if( $i % 2 != 0 )echo 'left';else echo 'right';?> animated eff-fadeIn<?php if( $i % 2 != 0 )echo 'Left';else echo 'Right';?> delay-<?php echo esc_attr( $i );?>00ms">
     
-    	<?php @the_post_thumbnail(''); ?>
+    	<a href="<?php the_permalink(); ?>"><?php @the_post_thumbnail(''); ?></a>
         
         <br>
         <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
@@ -62,7 +62,7 @@ switch( $style ){
 	case 'grids' : 	
 ?>		
 	<div class="one_fourth_less animated <?php echo esc_attr( $eff ); ?> delay-<?php echo esc_attr( $i ); ?>00ms<?php if( ($i)%4 == 0 )echo ' last'; ?>">
-    	<?php @the_post_thumbnail('king rimg'); ?>
+    	<a href="<?php the_permalink(); ?>"><?php @the_post_thumbnail('king rimg'); ?></a>
         <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
         <p><?php echo esc_html( $options['position'] ); ?></p>
 	</div>
