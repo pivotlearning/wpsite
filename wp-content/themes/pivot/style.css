@@ -1308,7 +1308,7 @@ width: 50%;
 width: 50%;
 }
 
-.king-form input[type=submit] {
+.king-form button[type=submit] {
 	margin-top: 10px;
 	background-color: #1ba79b;
 	color: #fff;
