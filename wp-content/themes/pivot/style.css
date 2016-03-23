@@ -1314,3 +1314,9 @@ width: 50%;
 	color: #fff;
 	padding: 2px 5px;
 }
+
+.equalitystatement {
+	font-family: 'Lato', Arial, sans-serif;
+	margin-top: 50%;
+	font-weight: bolder;
+}
