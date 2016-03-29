@@ -1325,6 +1325,10 @@ width: 50%;
 	font-weight: bolder;
 }
 
+.equalitystatement p::first-letter {
+	font-size: 200%;
+}
+
 .equalitystatementbox {
 	background-color: #e5e5e5;
 }
