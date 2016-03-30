@@ -6,8 +6,8 @@
 *
 ***/
 
-html body .logo img{max-height: 60px;}
-html body .logo{margin-top: 5px;}
+html body .logo img{max-height: 70px;}
+html body .logo{margin-top: 1px;}
 body{background-color: #cccccc;}
 body{background-image: url(http://king-theme.com/preview/linstar/wp-content/themes/linstar/assets/images/patterns/bg23.png);}
 a{text-decoration: default;}
