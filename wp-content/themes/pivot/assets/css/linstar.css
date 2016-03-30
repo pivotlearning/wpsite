@@ -9505,6 +9505,7 @@ body .blog-timeline{
 .blog_postcontent .image_frame img {
 	float: left;
 	max-width: 100%;
+	max-height: 350px;
 }
 .blog_postcontent .video_frame.small iframe {
 	height: 250px;
