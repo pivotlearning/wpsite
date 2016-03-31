@@ -1332,3 +1332,8 @@ width: 50%;
 .equalitystatementbox {
 	background-color: #e5e5e5;
 }
+
+/* Spacing fix for multiple articles */
+.king-post-excerpt {
+	margin-bottom: 20px;
+}
