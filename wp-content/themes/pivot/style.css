@@ -1337,3 +1337,9 @@ width: 50%;
 .king-post-excerpt {
 	margin-bottom: 20px;
 }
+
+/* Embiggen counter */
+
+.span.counter.visible {
+	font-size:200%;
+}
