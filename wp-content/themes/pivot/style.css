@@ -1340,6 +1340,6 @@ width: 50%;
 
 /* Embiggen counter */
 
-.span.counter.visible {
+.counter .visible {
 	font-size:200%;
 }
