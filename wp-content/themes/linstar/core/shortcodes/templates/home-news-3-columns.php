@@ -26,7 +26,7 @@
 			    		<?php echo wp_trim_words($post->post_title, 10); ?>
 			    	</a> 	
 			    </h4>
-				<p><?php echo wp_trim_words($post->post_content, 12); ?></p>
+				<p><?php echo wp_trim_words($post->post_content, 10); ?></p>
 	    		<a href="<?php the_permalink(); ?>" class="button two"><?php _e( 'Read More', KING_DOMAIN ); ?></a>
 		        
 		    </div>
