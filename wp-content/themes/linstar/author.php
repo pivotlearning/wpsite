@@ -36,7 +36,7 @@ get_header();
 	
 					<?php
 					// If a user has filled out their description, show a bio on their entries.
-					if ( get_the_author_meta( 'description' ) ) and ( $post->post_type != 'our-team': ?>
+					if ( get_the_author_meta( 'description' ) ) : ?>
 					<div class="about_author">
 						
 						<?php echo get_avatar( get_the_author_meta( 'user_email' ) ); ?>
