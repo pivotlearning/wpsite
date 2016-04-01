@@ -1361,3 +1361,9 @@ width: 50%;
 body .one_third {
 	height: 500px;
 }
+
+/* Attempt at removing BS */
+
+.our-team .sharepost {
+	display: none;
+}
