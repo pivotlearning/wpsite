@@ -1356,3 +1356,8 @@ width: 50%;
 .percentagestext {
 	margin-left: 10px;
 }
+
+/* Fixed blog content height */
+body .one_third {
+	height: 500px;
+}
