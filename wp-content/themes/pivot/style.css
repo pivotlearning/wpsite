@@ -1316,14 +1316,16 @@ width: 50%;
 	margin-top: 10px;
 	background-color: #1ba79b;
 	color: #fff;
-	padding: 2px 5px;
+	padding: 3px 6px;
+	border: none;
 }
 
 .cmsignupform button[type=submit] {
 	margin-top: 10px;
 	background-color: #1ba79b;
 	color: #fff;
-	padding: 2px 5px;
+	padding: 3px 6px;
+	border: none;
 }
 
 .equalitystatement {
