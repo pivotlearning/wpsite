@@ -1343,3 +1343,8 @@ width: 50%;
 .counter .visible {
 	font-size:200%;
 }
+
+.percentagestext {
+	margin-left: 15px;
+	margin-top: 50%;
+}
