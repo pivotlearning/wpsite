@@ -1361,3 +1361,13 @@ width: 50%;
 body .one_third {
 	height: 500px;
 }
+
+/* Contact button */
+
+.wpcf7-submit button[type=submit] {
+	margin-top: 10px;
+	background-color: #1ba79b;
+	color: #fff;
+	padding: 3px 6px;
+	border: none;
+}
