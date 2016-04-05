@@ -1364,10 +1364,10 @@ body .one_third {
 
 /* Contact button */
 
-.wpcf7-submit button[type=submit] {
+.wpcf7-form-control.wpcf7-submit button[type=submit] {
 	margin-top: 10px !important;
 	background-color: #1ba79b !important;
-	color: #fff !important;
+	color: #fff;
 	padding: 3px 6px !important;
 	border: none !important;
 }
