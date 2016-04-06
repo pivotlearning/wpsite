@@ -17,7 +17,7 @@
         <div class="left animated eff-fadeInLeft delay-150ms">
             <h3 class="white"><?php _e( 'CONTACT US', KING_DOMAIN ); ?></h3>
             <p>
-            	<?php _e( 'From the classroom to the district, Pivot Learning Partners is ready to help you ensure the best education for your students. Contact us using the form to the right, and we will be in touch with you.', KING_DOMAIN ); ?>
+            	<?php _e( 'From the classroom to the district, Pivot Learning is ready to help you ensure the best education for your students. E-mail us and sign up for our newsletter using the form to the right, and we will be in touch with you.', KING_DOMAIN ); ?>
             </p>
             <br>
             <br>
@@ -37,7 +37,6 @@
         </div>
         <!-- end left section -->
         <div class="right animated eff-fadeInRight delay-150ms">
-            <h3 class="white">Sign up for our mailing list</h3>
 			<div class="king-form two">
 				<a name="newsletter"></a><form action="http://pivotlearningpartners.createsend.com/t/i/s/krss/" method="post" id="subForm">
     <p>
