@@ -268,7 +268,9 @@ html body .layout-boxed .full{
 .entry-content img, .comment-content img, .widget img {
 	max-width: 100%;
 	max-height: 100%;
+	clip-path: inset(10px 20px 30px 40px);
 }
+
 .entry-content .ls-container img{
 	max-height: inherit;
 	max-width: inherit;
