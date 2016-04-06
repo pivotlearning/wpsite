@@ -6034,7 +6034,7 @@ body .featured_section108 h5 {
 }
 .featured_section135 .box:hover .box-details,
 .featured_section135 .box.active .box-details {
-	height: 205px;
+	height: 300px;
 	background: rgba(255,255,255,0.9);
 }
 .featured_section135 .box-details h4 {
