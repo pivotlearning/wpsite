@@ -1,10 +1,10 @@
 === Custom Post Type UI ===
-Contributors: tw2113, williamsba1, webdevstudios
+Contributors: webdevstudios, tw2113, vegasgeek, modemlooper, williamsba1
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3084056
 Tags: custom post types, CPT, CMS, post, types, post type, cck, taxonomy, tax, custom
 Requires at least: 4.2
 Tested up to: 4.5
-Stable tag: 1.3.1
+Stable tag: 1.3.3
 License: GPLv2
 
 Admin UI for creating custom post types and custom taxonomies in WordPress
@@ -24,11 +24,25 @@ All official development on this plugin is on GitHub. Version bumps will still b
 3. Add new taxonomy screen and tab.
 4. Edit taxonomy screen and tab.
 5. Registered post types and taxonomies from CPTUI
-6. Import/Export screen.
-7. Help/support screen.
-8. Update Information/Donate screen.
+6. Import/Export Post Types screen.
+7. Import/Export Taxonomies screen.
+8. Get Code screen.
+9. Debug Info screen.
+10. Help/support screen.
+11. About/Update Information/Donate screen.
 
 == Changelog ==
+
+= 1.3.3 - 2016-4-5 =
+* Revert Changes for ajax/heartbeat API requests before post type registration. 3rd party or other plugins were breaking because post types were not registered.
+
+= 1.3.2 - 2016-4-5 =
+* Fixed: Logic issue with cptui js files loading where they weren't meant to.
+* Fixed: Required markers missing on required post type fields.
+* Fixed: Removed excess labels that are not used by WordPress core.
+* Added: New contributors to readme file. Welcome John and Ryan.
+* Updated: New screenshot from 1.3.0 release. Moved to assets folder so users will no longer download as part of CPTUI.
+* Updated: Better prevention of running our code during ajax/heartbeat api requests.
 
 = 1.3.1 - 2016-3-25 =
 * Fixed: Logic issue for default values of `public` parameter for taxonomies added in 1.3.0.
@@ -193,6 +207,17 @@ All official development on this plugin is on GitHub. Version bumps will still b
 * Bug fixes not mentioned above.
 
 == Upgrade Notice ==
+
+= 1.3.3 - 2016-4-5 =
+* Revert Changes for ajax/heartbeat API requests before post type registration. 3rd party or other plugins were breaking because post types were not registered.
+
+= 1.3.2 - 2016-4-5 =
+* Fixed: Logic issue with cptui js files loading where they weren't meant to.
+* Fixed: Required markers missing on required post type fields.
+* Fixed: Removed excess labels that are not used by WordPress core.
+* Added: New contributors to readme file. Welcome John and Ryan.
+* Updated: New screenshot from 1.3.0 release. Moved to assets folder so users will no longer download as part of CPTUI.
+* Updated: Better prevention of running our code during ajax/heartbeat api requests.
 
 = 1.3.1 - 2016-3-25 =
 * Fixed: Logic issue for default values of `public` parameter for taxonomies added in 1.3.0.
