@@ -1373,3 +1373,15 @@ body .one_third {
 	padding: 3px 6px !important;
 	border: none !important;
 }
+
+.our-team .sharepost {
+	display: none !important;
+}
+
+.our-team .nav-single {
+	display: none !important;
+}
+
+.our-team .about_author {
+	display: none !important;
+}
