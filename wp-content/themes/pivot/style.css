@@ -1374,14 +1374,18 @@ body .one_third {
 	border: none !important;
 }
 
-.our-team .sharepost {
+.single-our-team .sharepost {
 	display: none !important;
 }
 
-.our-team .nav-single {
+.single-our-team #nav-single {
 	display: none !important;
 }
 
-.our-team .about_author {
+.single-our-team .about_author {
+	display: none !important;
+}
+
+.single-our-team h4 {
 	display: none !important;
 }
