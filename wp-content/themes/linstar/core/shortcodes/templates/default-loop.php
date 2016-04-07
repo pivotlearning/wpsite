@@ -16,7 +16,7 @@
 					<div class="king-post-excerpt">
 						<?php the_excerpt(); ?>
 					</div>
-					<a href="<?php comments_link(); ?>" class="king-post-comments-link"><?php comments_number( __( '0 comments', KING_DOMAIN ), __( '1 comment', KING_DOMAIN ), __( '%n comments', KING_DOMAIN ) ); ?></a>
+				<!--	<a href="<?php comments_link(); ?>" class="king-post-comments-link"><?php comments_number( __( '0 comments', KING_DOMAIN ), __( '1 comment', KING_DOMAIN ), __( '%n comments', KING_DOMAIN ) ); ?></a> -->
 				</div>
 
 				<?php
