@@ -1426,6 +1426,6 @@ body .one_third {
 
 /* Removing dual blog post titles */
 
-.blog-post .entry-title {
-	display: none;
+.blog-post .entry-title h3 {
+	display: none !important;
 }
