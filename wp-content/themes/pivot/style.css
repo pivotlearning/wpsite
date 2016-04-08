@@ -1423,3 +1423,9 @@ body .one_third {
 	color: #fff;
 	border: 2px solid #fff;
 }
+
+/* Removing dual blog post titles */
+
+.blog-post .entry-title {
+	display: none;
+}
