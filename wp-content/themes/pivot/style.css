@@ -1389,3 +1389,9 @@ body .one_third {
 .single-our-team h4 {
 	display: none !important;
 }
+
+/* Fixing the services contact form */
+
+#wpcf7-f3458-p3721-o1 p {
+	color: #fff;
+}
