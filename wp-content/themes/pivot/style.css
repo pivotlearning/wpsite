@@ -1429,3 +1429,11 @@ body .one_third {
 .single-post h3.entry-title {
 	display: none !important;
 }
+
+.single-our-team .entry-header {
+	display:none;
+}
+
+.single-our-team .image_frame {
+	margin-right: 20px;
+}
