@@ -247,7 +247,7 @@ body .address_info h4{
 	margin-bottom: 15px;
 }
 .blog_post h3 a{
-	color: #9eca45;
+	color: #1ba79b;
 }
 .blog_post h3.entry-title a {
 	text-decoration: none;
@@ -441,7 +441,7 @@ ul.post_meta_links_small {
 	float: left;
 	border-radius: 2px;
 	list-style-type: none;
-	background-color: #9eca45;
+	background-color: #1ba79b;
 }
 .sharepost li i {
 	color: #fff;
@@ -494,7 +494,7 @@ body .flexslider .wpb_single_image .vc_single_image-wrapper{
 	color: #333;
 }
 .about_author a:hover {
-	color: #9eca45;
+	color: #1ba79b;
 }
 
 .widget_contents-component [class*="su-"] img{
@@ -603,7 +603,7 @@ h3.widget-title i {
 	width: 30%;
 	margin-left: -1px;
 	cursor: pointer;
-	background: #9eca45;
+	background: #1ba79b;
 }
 #searchform #searchsubmit:hover,.widget_product_search input[type="submit"]:hover{
 	background: #A8D350;
@@ -643,7 +643,7 @@ h3.widget-title i {
 #wp-calendar th{
 	text-align: center;
 	line-height: 30px;
-	background: #9eca45;
+	background: #1ba79b;
 	color: #fff;	
 }
 #wp-calendar td{
@@ -684,7 +684,7 @@ ul.recent_posts_list {
 	color: #999;
 }
 .recent_posts_list li a:hover {
-	color: #9eca45;
+	color: #1ba79b;
 }
 
 .recent_posts_list li span {
@@ -775,7 +775,7 @@ ul.recent_posts_list {
 	display: block;
 	font-size: 18px;
 	line-height: 59px;
-	color: #9eca45;
+	color: #1ba79b;
 	margin: 0;
 	font-style: normal;
 }
@@ -872,7 +872,7 @@ ul.tabs li.last {
 }
 
 ul.tabs li.active, html ul.tabs li.active a,  html ul.tabs li.active a:hover  {
-	background: #9eca45;
+	background: #1ba79b;
 	color: #fff;
 }
 	
@@ -922,7 +922,7 @@ ul.tags {
 	margin: 0px 5px 5px 0px;
 }	
 .tags li a:hover,.tagcloud a:hover {
-	background-color: #9eca45;
+	background-color: #1ba79b;
 	color: #fff;
 }
 .footer .tagcloud a{
@@ -1570,8 +1570,8 @@ body .parallax_section19 a:hover {
 	transition: color 0.1s linear 0s, background-color 0.1s linear 0s, border-color 0.1s linear 0s;
 }
 .king-cart-footer .k-cart-button:hover{
-	background: #9ECA45;
-	border: 2px solid #9ECA45;
+	background: #1ba79b;
+	border: 2px solid #1ba79b;
 }
 
 .no-product-in-cart{
@@ -1738,7 +1738,7 @@ body .parallax_section19 a:hover {
     clear: both;
 }
 .cd-timeline-content h2 {
-    color: #9eca45;
+    color: #1ba79b;
     font-weight: normal;
     margin-bottom: 0;
 }
@@ -1762,19 +1762,19 @@ body .parallax_section19 a:hover {
     transition: all 0.3s ease 0s;
 }
 .no-touch .cd-timeline-content .cd-read-more:hover {
-    background-color: #9eca45;
+    background-color: #1ba79b;
 }
 .cd-timeline-content .cd-date {
     float: left;
     padding: 0.8em 0;
 }
 .cd-timeline-content .cd-date strong {
-    background-color: #9eca45;
+    background-color: #1ba79b;
     color: #fff;
     padding: 5px 12px;
 }
 .cd-timeline-content .cd-date strong {
-    background: none repeat scroll 0 0 #9eca45;
+    background: none repeat scroll 0 0 #1ba79b;
     position: relative;
 }
 .cd-timeline-content .cd-date strong::after {
@@ -1782,7 +1782,7 @@ body .parallax_section19 a:hover {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: rgba(47, 146, 238, 0) #9eca45 rgba(47, 146, 238, 0) rgba(47, 146, 238, 0);
+    border-color: rgba(47, 146, 238, 0) #1ba79b rgba(47, 146, 238, 0) rgba(47, 146, 238, 0);
     border-image: none;
     border-style: solid;
     border-width: 8px;
@@ -1796,12 +1796,12 @@ body .parallax_section19 a:hover {
     width: 0;
 }
 .cd-timeline-content .cd-date b {
-    background-color: #9eca45;
+    background-color: #1ba79b;
     color: #fff;
     padding: 5px 12px;
 }
 .cd-timeline-content .cd-date b {
-    background: none repeat scroll 0 0 #9eca45;
+    background: none repeat scroll 0 0 #1ba79b;
     position: relative;
 }
 .cd-timeline-content .cd-date b::after {
@@ -1809,7 +1809,7 @@ body .parallax_section19 a:hover {
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: rgba(47, 146, 238, 0) rgba(47, 146, 238, 0) rgba(47, 146, 238, 0) #9eca45;
+    border-color: rgba(47, 146, 238, 0) rgba(47, 146, 238, 0) rgba(47, 146, 238, 0) #1ba79b;
     border-image: none;
     border-style: solid;
     border-width: 8px;
@@ -1880,7 +1880,7 @@ body .parallax_section19 a:hover {
 	margin-top: 18px;
 }
 .demos-page.top h2 em {
-	color: #9eca45;
+	color: #1ba79b;
 	font-size: 13px;
 	font-style: normal;
 	font-weight: 600;
@@ -1912,7 +1912,7 @@ body .parallax_section19 a:hover {
 }
 
 .demos-page.content_area .new {
-	background: none repeat scroll 0 0 #9eca45;
+	background: none repeat scroll 0 0 #1ba79b;
 	border: 3px solid #fff;
 	color: #fff;
 	font-size: 10px;
@@ -1929,7 +1929,7 @@ body .parallax_section19 a:hover {
 	-moz-border-left-colors: none;
 	-moz-border-right-colors: none;
 	-moz-border-top-colors: none;
-	border-color: #9eca45 rgba(158, 202, 69, 0) rgba(158, 202, 69, 0);
+	border-color: #1ba79b rgba(158, 202, 69, 0) rgba(158, 202, 69, 0);
 	border-image: none;
 	border-right: 7px solid rgba(158, 202, 69, 0);
 	border-style: solid;
