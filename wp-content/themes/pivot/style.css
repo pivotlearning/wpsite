@@ -1430,10 +1430,28 @@ body .one_third {
 	display: none !important;
 }
 
+/* Bio page tweaks */ 
+
 .single-our-team .entry-header {
 	display:none;
 }
 
 .single-our-team .image_frame {
 	margin-right: 20px;
+}
+
+/* Categorical styling for services */
+
+.featured_section135 .box .servicehighlevel {
+	font-weight: bold;
+	font-size: 80%;
+}
+
+.featured_section135 .box .servicesmaintext {
+	font-size: 80%;
+}
+
+.featured_section135 .box .servicedetails {
+	font-style: italic;
+	font-size: 80%;
 }
