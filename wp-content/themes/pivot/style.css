@@ -1432,8 +1432,8 @@ body .one_third {
 	display: none !important;
 }
 
-.single-post post_comments {
-	display: none;
+.post_comments {
+	display: none !important;
 }
 
 /* Bio page tweaks */ 
