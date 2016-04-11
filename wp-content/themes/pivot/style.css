@@ -1446,6 +1446,16 @@ body .one_third {
 	display: none;
 }
 
+.staffname {
+	margin-bottom:0px;
+	font-size: 160%;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.stafftitle {
+
+}
 /* Categorical styling for services */
 
 .featured_section135 .box .servicehighlevel {
