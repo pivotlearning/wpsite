@@ -1432,6 +1432,10 @@ body .one_third {
 	display: none !important;
 }
 
+.single-post post_comments {
+	display: none;
+}
+
 /* Bio page tweaks */ 
 
 .single-our-team .entry-header {
