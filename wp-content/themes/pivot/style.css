@@ -1445,13 +1445,22 @@ body .one_third {
 .featured_section135 .box .servicehighlevel {
 	font-weight: bold;
 	font-size: 80%;
+	line-height: 1.3em;
+	padding-bottom: 0px;
+	width: 90%;
 }
 
 .featured_section135 .box .servicesmaintext {
-	font-size: 80%;
+	font-size: 90%;
+	width: 90%;
+	line-height:1.3em;
+	padding-bottom:0px;
 }
 
 .featured_section135 .box .servicedetails {
 	font-style: italic;
 	font-size: 80%;
+	line-height: 1.3em;
+	padding-bottom:0px;
+	width:90%;
 }
