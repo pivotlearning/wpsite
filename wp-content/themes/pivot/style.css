@@ -1447,7 +1447,7 @@ body .one_third {
 }
 
 .staffname {
-	margin-bottom:0px;
+	margin-bottom: 0px !important;
 	font-size: 160%;
 	font-weight: bold;
 	margin-top: 5px;
