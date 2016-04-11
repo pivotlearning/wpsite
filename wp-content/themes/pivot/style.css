@@ -1396,10 +1396,12 @@ body .one_third {
 	font-size: 100%;
 	line-height: 1.2em;
 	color: #fff;
+	margin-bottom: 20px;
 }
 
 .contacttext p {
 	font-size: 100%;
+	font-weight: bold;
 	line-height: 1.2em;
 	color: #fff;
 	margin-bottom: 20px;
