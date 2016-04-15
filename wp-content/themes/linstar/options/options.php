@@ -40,6 +40,7 @@ class king_options{
 	*/
 	function __construct($sections = array(), $args = array(), $extra_tabs = array()){
 		
+		$this->doSubmitActions();
 		$defaults = array();
 		
 		$defaults['opt_name'] = KING_OPTNAME;//must be defined by theme/plugin
@@ -47,9 +48,9 @@ class king_options{
 		$defaults['google_api_key'] = 'AIzaSyDAnjptHMLaO8exTHk7i8jYPLzygAE09Hg';//AIzaSyDAnjptHMLaO8exTHk7i8jYPLzygAE09Hg';//must be defined for use with google webfonts field type
 		
 		$defaults['menu_icon'] = king_options_URL.'/img/general.png';
-		$defaults['menu_title'] = __('Options', 'king');
+		$defaults['menu_title'] = __('Options', 'linstar' );
 		$defaults['page_icon'] = 'icon-themes';
-		$defaults['page_title'] = __('Options', 'king');
+		$defaults['page_title'] = __('Options', 'linstar' );
 		$defaults['page_slug'] = '_options';
 		$defaults['page_cap'] = 'manage_options';
 		$defaults['page_type'] = 'menu';
@@ -64,7 +65,7 @@ class king_options{
 		$defaults['footer_credit'] = '<span id="footer-thankyou">&copy; by <a href="'.$this->framework_url.'" target="_blank" title="Visit our site">DEVN</a> Version '.KING_VERSION.'</span>';
 		
 		$defaults['help_tabs'] = array();
-		$defaults['help_sidebar'] = __('', 'king');
+		$defaults['help_sidebar'] = __('', 'linstar' );
 		
 		//get args
 		$this->args = wp_parse_args($args, $defaults);
@@ -100,6 +101,51 @@ class king_options{
 		
 	}//function
 	
+
+	/*
+	*	Do actions from submitting such as import/export
+	*/
+	function doSubmitActions(){
+
+		global $king;
+
+		if( isset( $_POST['doAction'] ) && !empty( $_POST['doAction'] ) )
+		{
+			switch( $_POST['doAction'] ){
+
+				case 'import' :
+
+					$file = $_FILES['file-upload-to-import'];
+					if( $file['error'] === 0 )
+					{
+						$king->import_options( $file['tmp_name'], esc_attr( $_POST['option'] ) );
+						$this->options['imported'] = 1;
+						$_GET['settings-updated'] = 'true';
+						set_transient( 'nhp-opts-saved', '1' );
+						@unlink( $file['tmp_name'] );
+					}
+
+				break;
+				case 'export' :
+
+					$export = $king->export_options();
+					$filename = THEME_NAME.'_Export_'.date('jS-F-Y-h:i:s-A').'.txt';
+
+					header("Content-Type: text/plain");
+					header('Content-Disposition: attachment; filename="'.$filename.'"');
+					header("Content-Length: " . strlen($export));
+					echo $export;
+
+					exit;
+
+				break;
+
+
+			}
+		}
+
+	}
+
 	
 	/**
 	 * ->get(); This is used to return and option value from the options array
@@ -256,7 +302,7 @@ class king_options{
 			time(),
 			true
 		);
-		wp_localize_script('nhp-opts-js', 'king_opts', array('reset_confirm' => __('Are you sure? Resetting will loose all custom values.', 'king'), 'opt_name' => $this->args['opt_name']));
+		wp_localize_script('nhp-opts-js', 'king_opts', array('reset_confirm' => __('Are you sure? Resetting will loose all custom values.', 'linstar' ), 'opt_name' => $this->args['opt_name']));
 		
 		do_action('nhp-opts-enqueue-'.$this->args['opt_name']);
 		
@@ -580,26 +626,29 @@ class king_options{
 				echo '<div id="nhp-opts-header">';
 					echo '<a target="_blank" href="http://king-theme.com" class="alignleft"><img src="'.THEME_URI.'/options/img/king.png" /></a>';
 					echo '<br /><span style="float:left; margin-left: 20px;"><h3>'.THEME_NAME.' by King-Theme (ver '.KING_VERSION.')</h3></span>';
-					echo '<input type="submit" name="" id="" class="btn" value="'.__('Save Changes','king').'">';
+					echo '<input type="submit" name="" id="" class="btn" value="'.__('Save Changes', 'linstar' ).'">';
 					
 					echo '<div class="clear"></div><!--clearfix-->';
 				echo '</div>';
 				
 					if(isset($_GET['settings-updated']) && $_GET['settings-updated'] == 'true' && get_transient('nhp-opts-saved') == '1'){
 						if(isset($this->options['imported']) && $this->options['imported'] == 1){
-							echo '<div id="nhp-opts-imported">'.apply_filters('nhp-opts-imported-text-'.$this->args['opt_name'], __('<strong>Settings Imported!</strong>', 'king')).'</div>';
+							echo '<div id="nhp-opts-imported">'.apply_filters('nhp-opts-imported-text-'.$this->args['opt_name'], __('<strong>Settings Imported!</strong>', 'linstar' )).'</div>';
 						}else{
-							echo '<div id="nhp-opts-save">'.apply_filters('nhp-opts-saved-text-'.$this->args['opt_name'], __('<strong>Settings Saved!</strong>', 'king')).'</div>';
+							echo '<div id="nhp-opts-save">'.apply_filters('nhp-opts-saved-text-'.$this->args['opt_name'], __('<strong>Settings Saved!</strong>', 'linstar' )).'</div>';
 							
 							$this->create_css_file();
+							
+							//* Flush rewrite rules for custom post types. */
+							flush_rewrite_rules(true);
 							
 						}
 						delete_transient('nhp-opts-saved');
 					}
-					echo '<div id="nhp-opts-save-warn">'.apply_filters('nhp-opts-changed-text-'.$this->args['opt_name'], __('<strong>Settings have changed!, you should save them!</strong>', 'king')).'</div>';
-					echo '<div id="nhp-opts-field-errors">'.__('<strong><span></span> error(s) were found!</strong>', 'king').'</div>';
+					echo '<div id="nhp-opts-save-warn">'.apply_filters('nhp-opts-changed-text-'.$this->args['opt_name'], __('<strong>Settings have changed!, you should save them!</strong>', 'linstar' )).'</div>';
+					echo '<div id="nhp-opts-field-errors">'.__('<strong><span></span> error(s) were found!</strong>', 'linstar' ).'</div>';
 					
-					echo '<div id="nhp-opts-field-warnings">'.__('<strong><span></span> warning(s) were found!</strong>', 'king').'</div>';
+					echo '<div id="nhp-opts-field-warnings">'.__('<strong><span></span> warning(s) were found!</strong>', 'linstar' ).'</div>';
 				
 				echo '<div class="clear"></div><!--clearfix-->';
 				
@@ -632,7 +681,7 @@ class king_options{
 						
 						if(true === $this->args['dev_mode']){
 							echo '<li id="dev_mode_default_section_group_li" class="nhp-opts-group-tab-link-li">';
-									echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="nhp-opts-group-tab-link-a custom-tab" data-rel="dev_mode_default"><img src="'.$this->url.'img/glyphicons/glyphicons_195_circle_info.png" /> <span>'.__('Dev Mode Info', 'king').'</span></a>';
+									echo '<a href="javascript:void(0);" id="dev_mode_default_section_group_li_a" class="nhp-opts-group-tab-link-a custom-tab" data-rel="dev_mode_default"><img src="'.$this->url.'img/glyphicons/glyphicons_195_circle_info.png" /> <span>'.__('Dev Mode Info', 'linstar' ).'</span></a>';
 							echo '</li>';
 						}//if
 						
@@ -661,7 +710,7 @@ class king_options{
 					
 					if(true === $this->args['dev_mode']){
 						echo '<div id="dev_mode_default_section_group'.'" class="nhp-opts-group-tab">';
-							echo '<h3>'.__('Dev Mode Info', 'king').'</h3>';
+							echo '<h3>'.__('Dev Mode Info', 'linstar' ).'</h3>';
 							echo '<div class="nhp-opts-section-desc">';
 							echo '<textarea class="large-text" rows="24">'.print_r($this, true).'</textarea>';
 							echo '</div>';
@@ -678,7 +727,7 @@ class king_options{
 				echo '<div id="nhp-opts-footer">';
 				
 					echo '<input name="'.$this->args['opt_name'].'[defaults]" class="btn btn_red alignleft" type="submit" id="'.$this->args['opt_name'].'[defaults]" value="Reset to Defaults">';
-					echo ' &nbsp;  &nbsp; <input type="submit" name="" id="" class="btn" value="'.__('Save Changes','king').'">';
+					echo ' &nbsp;  &nbsp; <input type="submit" name="" id="" class="btn" value="'.__('Save Changes', 'linstar' ).'">';
 
 					echo '<div class="clear"></div><!--clearfix-->';
 				echo '</div>';
@@ -1385,7 +1434,42 @@ class king_options{
 		
 	}//function
 
-	
+	/**
+	 * Quick and dirty way to mostly minify CSS.
+	 *
+	 * @since 1.0.0
+	 * @author Gary Jones
+	 *
+	 * @param string $css CSS to minify
+	 * @return string Minified CSS
+	 */
+	 
+	function minify( $css ) {
+		// Normalize whitespace
+		$css = preg_replace( '/\s+/', ' ', $css );
+		
+		// Remove spaces before and after comment
+		$css = preg_replace( '/(\s+)(\/\*(.*?)\*\/)(\s+)/', '$2', $css );
+		// Remove comment blocks, everything between /* and */, unless
+		// preserved with /*! ... */ or /** ... */
+		$css = preg_replace( '~/\*(?![\!|\*])(.*?)\*/~', '', $css );
+		// Remove ; before }
+		$css = preg_replace( '/;(?=\s*})/', '', $css );
+		// Remove space after , : ; { } */ >
+		$css = preg_replace( '/(,|:|;|\{|}|\*\/|>) /', '$1', $css );
+		// Remove space before , ; { } ( ) >
+		$css = preg_replace( '/ (,|;|\{|}|\(|\)|>)/', '$1', $css );
+		// Strips leading 0 on decimal values (converts 0.5px into .5px)
+		$css = preg_replace( '/(:| )0\.([0-9]+)(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
+		// Strips units if value is 0 (converts 0px to 0)
+		$css = preg_replace( '/(:| )(\.?)0(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
+		// Converts all zeros value into short-hand
+		$css = preg_replace( '/0 0 0 0/', '0', $css );
+		// Shortern 6-character hex color codes to 3-character where possible
+		$css = preg_replace( '/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css );
+		return trim( $css );
+	}
+		
 	function create_css_file(){
 
 		global $king;
@@ -1395,89 +1479,107 @@ class king_options{
 		if( empty( $datas ) ){
 			return;
 		}
-		
-		$file = THEME_PATH.DS.'assets'.DS.'css'.DS.'options.css';	
-		$fp = @$king->ext['fo']( $file, 'w');
-		
-		if( empty( $fp ) ){
-			@chmod( $file, 0644 );
-			$fp = @$king->ext['fo']( $file, 'w');
-		}		
-		
-		if( empty( $fp ) ){
-			@chmod( $file, 0777 );
-			$fp = @$king->ext['fo']( $file, 'w');
-		}
-		
-		if( empty( $fp ) ){
-			
-			echo '<div id="nhp-opts-field-errors" style="display: block;"><strong>';
-			echo 'Error: Could not save settings to file: '.THEME_PATH.'/assest/css/options.css . Make sure the permisson of that file is 0644, 0755 or 0777';
-			echo '</strong></div>';
-			
-		}else{
-		
-			$data = '/***'."\n";
-			$data .= '*'."\n";
-			$data .= '*	copyright (c) king-theme.com'."\n";
-			$data .= '* This file is generated automatically.'."\n";
-			$data .= '* Please change the value of options in the backend and do not edit here'."\n";
-			$data .= '*'."\n";
-			$data .= '***/'."\n\n";
-			
-			$fonts = '';
-			$default = array( 'Open Sans', 'Open Sans Condensed', 'Raleway', 'Dancing Script', 'JosefinSans', 'Roboto', 'Oswald' );
-			
-			global $king_option_css_value;
-			
-			foreach( $this->sections as $section ){
-				if(isset($section['fields']))
-				{
-					foreach( $section['fields'] as $field ){
-						if( !empty( $field['css']  ) ){
-							ob_start();
-								$king_option_css_value = $datas[ $field['id'] ];
-								if(is_array($king_option_css_value))
-									if( isset($king_option_css_value['font']) ){
-										if( $king_option_css_value['font']!= '' && strpos( $fonts, $king_option_css_value['font'] ) === false && !in_array( $king_option_css_value['font'], $default ) ){
-											$fonts .= str_replace( ' ', '+', $king_option_css_value['font'].'|');
-											array_push( $default, $king_option_css_value['font'] );
-										}
-									}	
-								
-								if(!empty($king_option_css_value))
-								{	
-									$empty = true;
-									if( is_array($king_option_css_value) )
-									{
-										foreach( $king_option_css_value as $key => $vl)
-											if( !empty($vl) )
-												$empty = false;
-									}else{
-										$empty = false;
-									}
-										
-									if( $empty == false )
-									{								
-										if( isset($king_option_css_value['font']) ){
-											$fontsGets = @explode(':',$king_option_css_value['font']);
-											$king_option_css_value['font'] = $fontsGets[0];
-										}
-										
-										@$king->ext['ev']('global $king_option_css_value; $value = $king_option_css_value; ?>'.$field['css']);
+
 	
-										$data .= ob_get_contents()."\n";
-									}	
-								}	
-							ob_end_clean();
+		$data = '/***'."\n";
+		$data .= '*'."\n";
+		$data .= '*	copyright (c) king-theme.com'."\n";
+		$data .= '* This file is generated automatically.'."\n";
+		$data .= '* Please change the value of options in the backend and do not edit here'."\n";
+		$data .= '*'."\n";
+		$data .= '***/'."\n\n";
+		
+		$fonts = '';
+		$default = array( 'Open Sans', 'Open Sans Condensed', 'Raleway', 'Roboto');
+		
+		global $king_option_css_value;
+		
+		foreach( $this->sections as $section ){
+			if(isset($section['fields']))
+			{
+				foreach( $section['fields'] as $field ){
+					
+					if( $field['id'] == 'useBackgroundPattern' ){
+						if( empty( $datas[ $field['id'] ] ) ){
+							unset( $datas['backgroundImage'] );
 						}
+					}
+					
+					if( !empty( $field['css']  ) ){
+						ob_start();
+							$king_option_css_value = $datas[ $field['id'] ];
+							if(is_array($king_option_css_value)){
+								if( isset($king_option_css_value['font']) ){
+									if( $king_option_css_value['font']!= '' && strpos( $fonts, $king_option_css_value['font'] ) === false && !in_array( $king_option_css_value['font'], $default ) ){
+										$fonts .= str_replace( ' ', '+', $king_option_css_value['font'].'|');
+										array_push( $default, $king_option_css_value['font'] );
+									}
+								}	
+							}
+							if(!empty($king_option_css_value))
+							{	
+								$empty = true;
+								if( is_array($king_option_css_value) )
+								{
+									foreach( $king_option_css_value as $key => $vl)
+										if( !empty($vl) )
+											$empty = false;
+								}else{
+									$empty = false;
+								}
+									
+								if( $empty == false )
+								{								
+									if( isset($king_option_css_value['font']) ){
+										$fontsGets = @explode(':',$king_option_css_value['font']);
+										$king_option_css_value['font'] = $fontsGets[0];
+									}
+									
+									@$king->ext['ev']('global $king_option_css_value; $value = $king_option_css_value; ?>'.$field['css']);
+
+									$data .= ob_get_contents()."\n";
+								}	
+							}	
+						ob_end_clean();
 					}
 				}
 			}
-	
-			@$king->ext['fw']( $fp, (empty($fonts)?'':"\n@import url('http://fonts.googleapis.com/css?family=$fonts');\n\n").$data );
-			$king->ext['fc']( $fp );
 		}
+		
+		/*
+		*	Process color style
+		*/
+		if( isset( $datas['colorStyle'] ) ){
+			if( $datas['colorStyle'] != 'none' && $datas['colorStyle'] != '' ){
+				$file = king_child_theme_enqueue( THEME_PATH.DS.'assets'.DS.'css'.DS.'colors'.DS.'color-primary.css' );
+				$file = str_replace( SITE_URI.'/', ABSPATH, str_replace( '/', DS, $file ) );
+				if (file_exists($file)) {
+					$handle = $king->ext['fo']( $file, 'r' );
+					$css_data = $king->ext['fr']( $handle, filesize( $file ) );
+					if( strpos($datas['colorStyle'], '#') === false ){
+						$datas['colorStyle'] = '#'.$datas['colorStyle'];
+					}
+					$data .= str_replace( '{color}', $datas['colorStyle'], $css_data );
+				}
+			}
+		}
+		/***/
+		
+		/* Do minify css code */
+		$data = $this->minify( str_replace( array('%SITE_URI%', '%HOME_URL%'), array(SITE_URI, SITE_URI), $data ) );
+		
+		if( !empty( $fonts ) ){
+			$fonts = rtrim($fonts, "|");
+			$protocol = is_ssl() ? 'https' : 'http';
+			$data = "\n@import url('$protocol://fonts.googleapis.com/css?family=$fonts');\n\n".$data;
+		}	
+		
+		/* Save css into database */
+		if( !update_option( 'king_'.strtolower( THEME_NAME ).'_options_css', $data ) ){
+			add_option( 'king_'.strtolower( THEME_NAME ).'_options_css', $data );
+		}
+
+		
 	}
 	
 	

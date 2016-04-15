@@ -10,14 +10,13 @@ global $king, $post;
 $image = $king->get_featured_image( $post );
 $link =  "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $escaped_link = htmlspecialchars($link, ENT_QUOTES, 'UTF-8');
-
+if( empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) ||
+      strtolower( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ]) != 'xmlhttprequest' )
+{
 get_header();
-
+$king->breadcrumb();
+}
 ?>
-
-
-<?php $king->breadcrumb(); ?>
-
 <div id="primary" class="site-content container-content content ">
 	<div id="content" class="row row-content container">
 		<div class="content_fullwidth lessmar">
@@ -47,13 +46,13 @@ get_header();
 				</div>
 				<div class="portfolio_area_right animated eff-fadeInRight delay-200ms">
 					<h4>
-						<?php _e( 'Project Description', KING_DOMAIN ); ?>
+						<?php _e( 'Project Description', 'linstar' ); ?>
 					</h4>
 					<p class="work-des">
 						<?php echo strip_tags( $post->post_content ); ?></p>
 					<a href="javascript:void(0)" onclick="jQuery('.work-des').css({'max-height':'none'});jQuery(this).remove();" class="addto_favorites">
 						<i class="fa fa-chevron-down"></i>
-						<?php _e('Show More', KING_DOMAIN ); ?>
+						<?php _e('Show More', 'linstar' ); ?>
 					</a>
 					<ul class="small_social_links">
 						<li>
@@ -89,25 +88,28 @@ get_header();
 					</ul>
 					<div class="project_details animated eff-fadeInUp delay-500ms">
 						<h5>
-							<?php _e('Project Details', KING_DOMAIN ); ?>
+							<?php _e('Project Details', 'linstar' ); ?>
 						</h5>
 						<span>
 							<strong>
-								<?php _e('Name', KING_DOMAIN ); ?>
+								<?php _e('Name', 'linstar' ); ?>
 							</strong>
 							<em>
 								<?php the_title(); ?></em>
 						</span>
 						<span>
 							<strong>
-								<?php _e('Date', KING_DOMAIN ); ?>
+								<?php _e('Date', 'linstar' ); ?>
 							</strong>
 							<em>
 								<?php echo get_the_time('m D Y',$post); ?></em>
 						</span>
+						<?php
+						if(!isset($king->cfg['our_works_show_category']) || $king->cfg['our_works_show_category'] ==1){
+						?>
 						<span>
 							<strong>
-								<?php _e('Categories', KING_DOMAIN ); ?>
+								<?php _e('Categories', 'linstar' ); ?>
 							</strong>
 							<em>
 								<?php
@@ -120,9 +122,10 @@ get_header();
 								?>
 							</em>
 						</span>
+						<?php }?>
 						<span>
 							<strong>
-								<?php _e('Author', KING_DOMAIN ); ?>
+								<?php _e('Author', 'linstar' ); ?>
 							</strong>
 							<em>
 								<?php echo the_author_meta( 'display_name' , $post->post_author); ?>
@@ -130,13 +133,34 @@ get_header();
 						</span>
 						<div class="clearfix margin_top5">
 						</div>
+						<?php
+						if(!isset($king->cfg['our_works_visit_link']) || $king->cfg['our_works_visit_link'] ==1){
+						?>
 						<a href="<?php echo esc_url( get_post_meta( $post->ID, 'king_work', true ) ); ?>" class="but_goback globalBgColor">
 							<i class="fa fa-hand-o-right fa-lg">
 							</i>
-							<?php _e('Visit Site', KING_DOMAIN ); ?>
+							<?php _e('Visit Site', 'linstar' ); ?>
 						</a>
+						<?php }?>
 					</div>
 				</div>
+			</div>
+			<div class="portfolio_pagination">
+				<?php previous_post_link('%link', '%title', true, '', 'our-works-category'); ?>
+				<?php 
+				//if the config of main portfolio page set on the theme panel
+				if( isset( $king->cfg[ 'our_works_main_page' ] ) && !empty( $king->cfg[ 'our_works_main_page' ] ) )
+				{
+					$our_works_mainpage = get_post( $king->cfg[ 'our_works_main_page' ] );
+					$page_title = $our_works_mainpage->post_title;
+				?>
+				<a href="<?php echo get_permalink( $our_works_mainpage );?>" rel="main-page-our-works" class="main-page-our-works" title="<?php echo esc_attr( $page_title );?>">
+	                <i class="icon-grid"></i>
+	            </a>
+				<?php
+				}
+				?>				
+				<?php next_post_link( '%link', '%title', true, '', 'our-works-category'); ?>
 			</div>
 			<!-- end section -->
 		</div>
@@ -163,4 +187,10 @@ get_header();
 	});
 })(jQuery);	
 </script>
-<?php get_footer(); ?>	
+<?php 
+if( empty( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) ||
+      strtolower( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ]) != 'xmlhttprequest' )
+{
+get_footer();
+
+}?>	

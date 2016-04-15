@@ -4,7 +4,7 @@
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+global $king;
 ?>
 <link href="<?php echo THEME_URI; ?>/assets/js/comingsoon/animations.min.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" media="screen" href="<?php echo THEME_URI; ?>/assets/js/comingsoon/coming.css" type="text/css" />
@@ -17,11 +17,26 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<div class="comingsoon_page">
 		<div class="container">
 			<div class="topcontsoon">
-				<img src="<?php echo THEME_URI; ?>/assets/images/logo.png" alt="" />
+				<?php
+					$logo = $king->cfg['cs_logo'];
+					if($logo){
+						$logo = str_replace(array('%SITE_URI%', '%HOME_URI%'), array(SITE_URI, SITE_URI), $logo);
+					}else{
+						$logo = THEME_URI. '/assets/images/logo.png';
+					}					
+				?>
+				<img src="<?php echo esc_attr($logo); ?>" alt="Logo" />
 				<div class="clearfix">
 				</div>
 				<h5>
-					<?php _e('We\'re Launching Soon', KING_DOMAIN ); ?>
+					<?php 
+						$sologan = $king->cfg['cs_text_after_logo'];
+						if($sologan){
+							echo esc_html($sologan);
+						}else{
+							_e('We\'re Launching Soon', 'linstar' ); 
+						}
+					?>
 				</h5>
 			</div>
 			<!-- end section -->
@@ -78,7 +93,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<div class="clearfix"></div>
 			<div class="socialiconssoon">
 				<p>
-					<?php _e("Our website is under construction. We'll be here soon with our new awesome site. Get best experience with this one.", KING_DOMAIN ); ?>
+					<?php 
+						$description = $king->cfg['cs_description'];
+						if($description){
+							echo esc_html($description);
+						}else{
+							_e("Our website is under construction. We'll be here soon with our new awesome site. Get best experience with this one.", 'linstar' );
+						}
+					?>
 				</p>
 				<div class="clearfix marb4"></div>
 				<form name="myForm" action="" onSubmit="return validateForm();" method="post">
@@ -96,18 +118,56 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <script type="text/javascript" src="<?php echo THEME_URI; ?>/assets/js/comingsoon/countdown.js"></script>
 <!-- animations -->
 <script src="<?php echo THEME_URI; ?>/assets/js/comingsoon/animations.min.js" type="text/javascript"></script>
+
+<?php
+	$srcBgArray = array();
+	for($i=1; $i<=5; $i++){
+		$var_name = 'cs_slider'.$i;
+		if(!empty($king->cfg[$var_name])){
+			array_push($srcBgArray, $king->cfg[$var_name]);
+		}
+	}
+	
+	$str_arr = array();
+	if($srcBgArray){
+		foreach($srcBgArray as $src){
+			$str_arr[] =  str_replace(array('%SITE_URI%', '%HOME_URI%'), array(SITE_URI, SITE_URI), $src);
+		}
+	}
+
+
+	if(empty($str_arr)){
+		$str_arr = array(
+		"http://gsrthemes.com/aaika/fullwidth/js/comingsoon/img-slider-1.jpg",
+		"http://gsrthemes.com/aaika/fullwidth/js/comingsoon/img-slider-2.jpg",
+		"http://gsrthemes.com/aaika/fullwidth/js/comingsoon/img-slider-3.jpg",
+		);
+	} 
+?>
+<?php
+	$timedown = $king->cfg['cs_timedown'];
+	if( empty($king->cfg['cs_timedown'])){
+		$timedown = date("F d, Y H:i:s",strtotime("+1 week"));
+	}
+	$king_year = date('Y',strtotime($timedown));
+	$king_month = date('n',strtotime($timedown));
+	$king_day = date('j',strtotime($timedown));
+	$king_hour = date('H',strtotime($timedown));
+	$king_min = date('i',strtotime($timedown));
+	$king_sec = date('s',strtotime($timedown));
+?>
 <script type="text/javascript">
 
 		var timeTarget =  {
 	
 		/*=======Start Config Target=======*/
 		
-			year: 2019,
-			month: 3,
-			day: 30,
-			hour: 24,
-			min: 60,
-			sec: 1,
+			year: <?php echo esc_attr($king_year);?>,
+			month: <?php echo esc_attr($king_month);?>,
+			day: <?php echo esc_attr($king_day);?>,
+			hour: <?php echo esc_attr($king_hour);?>,
+			min: <?php echo esc_attr($king_min);?>,
+			sec: <?php echo esc_attr($king_sec);?>,
 		
 		
 		/*=======End Config=======*/
@@ -137,9 +197,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	};
 
 
-	var srcBgArray = ["http://gsrthemes.com/aaika/fullwidth/js/comingsoon/img-slider-1.jpg",
-		   			"http://gsrthemes.com/aaika/fullwidth/js/comingsoon/img-slider-2.jpg",
-		   			"http://gsrthemes.com/aaika/fullwidth/js/comingsoon/img-slider-3.jpg"];
+	var srcBgArray = [<?php foreach($str_arr as $img) echo '"'.esc_html($img).'",';?>];
 		   			
 	$(document).ready(function() {
 		$('#bg-body').bcatBGSwitcher({
