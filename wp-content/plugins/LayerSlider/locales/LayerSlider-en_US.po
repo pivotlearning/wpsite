@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: LayerSlider WP 5.5.0\n"
-"POT-Creation-Date: 2015-07-03 19:11+0200\n"
+"Project-Id-Version: LayerSlider WP 5.6.2\n"
+"POT-Creation-Date: 2015-08-31 19:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -176,7 +176,7 @@ msgstr ""
 msgid "Slideshow can go backwards if someone switches to a previous slide."
 msgstr ""
 
-#: config/defaults.php:203 views/slider_edit_settings.php:132
+#: config/defaults.php:203 templates/tmpl-slider-settings.php:129
 msgid "Loops"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Gesture-based navigation when swiping on touch-enabled devices."
 msgstr ""
 
-#: config/defaults.php:242 views/slider_edit_settings.php:157
+#: config/defaults.php:242 templates/tmpl-slider-settings.php:154
 msgid "Skin"
 msgstr ""
 
@@ -232,7 +232,7 @@ msgid ""
 "RGB(A) values."
 msgstr ""
 
-#: config/defaults.php:259 views/slider_edit_settings.php:181
+#: config/defaults.php:259 templates/tmpl-slider-settings.php:178
 msgid "Background image"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 msgid "Use circle timer to indicate slideshow progression."
 msgstr ""
 
-#: config/defaults.php:359 views/slider_edit_settings.php:257
+#: config/defaults.php:359 templates/tmpl-slider-settings.php:254
 msgid "Thumbnail navigation"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgid ""
 "moving your WP installation."
 msgstr ""
 
-#: config/defaults.php:512 views/slider_edit_settings.php:27
+#: config/defaults.php:512 templates/tmpl-slider-settings.php:24
 msgid "YourLogo"
 msgstr ""
 
@@ -574,14 +574,11 @@ msgid ""
 "hash mark, so LayerSlider will start with the correspondig slide."
 msgstr ""
 
-#: config/defaults.php:790 config/defaults.php:1150 views/slider_edit.php:313
-#: views/slider_edit.php:632 views/slider_edit_sample.php:78
-#: views/slider_edit_sample.php:339
+#: config/defaults.php:790 config/defaults.php:1150 templates/tmpl-slide.php:72
 msgid "Hidden"
 msgstr ""
 
-#: config/defaults.php:792 views/slider_edit.php:314
-#: views/slider_edit_sample.php:79
+#: config/defaults.php:792 templates/tmpl-slide.php:73
 msgid ""
 "If you don't want to use this slide in your front-page, but you want to keep "
 "it, you can hide it with this switch."
@@ -863,8 +860,7 @@ msgid ""
 "the default (1.0) value to yours."
 msgstr ""
 
-#: config/defaults.php:1152 views/slider_edit.php:633
-#: views/slider_edit_sample.php:340
+#: config/defaults.php:1152
 msgid ""
 "If you don't want to use this layer, but you want to keep it, you can hide "
 "it with this switch."
@@ -1047,7 +1043,7 @@ msgid ""
 "codes. Please make sure to write valid markup."
 msgstr ""
 
-#: config/defaults.php:1419 views/slider_list.php:277
+#: config/defaults.php:1419 views/slider_list.php:159
 msgid "ID"
 msgstr ""
 
@@ -1097,17 +1093,438 @@ msgid ""
 "specify it to make interaction with these plugins."
 msgstr ""
 
-#: views/skin_editor.php:33 views/slider_edit.php:69 views/slider_list.php:89
+#: templates/tmpl-add-slider.php:7
+msgid "Name your new slider"
+msgstr ""
+
+#: templates/tmpl-add-slider.php:9
+msgid "e.g. Homepage slider"
+msgstr ""
+
+#: templates/tmpl-add-slider.php:10
+msgid "Add slider"
+msgstr ""
+
+#: templates/tmpl-beta-feedback.php:4
+msgid "Using beta version"
+msgstr ""
+
+#: templates/tmpl-beta-feedback.php:5
+msgid "Send feedback"
+msgstr ""
+
+#: templates/tmpl-demo-sliders.php:7
+msgid "Choose a demo slider to import"
+msgstr ""
+
+#: templates/tmpl-demo-sliders.php:21
+msgid "Import all demo sliders (might be slow)"
+msgstr ""
+
+#: templates/tmpl-demo-sliders.php:26
+msgid ""
+"More demo content can be found in the downloaded package from CodeCanyon. "
+"You can import them in the usual way in the \"Import and Export Sliders\" "
+"section below."
+msgstr ""
+
+#: templates/tmpl-layer-item.php:6
+msgid "Hide layer in the editor."
+msgstr ""
+
+#: templates/tmpl-layer-item.php:7
+msgid "Prevent layer from dragging in the editor."
+msgstr ""
+
+#: templates/tmpl-layer-item.php:11 templates/tmpl-layer-item.php:12
+msgid "Remove this layer"
+msgstr ""
+
+#: templates/tmpl-layer.php:8
+msgid "Image"
+msgstr ""
+
+#: templates/tmpl-layer.php:9
+msgid "Text"
+msgstr ""
+
+#: templates/tmpl-layer.php:10
+msgid "HTML / Video / Audio"
+msgstr ""
+
+#: templates/tmpl-layer.php:11
+msgid "Dynamic content from posts"
+msgstr ""
+
+#: templates/tmpl-layer.php:19
+msgid "Paragraph"
+msgstr ""
+
+#: templates/tmpl-layer.php:20
+msgid "H1"
+msgstr ""
+
+#: templates/tmpl-layer.php:21
+msgid "H2"
+msgstr ""
+
+#: templates/tmpl-layer.php:22
+msgid "H3"
+msgstr ""
+
+#: templates/tmpl-layer.php:23
+msgid "H4"
+msgstr ""
+
+#: templates/tmpl-layer.php:24
+msgid "H5"
+msgstr ""
+
+#: templates/tmpl-layer.php:25
+msgid "H6"
+msgstr ""
+
+#: templates/tmpl-layer.php:40
+msgid "Click on the image preview to open WordPress Media Library or"
+msgstr ""
+
+#: templates/tmpl-layer.php:41
+msgid "insert from URL"
+msgstr ""
+
+#: templates/tmpl-layer.php:42 templates/tmpl-slide.php:30
+msgid "use post image"
+msgstr ""
+
+#: templates/tmpl-layer.php:48
+msgid ""
+"Type here the contents of your layer. You can use any HTML codes in this "
+"field to insert content others then text. This field is also shortcode-"
+"aware, so you can insert content from other plugins as well as video embed "
+"codes."
+msgstr ""
+
+#: templates/tmpl-layer.php:52
+msgid "Add Media"
+msgstr ""
+
+#: templates/tmpl-layer.php:54
+msgid "Insert self-hosted video or audio"
+msgstr ""
+
+#: templates/tmpl-layer.php:81
+msgid ""
+"Click on one or more post placeholders to insert them into your layer's "
+"content. Post placeholders act like shortcodes in WP, and they will be "
+"filled with the actual content from your posts."
+msgstr ""
+
+#: templates/tmpl-layer.php:82
+msgid "Limit text length (if any)"
+msgstr ""
+
+#: templates/tmpl-layer.php:84 templates/tmpl-slide.php:78
+msgid "Configure post options"
+msgstr ""
+
+#: templates/tmpl-layer.php:94
+msgid "Transition in"
+msgstr ""
+
+#: templates/tmpl-layer.php:133
+msgid "Transition out"
+msgstr ""
+
+#: templates/tmpl-layer.php:172
+msgid "Other options"
+msgstr ""
+
+#: templates/tmpl-layer.php:183 templates/tmpl-slide.php:58
+msgid "use post URL"
+msgstr ""
+
+#: templates/tmpl-layer.php:210
+msgid "Layout & Positions"
+msgstr ""
+
+#: templates/tmpl-layer.php:221
+msgid "Padding"
+msgstr ""
+
+#: templates/tmpl-layer.php:232
+msgid "Border"
+msgstr ""
+
+#: templates/tmpl-layer.php:243
+msgid "Font"
+msgstr ""
+
+#: templates/tmpl-layer.php:254 templates/tmpl-slider-settings.php:23
+msgid "Misc"
+msgstr ""
+
+#: templates/tmpl-layer.php:259
+msgid "Word-wrap"
+msgstr ""
+
+#: templates/tmpl-layer.php:260
+msgid ""
+"If you use custom sized layers, you have to enable this setting to wrap your "
+"text."
+msgstr ""
+
+#: templates/tmpl-layer.php:264
+msgid "Custom CSS"
+msgstr ""
+
+#: templates/tmpl-layer.php:265
+msgid ""
+"If you want to set style settings other then above, you can use here any CSS "
+"codes. Please make sure to write valid markup."
+msgstr ""
+
+#: templates/tmpl-post-options.php:34
+msgid "Find posts with the filters above"
+msgstr ""
+
+#: templates/tmpl-post-options.php:53
+msgid "Don't filter categories"
+msgstr ""
+
+#: templates/tmpl-post-options.php:65
+msgid "Don't filter tags"
+msgstr ""
+
+#: templates/tmpl-post-options.php:77
+msgid "Don't filter taxonomies"
+msgstr ""
+
+#: templates/tmpl-post-options.php:105
+msgid "Order results by"
+msgstr ""
+
+#: templates/tmpl-post-options.php:106
+msgid "On this slide"
+msgstr ""
+
+#: templates/tmpl-post-options.php:118
+msgid "Get the "
+msgstr ""
+
+#: templates/tmpl-post-options.php:120
+msgid "following"
+msgstr ""
+
+#: templates/tmpl-post-options.php:125
+msgid "item in the set of matched selection"
+msgstr ""
+
+#: templates/tmpl-post-options.php:128
+msgid "Preview from currenty matched elements"
+msgstr ""
+
+#: templates/tmpl-share-sheet.php:37
+msgid "Enjoy using LayerSlider?"
+msgstr ""
+
+#: templates/tmpl-share-sheet.php:41
+msgid ""
+"If so, please consider recommending it to your friends on your favorite "
+"social network!"
+msgstr ""
+
+#: templates/tmpl-share-sheet.php:45
+msgid "Share"
+msgstr ""
+
+#: templates/tmpl-share-sheet.php:49
+msgid "Tweet"
+msgstr ""
+
+#: templates/tmpl-slide.php:9
+msgid "Slide Options"
+msgstr ""
+
+#: templates/tmpl-slide.php:29 templates/tmpl-slide.php:30
+#: templates/tmpl-slide.php:40 views/slider_list.php:371
+#: views/transition_builder.php:535 views/transition_builder.php:554
+msgid "or"
+msgstr ""
+
+#: templates/tmpl-slide.php:29 templates/tmpl-slide.php:40
+msgid "enter URL"
+msgstr ""
+
+#: templates/tmpl-slide.php:49
+msgid ""
+"You can select your desired slide transitions by clicking on this button."
+msgstr ""
+
+#: templates/tmpl-slide.php:79
+msgid "Duplicate this slide"
+msgstr ""
+
+#: templates/tmpl-slide.php:93 views/transition_builder.php:67
+#: views/transition_builder.php:349 views/transition_builder.php:569
+#: views/transition_builder.php:901
+msgid "Preview"
+msgstr ""
+
+#: templates/tmpl-slide.php:112 views/transition_builder.php:77
+#: views/transition_builder.php:359 views/transition_builder.php:579
+#: views/transition_builder.php:911
+msgid "Enter Preview"
+msgstr ""
+
+#: templates/tmpl-slide.php:121
+msgid "Layers"
+msgstr ""
+
+#: templates/tmpl-slide.php:123 views/slider_list.php:119
+msgid "Add New"
+msgstr ""
+
+#: templates/tmpl-slide.php:127
+msgid "Layer options"
+msgstr ""
+
+#: templates/tmpl-slide.php:128
+msgid "Timeline"
+msgstr ""
+
+#: templates/tmpl-slide.php:135
+msgid "Content"
+msgstr ""
+
+#: templates/tmpl-slide.php:136 views/transition_builder.php:404
+#: views/transition_builder.php:958
+msgid "Transition"
+msgstr ""
+
+#: templates/tmpl-slide.php:137
+msgid "Link & Attributes"
+msgstr ""
+
+#: templates/tmpl-slide.php:138
+msgid "Styles"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:6
+msgid "Type your slider name here"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:8
+msgid "e.g. homepageslider"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:14 views/slider_edit.php:144
+msgid "Slider Settings"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:17
+msgid "Layout"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:18
+msgid "Slideshow"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:19 templates/tmpl-slider-settings.php:252
+msgid "Appearance"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:20
+msgid "Navigation Area"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:21
+msgid "Thumbnail Navigation"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:22
+msgid "Videos"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:31
+msgid "Slider dimensions"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:42
+msgid "Responsive mode"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:53
+msgid "Full-width slider settings"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:69 templates/tmpl-slider-settings.php:138
+msgid "Other settings"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:89
+msgid "Slideshow behavior"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:105
+msgid "Starting slide options"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:116
+msgid "Slideshow navigation"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:127
+msgid "Looping"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:131
+msgid ""
+"Number of loops if automatically start slideshow is enabled (0 means "
+"infinite!)"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:170
+msgid ""
+"You can change the skin of the slider. The 'noskin' skin is a border- and "
+"buttonless skin. Your custom skins will appear in the list when you create "
+"their folders as well."
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:200
+msgid "Custom slider CSS"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:210
+msgid "Show navigation buttons"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:226
+msgid "Navigation buttons on hover"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:237
+msgid "Slideshow timers"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:263
+msgid "Thumbnail dimensions"
+msgstr ""
+
+#: templates/tmpl-slider-settings.php:274
+msgid "Thumbnail appearance"
+msgstr ""
+
+#: views/skin_editor.php:33 views/slider_edit.php:64 views/slider_list.php:90
 #: views/style_editor.php:29 views/transition_builder.php:51
 msgid "Show on screen"
 msgstr ""
 
-#: views/skin_editor.php:35 views/slider_list.php:90 views/style_editor.php:31
+#: views/skin_editor.php:35 views/slider_list.php:91 views/style_editor.php:31
 #: views/transition_builder.php:53
 msgid "Tooltips"
 msgstr ""
 
-#: views/skin_editor.php:40 views/slider_edit.php:76 views/slider_list.php:98
+#: views/skin_editor.php:40 views/slider_edit.php:71 views/slider_list.php:99
 #: views/style_editor.php:36 views/transition_builder.php:58
 msgid "Screen Options"
 msgstr ""
@@ -1116,8 +1533,8 @@ msgstr ""
 msgid "LayerSlider Skin Editor"
 msgstr ""
 
-#: views/skin_editor.php:49 views/slider_edit.php:169
-#: views/style_editor.php:44 views/transition_builder.php:508
+#: views/skin_editor.php:49 views/slider_edit.php:134 views/style_editor.php:44
+#: views/transition_builder.php:508
 msgid "Back to the list"
 msgstr ""
 
@@ -1151,9 +1568,9 @@ msgid ""
 "\"_blank\">Codex</a> for more information."
 msgstr ""
 
-#: views/skin_editor.php:87 views/slider_edit.php:843
-#: views/slider_list.php:553 views/slider_list.php:643
-#: views/style_editor.php:84 views/transition_builder.php:1068
+#: views/skin_editor.php:87 views/slider_edit.php:282 views/slider_list.php:436
+#: views/slider_list.php:531 views/style_editor.php:84
+#: views/transition_builder.php:1068
 msgid "Save changes"
 msgstr ""
 
@@ -1163,719 +1580,272 @@ msgid ""
 "Changes cannot be reverted after saving."
 msgstr ""
 
-#: views/slider_edit.php:116 views/slider_list.php:210
-msgid "Enjoy using LayerSlider?"
-msgstr ""
-
-#: views/slider_edit.php:120 views/slider_list.php:214
-msgid ""
-"If so, please consider recommending it to your friends on your favorite "
-"social network!"
-msgstr ""
-
-#: views/slider_edit.php:167
+#: views/slider_edit.php:131
 msgid "Editing slider:"
 msgstr ""
 
-#: views/slider_edit.php:176 views/slider_edit_settings.php:17
-msgid "Slider Settings"
-msgstr ""
-
-#: views/slider_edit.php:180 views/slider_list.php:281
+#: views/slider_edit.php:148 views/slider_list.php:163
 msgid "Slides"
 msgstr ""
 
-#: views/slider_edit.php:184
+#: views/slider_edit.php:152
 msgid "Event Callbacks"
 msgstr ""
 
-#: views/slider_edit.php:188
+#: views/slider_edit.php:156
 msgid "FAQ"
 msgstr ""
 
-#: views/slider_edit.php:192
+#: views/slider_edit.php:160
 msgid "Documentation"
 msgstr ""
 
-#: views/slider_edit.php:194
+#: views/slider_edit.php:162
 msgid "Need help? Try these: "
 msgstr ""
 
-#: views/slider_edit.php:218
+#: views/slider_edit.php:186
 msgid "Add new slide"
 msgstr ""
 
-#: views/slider_edit.php:240 views/slider_edit_sample.php:15
-msgid "Slide Options"
-msgstr ""
-
-#: views/slider_edit.php:270 views/slider_edit.php:271
-#: views/slider_edit.php:281 views/slider_edit_sample.php:35
-#: views/slider_edit_sample.php:36 views/slider_edit_sample.php:46
-#: views/slider_list.php:488 views/transition_builder.php:535
-#: views/transition_builder.php:554
-msgid "or"
-msgstr ""
-
-#: views/slider_edit.php:270 views/slider_edit.php:281
-#: views/slider_edit_sample.php:35 views/slider_edit_sample.php:46
-msgid "enter URL"
-msgstr ""
-
-#: views/slider_edit.php:271 views/slider_edit.php:464
-#: views/slider_edit_sample.php:36 views/slider_edit_sample.php:205
-msgid "use post image"
-msgstr ""
-
-#: views/slider_edit.php:290 views/slider_edit_sample.php:55
-msgid ""
-"You can select your desired slide transitions by clicking on this button."
-msgstr ""
-
-#: views/slider_edit.php:299 views/slider_edit.php:646
-#: views/slider_edit_sample.php:64 views/slider_edit_sample.php:353
-msgid "use post URL"
-msgstr ""
-
-#: views/slider_edit.php:319 views/slider_edit.php:506
-#: views/slider_edit_sample.php:84 views/slider_edit_sample.php:247
-msgid "Configure post options"
-msgstr ""
-
-#: views/slider_edit.php:320 views/slider_edit_sample.php:85
-msgid "Duplicate this slide"
-msgstr ""
-
-#: views/slider_edit.php:334 views/slider_edit_sample.php:99
-#: views/transition_builder.php:67 views/transition_builder.php:349
-#: views/transition_builder.php:569 views/transition_builder.php:901
-msgid "Preview"
-msgstr ""
-
-#: views/slider_edit.php:353 views/slider_edit_sample.php:118
-#: views/transition_builder.php:77 views/transition_builder.php:359
-#: views/transition_builder.php:579 views/transition_builder.php:911
-msgid "Enter Preview"
-msgstr ""
-
-#: views/slider_edit.php:363 views/slider_edit_sample.php:128
-msgid "Layers"
-msgstr ""
-
-#: views/slider_edit.php:363 views/slider_edit_sample.php:128
-msgid "timeline view"
-msgstr ""
-
-#: views/slider_edit.php:391 views/slider_edit_sample.php:152
-msgid "Highlight layer in the editor."
-msgstr ""
-
-#: views/slider_edit.php:392 views/slider_edit_sample.php:153
-msgid "Prevent layer from dragging in the editor."
-msgstr ""
-
-#: views/slider_edit.php:393 views/slider_edit_sample.php:154
-msgid "Hide layer in the editor."
-msgstr ""
-
-#: views/slider_edit.php:397 views/slider_edit_sample.php:158
-msgid "Content"
-msgstr ""
-
-#: views/slider_edit.php:398 views/slider_edit_sample.php:159
-#: views/transition_builder.php:404 views/transition_builder.php:958
-msgid "Transition"
-msgstr ""
-
-#: views/slider_edit.php:399 views/slider_edit_sample.php:160
-msgid "Link"
-msgstr ""
-
-#: views/slider_edit.php:400 views/slider_edit_sample.php:161
-msgid "Styles"
-msgstr ""
-
-#: views/slider_edit.php:401 views/slider_edit.php:725
-#: views/slider_edit_sample.php:162 views/slider_edit_sample.php:429
-msgid "Attributes"
-msgstr ""
-
-#: views/slider_edit.php:402 views/slider_edit_sample.php:163
-msgid "Remove this layer"
-msgstr ""
-
-#: views/slider_edit.php:422 views/slider_edit_sample.php:171
-msgid "Image"
-msgstr ""
-
-#: views/slider_edit.php:423 views/slider_edit_sample.php:172
-msgid "Text"
-msgstr ""
-
-#: views/slider_edit.php:424 views/slider_edit_sample.php:173
-msgid "HTML / Video / Audio"
-msgstr ""
-
-#: views/slider_edit.php:425 views/slider_edit_sample.php:174
-msgid "Dynamic content from posts"
-msgstr ""
-
-#: views/slider_edit.php:433 views/slider_edit_sample.php:182
-msgid "Paragraph"
-msgstr ""
-
-#: views/slider_edit.php:434 views/slider_edit_sample.php:183
-msgid "H1"
-msgstr ""
-
-#: views/slider_edit.php:435 views/slider_edit_sample.php:184
-msgid "H2"
-msgstr ""
-
-#: views/slider_edit.php:436 views/slider_edit_sample.php:185
-msgid "H3"
-msgstr ""
-
-#: views/slider_edit.php:437 views/slider_edit_sample.php:186
-msgid "H4"
-msgstr ""
-
-#: views/slider_edit.php:438 views/slider_edit_sample.php:187
-msgid "H5"
-msgstr ""
-
-#: views/slider_edit.php:439 views/slider_edit_sample.php:188
-msgid "H6"
-msgstr ""
-
-#: views/slider_edit.php:462 views/slider_edit_sample.php:203
-msgid "Click on the image preview to open WordPress Media Library or"
-msgstr ""
-
-#: views/slider_edit.php:463 views/slider_edit_sample.php:204
-msgid "insert from URL"
-msgstr ""
-
-#: views/slider_edit.php:470 views/slider_edit_sample.php:211
-msgid ""
-"Type here the contents of your layer. You can use any HTML codes in this "
-"field to insert content others then text. This field is also shortcode-"
-"aware, so you can insert content from other plugins as well as video embed "
-"codes."
-msgstr ""
-
-#: views/slider_edit.php:474 views/slider_edit_sample.php:215
-msgid "Add Media"
-msgstr ""
-
-#: views/slider_edit.php:476 views/slider_edit_sample.php:217
-msgid "Insert self-hosted video or audio"
-msgstr ""
-
-#: views/slider_edit.php:503 views/slider_edit_sample.php:244
-msgid ""
-"Click on one or more post placeholders to insert them into your layer's "
-"content. Post placeholders act like shortcodes in WP, and they will be "
-"filled with the actual content from your posts."
-msgstr ""
-
-#: views/slider_edit.php:504 views/slider_edit_sample.php:245
-msgid "Limit text length (if any)"
-msgstr ""
-
-#: views/slider_edit.php:551 views/slider_edit_sample.php:258
-msgid "Transition in"
-msgstr ""
-
-#: views/slider_edit.php:590 views/slider_edit_sample.php:297
-msgid "Transition out"
-msgstr ""
-
-#: views/slider_edit.php:629 views/slider_edit_sample.php:336
-msgid "Other options"
-msgstr ""
-
-#: views/slider_edit.php:634 views/slider_edit_sample.php:341
-msgid ""
-"If you would like to use similar settings for other layers or to experiment "
-"on a copy, you can duplicate this layer."
-msgstr ""
-
-#: views/slider_edit.php:634 views/slider_edit_sample.php:341
-msgid "Duplicate this layer"
-msgstr ""
-
-#: views/slider_edit.php:661 views/slider_edit_sample.php:365
-msgid "Layout & Positions"
-msgstr ""
-
-#: views/slider_edit.php:672 views/slider_edit_sample.php:376
-msgid "Padding"
-msgstr ""
-
-#: views/slider_edit.php:683 views/slider_edit_sample.php:387
-msgid "Border"
-msgstr ""
-
-#: views/slider_edit.php:694 views/slider_edit_sample.php:398
-msgid "Font"
-msgstr ""
-
-#: views/slider_edit.php:705 views/slider_edit_sample.php:409
-#: views/slider_edit_settings.php:26
-msgid "Misc"
-msgstr ""
-
-#: views/slider_edit.php:710 views/slider_edit_sample.php:414
-msgid "Word-wrap"
-msgstr ""
-
-#: views/slider_edit.php:711 views/slider_edit_sample.php:415
-msgid ""
-"If you use custom sized layers, you have to enable this setting to wrap your "
-"text."
-msgstr ""
-
-#: views/slider_edit.php:715 views/slider_edit_sample.php:419
-msgid "Custom CSS"
-msgstr ""
-
-#: views/slider_edit.php:716 views/slider_edit_sample.php:420
-msgid ""
-"If you want to set style settings other then above, you can use here any CSS "
-"codes. Please make sure to write valid markup."
-msgstr ""
-
-#: views/slider_edit.php:749 views/slider_edit_sample.php:451
-msgid "Add new layer"
-msgstr ""
-
-#: views/slider_edit.php:762
+#: views/slider_edit.php:201
 msgid "Fires when LayerSlider has loaded"
 msgstr ""
 
-#: views/slider_edit.php:772
+#: views/slider_edit.php:211
 msgid "Calling when the slideshow has started."
 msgstr ""
 
-#: views/slider_edit.php:782
+#: views/slider_edit.php:221
 msgid "Calling when the slideshow is stopped by the user."
 msgstr ""
 
-#: views/slider_edit.php:792
+#: views/slider_edit.php:231
 msgid ""
 "Fireing when the slideshow is temporary on hold (e.g.: \"Pause on hover\" "
 "feature)."
 msgstr ""
 
-#: views/slider_edit.php:802
+#: views/slider_edit.php:241
 msgid "Calling when the slider commencing slide change (animation start)."
 msgstr ""
 
-#: views/slider_edit.php:812
+#: views/slider_edit.php:251
 msgid "Fireing when the slider finished a slide change (animation end)."
 msgstr ""
 
-#: views/slider_edit.php:822
+#: views/slider_edit.php:261
 msgid "Calling when the slider will change to the previous slide by the user."
 msgstr ""
 
-#: views/slider_edit.php:832
+#: views/slider_edit.php:271
 msgid "Calling when the slider will change to the next slide by the user."
 msgstr ""
 
-#: views/slider_edit_posts.php:40
-msgid "Find posts with the filters above"
-msgstr ""
-
-#: views/slider_edit_posts.php:59
-msgid "Don't filter categories"
-msgstr ""
-
-#: views/slider_edit_posts.php:71
-msgid "Don't filter tags"
-msgstr ""
-
-#: views/slider_edit_posts.php:83
-msgid "Don't filter taxonomies"
-msgstr ""
-
-#: views/slider_edit_posts.php:111
-msgid "Order results by"
-msgstr ""
-
-#: views/slider_edit_posts.php:112
-msgid "On this slide"
-msgstr ""
-
-#: views/slider_edit_posts.php:124
-msgid "Get the "
-msgstr ""
-
-#: views/slider_edit_posts.php:126
-msgid "following"
-msgstr ""
-
-#: views/slider_edit_posts.php:131
-msgid "item in the set of matched selection"
-msgstr ""
-
-#: views/slider_edit_posts.php:134
-msgid "Preview from currenty matched elements"
-msgstr ""
-
-#: views/slider_edit_settings.php:9
-msgid "Type your slider name here"
-msgstr ""
-
-#: views/slider_edit_settings.php:11
-msgid "e.g. homepageslider"
-msgstr ""
-
-#: views/slider_edit_settings.php:20
-msgid "Layout"
-msgstr ""
-
-#: views/slider_edit_settings.php:21
-msgid "Slideshow"
-msgstr ""
-
-#: views/slider_edit_settings.php:22 views/slider_edit_settings.php:255
-msgid "Appearance"
-msgstr ""
-
-#: views/slider_edit_settings.php:23
-msgid "Navigation Area"
-msgstr ""
-
-#: views/slider_edit_settings.php:24
-msgid "Thumbnail Navigation"
-msgstr ""
-
-#: views/slider_edit_settings.php:25
-msgid "Videos"
-msgstr ""
-
-#: views/slider_edit_settings.php:34
-msgid "Slider dimensions"
-msgstr ""
-
-#: views/slider_edit_settings.php:45
-msgid "Responsive mode"
-msgstr ""
-
-#: views/slider_edit_settings.php:56
-msgid "Full-width slider settings"
-msgstr ""
-
-#: views/slider_edit_settings.php:72 views/slider_edit_settings.php:141
-msgid "Other settings"
-msgstr ""
-
-#: views/slider_edit_settings.php:92
-msgid "Slideshow behavior"
-msgstr ""
-
-#: views/slider_edit_settings.php:108
-msgid "Starting slide options"
-msgstr ""
-
-#: views/slider_edit_settings.php:119
-msgid "Slideshow navigation"
-msgstr ""
-
-#: views/slider_edit_settings.php:130
-msgid "Looping"
-msgstr ""
-
-#: views/slider_edit_settings.php:134
-msgid ""
-"Number of loops if automatically start slideshow is enabled (0 means "
-"infinite!)"
-msgstr ""
-
-#: views/slider_edit_settings.php:173
-msgid ""
-"You can change the skin of the slider. The 'noskin' skin is a border- and "
-"buttonless skin. Your custom skins will appear in the list when you create "
-"their folders as well."
-msgstr ""
-
-#: views/slider_edit_settings.php:203
-msgid "Custom slider CSS"
-msgstr ""
-
-#: views/slider_edit_settings.php:213
-msgid "Show navigation buttons"
-msgstr ""
-
-#: views/slider_edit_settings.php:229
-msgid "Navigation buttons on hover"
-msgstr ""
-
-#: views/slider_edit_settings.php:240
-msgid "Slideshow timers"
-msgstr ""
-
-#: views/slider_edit_settings.php:266
-msgid "Thumbnail dimensions"
-msgstr ""
-
-#: views/slider_edit_settings.php:277
-msgid "Thumbnail appearance"
-msgstr ""
-
-#: views/slider_list.php:64
+#: views/slider_list.php:65
 msgid "No sliders were selected to remove."
 msgstr ""
 
-#: views/slider_list.php:65
+#: views/slider_list.php:66
 msgid "The selected sliders were removed."
 msgstr ""
 
-#: views/slider_list.php:66 views/slider_list.php:70
+#: views/slider_list.php:67 views/slider_list.php:71
 msgid "No sliders were selected."
 msgstr ""
 
-#: views/slider_list.php:67
+#: views/slider_list.php:68
 msgid "The selected sliders were permanently deleted."
 msgstr ""
 
-#: views/slider_list.php:68
+#: views/slider_list.php:69
 msgid "You need to select at least 2 sliders to merge them."
 msgstr ""
 
-#: views/slider_list.php:69
+#: views/slider_list.php:70
 msgid "The selected items were merged together as a new slider."
 msgstr ""
 
-#: views/slider_list.php:71
+#: views/slider_list.php:72
 msgid "The selected sliders were restored."
 msgstr ""
 
-#: views/slider_list.php:73
+#: views/slider_list.php:74
 msgid "No sliders were found to export."
 msgstr ""
 
-#: views/slider_list.php:74
+#: views/slider_list.php:75
 msgid "No sliders were selected to export."
 msgstr ""
 
-#: views/slider_list.php:75
+#: views/slider_list.php:76
 msgid "The PHP ZipArchive extension is required to import .zip files."
 msgstr ""
 
-#: views/slider_list.php:77
+#: views/slider_list.php:78
 msgid "Choose a file to import sliders."
 msgstr ""
 
-#: views/slider_list.php:78
+#: views/slider_list.php:79
 msgid "The import file seems to be invalid or corrupted."
 msgstr ""
 
-#: views/slider_list.php:79
+#: views/slider_list.php:80
 msgid "Your slider has been imported."
 msgstr ""
 
-#: views/slider_list.php:80
+#: views/slider_list.php:81
 msgid ""
 "Your account does not have the necessary permission you have chosen, and "
 "your settings have not been saved in order to prevent locking yourself out "
 "of the plugin."
 msgstr ""
 
-#: views/slider_list.php:81
+#: views/slider_list.php:82
 msgid "Permission changes has been updated."
 msgstr ""
 
-#: views/slider_list.php:82
+#: views/slider_list.php:83
 msgid "Your Google Fonts library has been updated."
 msgstr ""
 
-#: views/slider_list.php:83
+#: views/slider_list.php:84
 msgid "Your settings has been updated."
 msgstr ""
 
-#: views/slider_list.php:91
+#: views/slider_list.php:92
 msgid "Removed sliders"
 msgstr ""
 
-#: views/slider_list.php:93
+#: views/slider_list.php:94
 msgid "Show me"
 msgstr ""
 
-#: views/slider_list.php:93
+#: views/slider_list.php:94
 msgid "sliders per page"
 msgstr ""
 
-#: views/slider_list.php:94 views/slider_list.php:337
+#: views/slider_list.php:95 views/slider_list.php:219
 msgid "Apply"
 msgstr ""
 
-#: views/slider_list.php:117
+#: views/slider_list.php:118
 msgid "LayerSlider sliders"
 msgstr ""
 
-#: views/slider_list.php:118
-msgid "Add New"
-msgstr ""
-
-#: views/slider_list.php:119
+#: views/slider_list.php:120
 msgid "Import sample sliders"
 msgstr ""
 
-#: views/slider_list.php:125
-msgid "Using beta version"
-msgstr ""
-
-#: views/slider_list.php:126
-msgid "Send feedback"
-msgstr ""
-
-#: views/slider_list.php:136
-msgid "Name your new slider"
-msgstr ""
-
-#: views/slider_list.php:138
-msgid "e.g. Homepage slider"
-msgstr ""
-
-#: views/slider_list.php:139
-msgid "Add slider"
-msgstr ""
-
-#: views/slider_list.php:149
-msgid "Choose a demo slider to import"
-msgstr ""
-
-#: views/slider_list.php:163
-msgid "Import all demo sliders (might be slow)"
-msgstr ""
-
-#: views/slider_list.php:168
-msgid ""
-"More demo content can be found in the downloaded package from CodeCanyon. "
-"You can import them in the usual way in the \"Import and Export Sliders\" "
-"section below."
-msgstr ""
-
-#: views/slider_list.php:218
-msgid "Share"
-msgstr ""
-
-#: views/slider_list.php:222
-msgid "Tweet"
-msgstr ""
-
-#: views/slider_list.php:263
+#: views/slider_list.php:145
 msgid "You haven't created any slider yet."
 msgstr ""
 
-#: views/slider_list.php:264
+#: views/slider_list.php:146
 msgid "Click those buttons to add one or import our demo content."
 msgstr ""
 
-#: views/slider_list.php:278
+#: views/slider_list.php:160
 msgid "Slider preview"
 msgstr ""
 
-#: views/slider_list.php:279
+#: views/slider_list.php:161
 msgid "Name"
 msgstr ""
 
-#: views/slider_list.php:280
+#: views/slider_list.php:162
 msgid "Shortcode"
 msgstr ""
 
-#: views/slider_list.php:282
+#: views/slider_list.php:164
 msgid "Created"
 msgstr ""
 
-#: views/slider_list.php:283
+#: views/slider_list.php:165
 msgid "Modified"
 msgstr ""
 
-#: views/slider_list.php:308
+#: views/slider_list.php:190
 msgid "ago"
 msgstr ""
 
-#: views/slider_list.php:312
+#: views/slider_list.php:194
 msgid "Duplicate this slider"
 msgstr ""
 
-#: views/slider_list.php:315
+#: views/slider_list.php:197
 msgid "Remove this slider"
 msgstr ""
 
-#: views/slider_list.php:319
+#: views/slider_list.php:201
 msgid "Restore removed slider"
 msgstr ""
 
-#: views/slider_list.php:329
+#: views/slider_list.php:211
 msgid "Bulk Actions"
 msgstr ""
 
-#: views/slider_list.php:330
+#: views/slider_list.php:212
 msgid "Remove selected"
 msgstr ""
 
-#: views/slider_list.php:331
+#: views/slider_list.php:213
 msgid "Delete permanently"
 msgstr ""
 
-#: views/slider_list.php:333
+#: views/slider_list.php:215
 msgid "Restore removed"
 msgstr ""
 
-#: views/slider_list.php:335
+#: views/slider_list.php:217
 msgid "Merge selected as new"
 msgstr ""
 
-#: views/slider_list.php:341
+#: views/slider_list.php:223
 msgid "items"
 msgstr ""
 
-#: views/slider_list.php:361
+#: views/slider_list.php:243
 msgid "Auto-Updates"
 msgstr ""
 
-#: views/slider_list.php:362
+#: views/slider_list.php:244
 msgid "Import / Export"
 msgstr ""
 
-#: views/slider_list.php:363
+#: views/slider_list.php:245
 msgid "Permissions"
 msgstr ""
 
-#: views/slider_list.php:364
+#: views/slider_list.php:246
 msgid "Google Fonts"
 msgstr ""
 
-#: views/slider_list.php:365
+#: views/slider_list.php:247
 msgid "Advanced"
 msgstr ""
 
-#: views/slider_list.php:372
+#: views/slider_list.php:254
 msgid "Receive update notifications and install new versions with 1-Click."
 msgstr ""
 
-#: views/slider_list.php:373
+#: views/slider_list.php:255
 msgid "Read more"
 msgstr ""
 
-#: views/slider_list.php:377
+#: views/slider_list.php:259
 msgid "This site is authorized to receive automatic updates."
 msgstr ""
 
-#: views/slider_list.php:379
+#: views/slider_list.php:261
 msgid "This site is not yet authorized to receive plugin updates."
 msgstr ""
 
-#: views/slider_list.php:388
+#: views/slider_list.php:270
 msgid "Enter your purchase code"
 msgstr ""
 
-#: views/slider_list.php:389
+#: views/slider_list.php:271
 msgid ""
 "To receive automatic updates, you need to enter your item purchase code. "
 "Click on the Download button next to LayerSlider WP on your CodeCanyon "
@@ -1884,43 +1854,43 @@ msgid ""
 "purchase code."
 msgstr ""
 
-#: views/slider_list.php:390
+#: views/slider_list.php:272
 msgid "and"
 msgstr ""
 
-#: views/slider_list.php:391
+#: views/slider_list.php:273
 msgid "choose release channel"
 msgstr ""
 
-#: views/slider_list.php:392
+#: views/slider_list.php:274
 msgid "Stable"
 msgstr ""
 
-#: views/slider_list.php:393
+#: views/slider_list.php:275
 msgid ""
 "Although pre-release versions meant to work properly, they might contain "
 "unknown issues, and are not recommended for sites in production."
 msgstr ""
 
-#: views/slider_list.php:394
+#: views/slider_list.php:276
 msgid "Beta"
 msgstr ""
 
-#: views/slider_list.php:397
+#: views/slider_list.php:279
 msgid ""
 "You can find your purchase code by selecting the License Certificate option "
 "under LayerSlider's Download button on your"
 msgstr ""
 
-#: views/slider_list.php:398
+#: views/slider_list.php:280
 msgid "CodeCanyon Downloads"
 msgstr ""
 
-#: views/slider_list.php:399
+#: views/slider_list.php:281
 msgid "page."
 msgstr ""
 
-#: views/slider_list.php:403
+#: views/slider_list.php:285
 msgid ""
 "It seems you've received LayerSlider by a theme. Please note that the auto-"
 "update feature only works if you've purchased the plugin directly from us on "
@@ -1928,38 +1898,42 @@ msgid ""
 "plugin-/1362246\" target=\"_blank\">CodeCanyon</a>."
 msgstr ""
 
-#: views/slider_list.php:409 views/slider_list.php:494
+#: views/slider_list.php:291 views/slider_list.php:377
 msgid "Update"
 msgstr ""
 
-#: views/slider_list.php:410
+#: views/slider_list.php:292
 msgid "Deauthorize this site"
 msgstr ""
 
-#: views/slider_list.php:411
+#: views/slider_list.php:293
+msgid "Download latest version manually"
+msgstr ""
+
+#: views/slider_list.php:294
 msgid "Check for updates"
 msgstr ""
 
-#: views/slider_list.php:420
+#: views/slider_list.php:303
 msgid "Move sliders between sites, make backups, import demo content"
 msgstr ""
 
-#: views/slider_list.php:421
+#: views/slider_list.php:304
 msgid ""
 "The PHP ZipArchive extension is needed for exporting/importing images. The "
 "plugin will only copy your slider settings if it's not available. In that "
 "case please contact with your hosting provider."
 msgstr ""
 
-#: views/slider_list.php:435
+#: views/slider_list.php:318
 msgid "Import"
 msgstr ""
 
-#: views/slider_list.php:436
+#: views/slider_list.php:319
 msgid "Do not import images"
 msgstr ""
 
-#: views/slider_list.php:438
+#: views/slider_list.php:321
 msgid ""
 "Choose a LayerSlider export file downloaded previously to import your "
 "sliders. In order to import from outdated versions, you need to create a "
@@ -1967,243 +1941,253 @@ msgid ""
 "extension."
 msgstr ""
 
-#: views/slider_list.php:449
+#: views/slider_list.php:332
 msgid ""
 "Downloads an export file that contains your selected sliders to import on "
 "your new site. You can select multiple sliders by holding the Ctrl/Cmd "
 "button while clicking."
 msgstr ""
 
-#: views/slider_list.php:450 wp/menus.php:33
+#: views/slider_list.php:333 wp/menus.php:33
 msgid "All Sliders"
 msgstr ""
 
-#: views/slider_list.php:462
+#: views/slider_list.php:345
 msgid "Export"
 msgstr ""
 
-#: views/slider_list.php:471
+#: views/slider_list.php:354
 msgid "Allow non-admin users to change plugin settings and manage your sliders"
 msgstr ""
 
-#: views/slider_list.php:476
+#: views/slider_list.php:359
 msgid "Choose a role"
 msgstr ""
 
-#: views/slider_list.php:479
+#: views/slider_list.php:362
 msgid "Super Admin"
 msgstr ""
 
-#: views/slider_list.php:481
+#: views/slider_list.php:364
 msgid "Admin"
 msgstr ""
 
-#: views/slider_list.php:482
+#: views/slider_list.php:365
 msgid "Editor, Admin"
 msgstr ""
 
-#: views/slider_list.php:483
+#: views/slider_list.php:366
 msgid "Author, Editor, Admin"
 msgstr ""
 
-#: views/slider_list.php:484
+#: views/slider_list.php:367
 msgid "Contributor, Author, Editor, Admin"
 msgstr ""
 
-#: views/slider_list.php:485
+#: views/slider_list.php:368
 msgid "Custom"
 msgstr ""
 
-#: views/slider_list.php:488
+#: views/slider_list.php:371
 msgid "enter a custom capability"
 msgstr ""
 
-#: views/slider_list.php:491
+#: views/slider_list.php:374
 msgid ""
 "You can specify a custom capability if none of the pre-defined roles match "
 "your needs. You can find all the available capabilities on"
 msgstr ""
 
-#: views/slider_list.php:491
+#: views/slider_list.php:374
 msgid "this page"
 msgstr ""
 
-#: views/slider_list.php:502
+#: views/slider_list.php:385
 msgid "Choose from hundreds of custom fonts faces provided by Google Fonts"
 msgstr ""
 
-#: views/slider_list.php:514 views/slider_list.php:522
+#: views/slider_list.php:397 views/slider_list.php:405
 msgid "Load only on admin interface"
 msgstr ""
 
-#: views/slider_list.php:526
+#: views/slider_list.php:409
 msgid "You didn't add any Google font to your library yet."
 msgstr ""
 
-#: views/slider_list.php:532
+#: views/slider_list.php:415
 msgid "Enter a font name to add to your collection"
 msgstr ""
 
-#: views/slider_list.php:533
+#: views/slider_list.php:416
 msgid "Search"
 msgstr ""
 
-#: views/slider_list.php:537
+#: views/slider_list.php:420
 msgid "Choose a font family"
 msgstr ""
 
-#: views/slider_list.php:544
+#: views/slider_list.php:427
 msgid "Add font"
 msgstr ""
 
-#: views/slider_list.php:545
+#: views/slider_list.php:428
 msgid "Back to results"
 msgstr ""
 
-#: views/slider_list.php:556
+#: views/slider_list.php:439
 msgid "Cyrillic"
 msgstr ""
 
-#: views/slider_list.php:557
+#: views/slider_list.php:440
 msgid "Cyrillic Extended"
 msgstr ""
 
-#: views/slider_list.php:558
+#: views/slider_list.php:441
 msgid "Devanagari"
 msgstr ""
 
-#: views/slider_list.php:559
+#: views/slider_list.php:442
 msgid "Greek"
 msgstr ""
 
-#: views/slider_list.php:560
+#: views/slider_list.php:443
 msgid "Greek Extended"
 msgstr ""
 
-#: views/slider_list.php:561
+#: views/slider_list.php:444
 msgid "Khmer"
 msgstr ""
 
-#: views/slider_list.php:562
+#: views/slider_list.php:445
 msgid "Latin"
 msgstr ""
 
-#: views/slider_list.php:563
+#: views/slider_list.php:446
 msgid "Latin Extended"
 msgstr ""
 
-#: views/slider_list.php:564
+#: views/slider_list.php:447
 msgid "Vietnamese"
 msgstr ""
 
-#: views/slider_list.php:570
+#: views/slider_list.php:453
 msgid "Select new"
 msgstr ""
 
-#: views/slider_list.php:579 views/slider_list.php:586
-#: views/slider_list.php:593
+#: views/slider_list.php:462 views/slider_list.php:469
+#: views/slider_list.php:476
 msgid "Remove character set"
 msgstr ""
 
-#: views/slider_list.php:598
+#: views/slider_list.php:481
 msgid "Use character sets:"
 msgstr ""
 
-#: views/slider_list.php:608
+#: views/slider_list.php:491
 msgid "Troubleshooting &amp; Advanced Settings"
 msgstr ""
 
-#: views/slider_list.php:609
+#: views/slider_list.php:492
 msgid ""
 "Don't change these options without experience, incorrect settings might "
 "break your site."
 msgstr ""
 
-#: views/slider_list.php:617
-msgid "Use Google CDN version of jQuery"
+#: views/slider_list.php:500
+msgid "Use slider markup caching"
 msgstr ""
 
-#: views/slider_list.php:619
-msgid "This option will likely solve \"Old jQuery\" issues."
+#: views/slider_list.php:502
+msgid ""
+"Enabled caching can drastically increase the plugin performance and spare "
+"your server from unnecessary load."
 msgstr ""
 
-#: views/slider_list.php:622
+#: views/slider_list.php:505
 msgid "Include scripts in the footer"
 msgstr ""
 
-#: views/slider_list.php:624
+#: views/slider_list.php:507
 msgid ""
-"Including resources in the footer could decrease load times, and solve other "
-"type of issues, but your theme might not support this method."
+"Including resources in the footer can improve load times and solve other "
+"type of issues. Outdated themes might not support this method."
 msgstr ""
 
-#: views/slider_list.php:627
+#: views/slider_list.php:510
 msgid "Conditional script loading"
 msgstr ""
 
-#: views/slider_list.php:629
+#: views/slider_list.php:512
 msgid ""
 "Increase your site's performance by loading resources only when necessary. "
 "Outdated themes might not support this method."
 msgstr ""
 
-#: views/slider_list.php:632
+#: views/slider_list.php:515
 msgid "Concatenate output"
 msgstr ""
 
-#: views/slider_list.php:634
+#: views/slider_list.php:517
 msgid ""
 "Concatenating the plugin's output could solve issues caused by custom "
 "filters your theme might use."
 msgstr ""
 
-#: views/slider_list.php:637
+#: views/slider_list.php:520
+msgid "Use Google CDN version of jQuery"
+msgstr ""
+
+#: views/slider_list.php:522
+msgid "This option will likely solve \"Old jQuery\" issues."
+msgstr ""
+
+#: views/slider_list.php:525
 msgid "Put JS includes to body"
 msgstr ""
 
-#: views/slider_list.php:639
+#: views/slider_list.php:527
 msgid ""
 "This is the most common workaround for jQuery related issues, and is "
 "recommended when you experience problems with jQuery."
 msgstr ""
 
-#: views/slider_list.php:652
+#: views/slider_list.php:540
 msgid "LayerSlider News"
 msgstr ""
 
-#: views/slider_list.php:654
+#: views/slider_list.php:542
 msgid "Filter:"
 msgstr ""
 
-#: views/slider_list.php:656
+#: views/slider_list.php:544
 msgid "All"
 msgstr ""
 
-#: views/slider_list.php:657
+#: views/slider_list.php:545
 msgid "Announcements"
 msgstr ""
 
-#: views/slider_list.php:658
+#: views/slider_list.php:546
 msgid "Release log"
 msgstr ""
 
-#: views/slider_list.php:659
+#: views/slider_list.php:547
 msgid "Beta versions"
 msgstr ""
 
-#: views/slider_list.php:662
+#: views/slider_list.php:550
 msgid ">You have version"
 msgstr ""
 
-#: views/slider_list.php:662
+#: views/slider_list.php:550
 msgid "installed"
 msgstr ""
 
-#: views/slider_list.php:681
+#: views/slider_list.php:569
 msgid "The documentation is here"
 msgstr ""
 
-#: views/slider_list.php:681
+#: views/slider_list.php:569
 msgid "Open this help menu to quickly access to our online documentation."
 msgstr ""
 
@@ -2510,21 +2494,21 @@ msgid ""
 "online documentation by clicking on this help menu."
 msgstr ""
 
-#: wp/actions.php:512 wp/actions.php:538
+#: wp/actions.php:523 wp/actions.php:549
 msgid ""
 "It looks like your files isn't writable, so PHP couldn't make any changes "
 "(CHMOD)."
 msgstr ""
 
-#: wp/actions.php:512 wp/actions.php:538
+#: wp/actions.php:523 wp/actions.php:549
 msgid "Cannot write to file"
 msgstr ""
 
-#: wp/actions.php:526
+#: wp/actions.php:537
 msgid "It looks like you haven't selected any skin to edit."
 msgstr ""
 
-#: wp/actions.php:526
+#: wp/actions.php:537
 msgid "No skin selected."
 msgstr ""
 

@@ -5,11 +5,11 @@ add_action( 'widgets_init', create_function( '', 'register_widget("LayerSlider_W
 
 class LayerSlider_Widget extends WP_Widget {
 
-	function LayerSlider_Widget() {
+	function __construct() {
 
 		$widget_ops = array( 'classname' => 'layerslider_widget', 'description' => __('Insert a slider with LayerSlider WP Widget', 'LayerSlider') );
 		$control_ops = array( 'id_base' => 'layerslider_widget' );
-		$this->WP_Widget( 'layerslider_widget', __('LayerSlider WP Widget', 'LayerSlider'), $widget_ops, $control_ops );
+		parent::__construct( 'layerslider_widget', __('LayerSlider WP Widget', 'LayerSlider'), $widget_ops, $control_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -40,7 +40,7 @@ class LayerSlider_Widget extends WP_Widget {
 			<?php if($sliders != null && !empty($sliders)) { ?>
 			<select id="<?php echo $this->get_field_id( 'id' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'id' ); ?>">
 				<?php foreach($sliders as $item) : ?>
-				<?php $name = empty($item['name']) ? 'Unnamed' : $item['name']; ?>
+				<?php $name = empty($item['name']) ? 'Unnamed' : htmlspecialchars($item['name']); ?>
 				<?php if($item['id'] == $instance['id']) { ?>
 				<option value="<?php echo $item['id'] ?>" selected="selected"><?php echo $name ?> | #<?php echo $item['id'] ?></option>
 				<?php } else { ?>

@@ -7,8 +7,8 @@ if(!defined('LS_ROOT_FILE')) {
 
 // Full-width slider
 if(isset($slides['properties']['props']['forceresponsive'])) {
-	$output[] = '<div class="ls-wp-fullwidth-container" style="height:'.layerslider_check_unit($slides['properties']['props']['height']).';">';
-	$output[] = '<div class="ls-wp-fullwidth-helper">';
+	$lsContainer[] = '<div class="ls-wp-fullwidth-container" style="height:'.layerslider_check_unit($slides['properties']['props']['height']).';">';
+	$lsContainer[] = '<div class="ls-wp-fullwidth-helper">';
 }
 
 // Get slider style
@@ -30,14 +30,14 @@ if(has_action('layerslider_before_slider_content')) {
 }
 
 // Start of slider container
-$output[] = '<div id="'.$sliderID.'" class="ls-wp-container" style="'.implode('', $sliderStyleAttr).'">';
+$lsContainer[] = '<div id="'.$sliderID.'" class="ls-wp-container" style="'.implode('', $sliderStyleAttr).'">';
 
 // Add slides
 if(!empty($slider['slides']) && is_array($slider['slides'])) {
 	foreach($slider['slides'] as $slidekey => $slide) {
 
 		// Skip this slide?
-		if(isset($slide['props']['skip'])) { continue; }
+		if(!empty($slide['props']['skip'])) { continue; }
 
 		// Get slide attributes
 		$slideId = !empty($slide['props']['id']) ? ' id="'.$slide['props']['id'].'"' : '';
@@ -89,7 +89,7 @@ if(!empty($slider['slides']) && is_array($slider['slides'])) {
 
 		// Start of slide
 		$slideAttrs = !empty($slideAttrs) ? 'data-ls="'.$slideAttrs.'"' : '';
-		$output[] = '<div class="ls-slide"'.$slideId.' '.$slideAttrs.'>';
+		$lsMarkup[] = '<div class="ls-slide"'.$slideId.' '.$slideAttrs.'>';
 
 		// Add slide background
 		if(!empty($slide['props']['background'])) {
@@ -114,14 +114,14 @@ if(!empty($slider['slides']) && is_array($slider['slides'])) {
 			}
 
 
-			$output[] = '<img src="'.$src.'" class="ls-bg" alt="'.$alt.'" />';
+			$lsMarkup[] = '<img src="'.$src.'" class="ls-bg" alt="'.$alt.'" />';
 		}
 
 		// Add slide thumbnail
 		if(!isset($slides['properties']['attrs']['thumbnailNavigation']) || $slides['properties']['attrs']['thumbnailNavigation'] != 'disabled') {
 			if(!empty($slide['props']['thumbnail'])) {
 				$src = !empty($slide['props']['thumbnailId']) ? apply_filters('ls_get_image', $slide['props']['thumbnailId'], $slide['props']['thumbnail']) : $slide['props']['thumbnail'];
-				$output[] = '<img src="'.$src.'" class="ls-tn" alt="Slide thumbnail" />';
+				$lsMarkup[] = '<img src="'.$src.'" class="ls-tn" alt="Slide thumbnail" />';
 			}
 		}
 
@@ -130,7 +130,7 @@ if(!empty($slider['slides']) && is_array($slider['slides'])) {
 			foreach($slide['layers'] as $layerkey => $layer) {
 
 				// Skip this slide?
-				if(isset($layer['props']['skip'])) { continue; }
+				if(!empty($layer['props']['skip'])) { continue; }
 
 				// WPML support
 				if(function_exists('icl_t')) {
@@ -247,7 +247,7 @@ if(!empty($slider['slides']) && is_array($slider['slides'])) {
 					$inner->html(do_shortcode(__(stripslashes($layer['props']['html']))));
 				}
 
-				$output[] = $el;
+				$lsMarkup[] = $el;
 			}
 		}
 
@@ -261,21 +261,21 @@ if(!empty($slider['slides']) && is_array($slider['slides'])) {
 				$slide['props']['linkUrl'] = $postContent->getWithFormat($slide['props']['linkUrl']);
 			}
 
-			$output[] = '<a href="'.$slide['props']['linkUrl'].'"'.$target.' class="ls-link"></a>';
+			$lsMarkup[] = '<a href="'.$slide['props']['linkUrl'].'"'.$target.' class="ls-link"></a>';
 		}
 
 		// End of slide
-		$output[] = '</div>';
+		$lsMarkup[] = '</div>';
 	}
 }
 
 // End of slider container
-$output[] = '</div>';
+$lsMarkup[] = '</div>';
 
 // Full-width slider
 if(isset($slides['properties']['props']['forceresponsive'])) {
-	$output[] = '</div>';
-	$output[] = '</div>';
+	$lsMarkup[] = '</div>';
+	$lsMarkup[] = '</div>';
 }
 
 // After slider content hook

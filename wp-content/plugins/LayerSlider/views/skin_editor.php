@@ -1,6 +1,6 @@
 <?php
 
-	if(!defined('LS_ROOT_FILE')) { 
+	if(!defined('LS_ROOT_FILE')) {
 		header('HTTP/1.0 403 Forbidden');
 		exit;
 	}
@@ -29,7 +29,7 @@
 
 <div id="ls-screen-options" class="metabox-prefs hidden">
 	<div id="screen-options-wrap" class="hidden">
-		<form id="ls-screen-options-form" action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+		<form id="ls-screen-options-form" method="post">
 			<h5><?php _e('Show on screen', 'LayerSlider') ?></h5>
 			<label>
 				<input type="checkbox" name="showTooltips"<?php echo $lsScreenOptions['showTooltips'] == 'true' ? ' checked="checked"' : ''?>> <?php _e('Tooltips', 'LayerSlider') ?>
@@ -37,7 +37,7 @@
 		</form>
 	</div>
 	<div id="screen-options-link-wrap" class="hide-if-no-js screen-meta-toggle">
-		<a href="#screen-options-wrap" id="show-settings-link" class="show-settings"><?php _e('Screen Options', 'LayerSlider') ?></a>
+		<button type="button" id="show-settings-link" class="button show-settings" aria-controls="screen-options-wrap" aria-expanded="false"><?php _e('Screen Options', 'LayerSlider') ?></button>
 	</div>
 </div>
 
@@ -58,7 +58,7 @@
 	<!-- End of error messages -->
 
 	<!-- Editor box -->
-	<form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post" class="ls-box ls-skin-editor-box">
+	<form method="post" class="ls-box ls-skin-editor-box">
 		<input type="hidden" name="ls-user-skins" value="1">
 		<?php wp_nonce_field('save-user-skin'); ?>
 		<h3 class="header medium">

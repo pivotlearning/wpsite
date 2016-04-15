@@ -1,12 +1,9 @@
-<?php
-	if(!defined('LS_ROOT_FILE')) {
-		header('HTTP/1.0 403 Forbidden');
-		exit;
-	}
-?>
+<?php if(!defined('LS_ROOT_FILE')) { header('HTTP/1.0 403 Forbidden'); exit; } ?>
+
 <!-- Slider title -->
 <div class="ls-slider-titlewrap">
-	<input type="text" name="title" value="<?php echo $slider['properties']['title'] ?>" id="title" autocomplete="off" placeholder="<?php _e('Type your slider name here', 'LayerSlider') ?>">
+	<?php $sliderName = !empty($slider['properties']['title']) ? htmlspecialchars(stripslashes($slider['properties']['title'])) : ''; ?>
+	<input type="text" name="title" value="<?php echo $sliderName ?>" id="title" autocomplete="off" placeholder="<?php _e('Type your slider name here', 'LayerSlider') ?>">
 	<div class="ls-slider-slug">
 		Slider slug:<input type="text" name="slug" value="<?php echo !empty($slider['properties']['slug']) ? $slider['properties']['slug'] : '' ?>" autocomplete="off" placeholder="<?php _e('e.g. homepageslider', 'LayerSlider') ?>" data-help="Set a custom slider identifier to use in shortcodes instead of the database ID. Needs to be unique, and can contain only alphanumeric characters. This setting is optional.">
 	</div>
@@ -184,7 +181,7 @@
 							<?php $bgImageId = !empty($slider['properties']['backgroundimageId']) ? $slider['properties']['backgroundimageId'] : null; ?>
 							<input type="hidden" name="backgroundimageId" value="<?php echo !empty($slider['properties']['backgroundimageId']) ? $slider['properties']['backgroundimageId'] : '' ?>">
 							<input type="hidden" name="backgroundimage" value="<?php echo !empty($slider['properties']['backgroundimage']) ? $slider['properties']['backgroundimage'] : '' ?>">
-							<div class="ls-image ls-upload">
+							<div class="ls-image ls-global-background ls-upload">
 								<div><img src="<?php echo apply_filters('ls_get_thumbnail', $bgImageId, $bgImage) ?>" alt=""></div>
 								<a href="#" class="dashicons dashicons-dismiss"></a>
 							</div>
@@ -334,7 +331,7 @@
 							<?php $slider['properties']['yourlogoId'] = !empty($slider['properties']['yourlogoId']) ? $slider['properties']['yourlogoId'] : null; ?>
 							<input type="hidden" name="yourlogoId" value="<?php echo !empty($slider['properties']['yourlogoId']) ? $slider['properties']['yourlogoId'] : '' ?>">
 							<input type="hidden" name="yourlogo" value="<?php echo !empty($slider['properties']['yourlogo']) ? $slider['properties']['yourlogo'] : '' ?>">
-							<div class="ls-image ls-upload">
+							<div class="ls-image ls-upload ls-yourlogo-upload">
 								<div><img src="<?php echo apply_filters('ls_get_thumbnail', $slider['properties']['yourlogoId'], $slider['properties']['yourlogo']) ?>" alt=""></div>
 								<a href="#" class="dashicons dashicons-dismiss"></a>
 							</div>

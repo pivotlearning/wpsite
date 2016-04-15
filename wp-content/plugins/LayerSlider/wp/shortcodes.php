@@ -7,9 +7,10 @@ function layerslider($id = 0, $filters = '') {
 
 class LS_Shortcode {
 
-	// A counter used to make slider IDs
-	// that are guaranteed to be unique
-	public static $sliderCount = 0;
+	// List of already included sliders on page.
+	// Using to identify duplicates and give them
+	// a unique slider ID to avoid issues with caching.
+	public static $slidersOnPage = array();
 
 	private function __contruct() {}
 
@@ -116,6 +117,16 @@ class LS_Shortcode {
 		// Has ID attribute
 		if(!empty($atts['id'])) {
 
+			// Attempt to retrieve the pre-generated markup
+			// set via the Transients API
+			if(get_option('ls_use_cache', true)) {
+				if($markup = get_transient('ls-slider-data-'.intval($atts['id']))) {
+					$markup['id'] = intval($atts['id']);
+					$markup['_cached'] = true;
+					return $markup;
+				}
+			}
+
 			// Slider exists and isn't deleted
 			$slider = LS_Sliders::find($atts['id']);
 			if(!empty($slider) || $slider['flag_deleted'] != '1') {
@@ -132,15 +143,67 @@ class LS_Shortcode {
 
 	public static function processShortcode($slider) {
 
-		// Increase slider counter to make slider IDs
-		// that are guaranteed to be unique
-		self::$sliderCount++;
+		// Slider ID
+		$sID = 'layerslider_'.$slider['id'];
+
+		// Include init code in the footer?
+		$condsc = get_option('ls_conditional_script_loading', false) ? true : false;
+		$footer = get_option('ls_include_at_footer', false) ? true : false;
+		$footer = $condsc ? true : $footer;
+
+		// Check if the returned data is a string,
+		// indicating that it's a pre-generated
+		// slider markup retrieved via Transients
+		if(!empty($slider['_cached'])) { $output = $slider;}
+		else {
+			$output = self::generateSliderMarkup($slider);
+			set_transient('ls-slider-data-'.$slider['id'], $output, HOUR_IN_SECONDS * 6);
+		}
+
+		// Replace slider ID to avoid issues with enabled caching when
+		// adding the same slider to a page in multiple times
+		if(array_key_exists($slider['id'], self::$slidersOnPage)) {
+			$sliderCount = ++self::$slidersOnPage[ $slider['id'] ];
+			$output['init'] = str_replace($sID, $sID.'_'.$sliderCount, $output['init']);
+			$output['container'] = str_replace($sID, $sID.'_'.$sliderCount, $output['container']);
+
+		} else {
+
+			// Add current slider ID to identify duplicates later on
+			// and give them a unique slider ID to avoid issues with caching.
+			self::$slidersOnPage[ $slider['id'] ] = 1;
+		}
+
+		// Unify the whole markup after any potential string replacement
+		$output['markup'] = $output['container'].$output['markup'];
+
+		// Filter to override the printed HTML markup
+		if(has_filter('layerslider_slider_markup')) {
+			$lsMarkup = apply_filters('layerslider_slider_markup', $lsMarkup);
+		}
+
+		if($footer) {
+			$GLOBALS['lsSliderInit'][] = $output['init'];
+			return $output['markup'];
+		} else {
+			return $output['init'].$output['markup'];
+		}
+	}
+
+
+
+	public static function generateSliderMarkup($slider = null) {
+
+		// Bail out early if no params received
+		if(!$slider) { return array('init' => '', 'container' => '', 'markup' => ''); }
 
 		// Slider and markup data
-		$slides = $slider['data'];
 		$id = $slider['id'];
-		$sliderID = 'layerslider_'.$id.'_'.self::$sliderCount;
-		$output = '';
+		$sliderID = 'layerslider_'.$id;
+		$slides = $slider['data'];
+
+		// Store generated output
+		$lsInit = ''; $lsContainer = ''; $lsMarkup = '';
 
 		// Include slider file
 		if(is_array($slides)) {
@@ -154,22 +217,26 @@ class LS_Shortcode {
 			include LS_ROOT_PATH.'/config/defaults.php';
 			include LS_ROOT_PATH.'/includes/slider_markup_init.php';
 			include LS_ROOT_PATH.'/includes/slider_markup_html.php';
-			$output = implode('', $output);
+			$lsInit = implode('', $lsInit);
+			$lsContainer = implode('', $lsContainer);
+			$lsMarkup = implode('', $lsMarkup);
 		}
 
-		// Filter to override the printed HTML markup
-		if(has_filter('layerslider_slider_markup')) {
-			$output = apply_filter('layerslider_slider_markup', $output);
-		}
-
-		// Return data
-		if(get_option('ls_concatenate_output', true)) {
-			$output = trim(preg_replace('/\s+/u', ' ', $output));
+		// Concatenate output
+		if(get_option('ls_concatenate_output', false)) {
+			$lsInit = trim(preg_replace('/\s+/u', ' ', $lsInit));
+			$lsContainer = trim(preg_replace('/\s+/u', ' ', $lsContainer));
+			$lsMarkup = trim(preg_replace('/\s+/u', ' ', $lsMarkup));
 		}
 
 		// Bug fix in v5.4.0: Use self closing tag for <source>
-		$output = str_replace('></source>', ' />', $output);
+		$lsMarkup = str_replace('></source>', ' />', $lsMarkup);
 
-		return $output;
+		// Return formatted data
+		return array(
+			'init' => $lsInit,
+			'container' => $lsContainer,
+			'markup' => $lsMarkup
+		);
 	}
 }

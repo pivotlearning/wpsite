@@ -52,6 +52,10 @@
 	color: red;
 }
 
+.ls-version-number a {
+	margin-left: 5px;
+}
+
 // No sliders notification
 #ls-no-sliders {
 	width: 600px;
@@ -404,7 +408,7 @@ div.ls-bulk-actions {
 	margin-top: 50px;
 
 	.filters span {
-		line-height: 40px;
+		line-height: 38px;
 	}
 
 	.ls-version {
@@ -484,12 +488,14 @@ div.ls-bulk-actions {
 	.footer a {
 		float: right;
 		margin-left: 10px;
+		padding-right: 10px;
+		border-right: 1px solid #e1e1e1;
 		line-height: 28px;
 
-		&:last-child {
-			padding-right: 10px;
+		&.ls-deauthorize {
+			padding-right: 0 ;
 			// margin-right: 10px;
-			border-right: 1px solid #e1e1e1;
+			border-right: 0;
 		}
 	}
 }
