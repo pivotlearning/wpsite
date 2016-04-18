@@ -1509,3 +1509,15 @@ body .one_third {
 	font-size: 150% !important;
 	color: #fff !important;
 }
+
+.page-id-4089 h2 {
+	font-size: 300%;
+}
+
+.page-id-4089 .margin_top8 {
+	display: none;
+}
+
+.page-id-4089 #breadcrumb {
+	display: none;
+}
