@@ -28,6 +28,12 @@ if ( ! isset( $content_width ) ) $content_width = 1170;
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=286148241411530";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0049/1530.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
 	<div id="main" class="layout-<?php 	
 		$mclass =  $king->cfg['layout']; 
 		if( !empty( $post->post_name ) ){
