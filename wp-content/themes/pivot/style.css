@@ -1504,3 +1504,8 @@ body .one_third {
 	color: #fff !important;
 	text-transform: uppercase;
 }
+
+.serviceheader h4 {
+	font-size: 150% !important;
+	color: #fff !important;
+}
