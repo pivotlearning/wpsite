@@ -1500,7 +1500,7 @@ body .one_third {
 }
 
 .serviceheader {
-	font-size: 150%;
-	color: #fff;
+	font-size: 150% !important;
+	color: #fff !important;
 	text-transform: uppercase;
 }
