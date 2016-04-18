@@ -299,6 +299,12 @@ $sections[] = array(
 			'std' => '#'
 		),
 		array(
+			'id' => 'footerFinancials',
+			'type' => 'text',
+			'title' => __('Footer Financials\'s Link', 'linstar'), 
+			'std' => '#'
+		),
+		array(
 			'id' => 'footerPrivacy',
 			'type' => 'text',
 			'title' => __('Footer Privacy\'s Link', 'linstar'), 

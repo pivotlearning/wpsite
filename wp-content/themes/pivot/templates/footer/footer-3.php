@@ -67,5 +67,9 @@
     	<a href="<?php echo esc_url( $king->cfg['footerPrivacy'] ); ?>">
     		<?php _e('Privacy Policy', KING_DOMAIN ); ?>
     	</a>
+                | 
+        <a href="<?php echo esc_url( $king->cfg['footerFinancials'] ); ?>">
+            <?php _e('Financials', KING_DOMAIN ); ?>
+        </a>
 	</div>
 </div>
