@@ -1498,3 +1498,9 @@ body .one_third {
 .page-id-3721 h2 {
 	font-size: 40px;
 }
+
+.serviceheader {
+	font-size: 150%;
+	color: #fff;
+	text-transform: uppercase;
+}
