@@ -1521,3 +1521,16 @@ body .one_third {
 .page-id-4089 #breadcrumb {
 	display: none;
 }
+
+
+.featured_section135 .box h4 {
+	min-height:5em;
+}
+
+.featured_section135 .box h4::after {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 5em;
+	overflow: hidden;
+	content: "\00A0"; 
+}
