@@ -34,7 +34,7 @@ var b=document.getElementsByTagName("script")[0];
 a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0049/1530.js?"+Math.floor(new Date().getTime()/3600000);
 a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </script>
-<script type="text/javascript" src="scroll.min.js"></script>
+<script type="text/javascript" src="<?php echo THEME_URI; ?>/assets/js/scroll.min.js"></script>
 	<div id="main" class="layout-<?php 	
 		$mclass =  $king->cfg['layout']; 
 		if( !empty( $post->post_name ) ){
