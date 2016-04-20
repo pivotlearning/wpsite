@@ -1545,3 +1545,9 @@ body .one_third {
 .page-id-4089 #breadcrumb {
 	display: none;
 }
+
+/* New contact form */
+
+#wpcf7-f4118-p3721-o1 .wpcf7-text {
+	width: 50%;
+}
