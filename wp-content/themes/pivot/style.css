@@ -1567,6 +1567,33 @@ body .one_third {
 	border: 2px solid #fff;
 }
 
+#wpcf7-f4118-p4089-o1 .wpcf7-text {
+	width: 50%;
+}
+
+#wpcf7-f4118-p4089-o1 .wpcf7-textarea {
+	width: 50%;
+}
+
+#wpcf7-f4118-p4089-o1 .wpcf7-text {
+	width: 50%;
+}
+
+#wpcf7-f4118-p4089-o1 .wpcf7-textarea {
+	width: 50%;
+}
+
+#wpcf7-f4118-p4089-o1 .wpcf7-submit {
+	color: #1ba79b;
+	background-color: #fff;
+	font-weight: bold;
+}
+
+#wpcf7-f4118-p34089-o1 .wpcf7-response-output {
+	color: #fff;
+	border: 2px solid #fff;
+}
+
 .servicescontactbutton {
 	padding: 5px 15px;
 	background-color: #fff;
