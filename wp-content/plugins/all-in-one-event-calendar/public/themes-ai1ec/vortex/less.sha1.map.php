@@ -47,6 +47,19 @@
     'posterboardTileBg' => '#fff9f0',
     'posterboardTileBorder' => '#fff9f0',
     'posterboardTileShadow' => 'rgba(0,0,0,0.4)',
+    'saasThemeActionColor' => '#ffffff',
+    'saasThemeActionMenuBackgroundColor' => '#67b128',
+    'saasThemeDateBlockBackgroundColor' => '#539a00',
+    'saasThemeDateBlockColor' => '#fff',
+    'saasThemePagePanelBackgroundColor' => '#eeeeee',
+    'saasThemePagePanelBorderColor' => '#dddddd',
+    'saasThemePagePanelLinksColor' => '#3d6b99',
+    'saasThemePageTextColor' => '#333333',
+    'saasThemePageTitleFontColor' => '#000',
+    'saasThemePageTitleFontFamily' => '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    'saasThemePageTitleFontSize' => '68px',
+    'saasThemeTaxonomiesBackgroundColor' => '#272727',
+    'saasThemeTaxonomiesColor' => '#ffffff',
     'streamDateTitleBackground' => '#c4c4c4',
     'streamDateTitleText' => '#ffffff',
     'streamEventBackground' => '#ffffff',
@@ -269,28 +282,18 @@
     ),
     'less\\calendar.less' => 
     array (
-      'size' => 17309,
-      'sha1' => '830fc0d021de8720f122954a5cdfd801a1c427a1',
-    ),
-    'less\\cfg-icons.less' => 
-    array (
-      'size' => 17827,
-      'sha1' => '21e782aa46e84088e7d09c1f0c252e40d8fc0d76',
+      'size' => 19251,
+      'sha1' => '06e08ee4a9a70574f6f51bdbfeed2e53d2f779b0',
     ),
     'less\\common-widgets.less' => 
     array (
       'size' => 725,
       'sha1' => '0b39b1d4e35bffe2157468344e1b7f4d06533606',
     ),
-    'less\\custom-filter-groups.less' => 
-    array (
-      'size' => 671,
-      'sha1' => '768aa7f0cfcc8375d8b5597fb3062c098adc3cf8',
-    ),
     'less\\event.less' => 
     array (
-      'size' => 3632,
-      'sha1' => '5d5f2096acde8b2a455322734ae1d62ec6b396c4',
+      'size' => 3692,
+      'sha1' => 'a9958aa2c0137670f3e39c73dbd3be3d1adcbdf1',
     ),
     'less\\extended_views.less' => 
     array (
@@ -362,15 +365,15 @@
       'size' => 10665,
       'sha1' => '8d7d0d81e445093ecc58577605c36320d2741ba7',
     ),
+    'less\\font-league-gothic.less' => 
+    array (
+      'size' => 677,
+      'sha1' => 'fad7c34931c2a1d45a19d882391210f61f966002',
+    ),
     'less\\fonts\\font-league-gothic.less' => 
     array (
       'size' => 483,
       'sha1' => 'ade2834177d0a2a466c2dbd08a5d4a0c348b059b',
-    ),
-    'less\\interactive_frontend.less' => 
-    array (
-      'size' => 2689,
-      'sha1' => '1757229df9f45c4c559d054d5d1ab130df707db1',
     ),
     'less\\plugins\\datepicker3.less' => 
     array (
@@ -392,10 +395,15 @@
       'size' => 3946,
       'sha1' => 'b20c2d939abce946e6456845df993a8043e9e1ae',
     ),
+    'less\\saas-theme.less' => 
+    array (
+      'size' => 13134,
+      'sha1' => 'e0e68b93df410232e1e14eaefed0e3542a09ecc4',
+    ),
     'less\\style.less' => 
     array (
-      'size' => 20830,
-      'sha1' => '83fe2a2d17b85b45627ffbb93f4b6cbafcda7ebb',
+      'size' => 20936,
+      'sha1' => '54917e6bb481eea9649ca08e9b7ba2221fdf31eb',
     ),
     'less\\timely-font-awesome.less' => 
     array (
@@ -422,20 +430,20 @@
       'size' => 2875,
       'sha1' => 'edf0e9b240b3cda3b30b6b835bf6dfedb1047edf',
     ),
+    'less\\user_variables_st.php' => 
+    array (
+      'size' => 3833,
+      'sha1' => '35291b881a946836c7ee20c2a8152ade1ff8f659',
+    ),
     'less\\variables.less' => 
     array (
       'size' => 1248,
       'sha1' => '1d7fcb0178ffdf8a57e8e9c4f2fb2c0dc70e3c7f',
     ),
-    'less\\venue-details.less' => 
-    array (
-      'size' => 932,
-      'sha1' => 'ddfc94e59e47329dcbb93c36edf5dc07587e5bf3',
-    ),
     'style.css' => 
     array (
-      'size' => 239,
-      'sha1' => '4041c1f91f77e5cc426c995c252ed5ba7193628d',
+      'size' => 213,
+      'sha1' => 'd2d11e0f5366362d3c0cc77b0b36915841f2988d',
     ),
   ),
 );

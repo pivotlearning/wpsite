@@ -90,3 +90,4 @@ require_once(ABSPATH . 'wp-settings.php');
 
 /* Turn off auto-updates to keep site in sync with repo */
 define( 'AUTOMATIC_UPDATER_DISABLED', true );
+define('ALLOW_UNFILTERED_UPLOADS', true);

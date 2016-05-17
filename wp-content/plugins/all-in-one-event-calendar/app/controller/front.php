@@ -608,6 +608,11 @@ class Ai1ec_Front_Controller {
 				'wp_ajax_ai1ec_get_repeat_box',
 				array( 'view.admin.get-repeat-box', 'get_repeat_box' )
 			);
+			// get the tax options box
+			$dispatcher->register_action(
+				'wp_ajax_ai1ec_get_tax_box',
+				array( 'view.admin.get-tax-box', 'get_tax_box' )
+			);
 			// add dismissable notice handler
 			$dispatcher->register_action(
 				'wp_ajax_ai1ec_dismiss_notice',
@@ -618,23 +623,21 @@ class Ai1ec_Front_Controller {
 				'wp_ajax_ai1ec_rrule_to_text',
 				array( 'view.admin.get-repeat-box', 'convert_rrule_to_text' )
 			);
-			if ( $this->_registry->get( 'helper.api-settings' )->ai1ec_api_enabled() ) {
-				// display ticketing details in the events list
-				$dispatcher->register_action(
-					'wp_ajax_ai1ec_show_ticket_details',
-					array( 'view.admin.all-events', 'show_ticket_details' )
-				);
-				// display attendees list
-				$dispatcher->register_action(
-					'wp_ajax_ai1ec_show_attendees',
-					array( 'view.admin.all-events', 'show_attendees' )
-				);
-				// CSS and templates for ticketing options
-				$dispatcher->register_action(
-					'restrict_manage_posts',
-					array( 'view.admin.all-events', 'add_ticketing_styling' )
-				);
-			}
+			// display ticketing details in the events list
+			$dispatcher->register_action(
+				'wp_ajax_ai1ec_show_ticket_details',
+				array( 'view.admin.all-events', 'show_ticket_details' )
+			);
+			// display attendees list
+			$dispatcher->register_action(
+				'wp_ajax_ai1ec_show_attendees',
+				array( 'view.admin.all-events', 'show_attendees' )
+			);
+			// CSS and templates for ticketing options
+			$dispatcher->register_action(
+				'restrict_manage_posts',
+				array( 'view.admin.all-events', 'add_ticketing_styling' )
+			);
 			// taxonomy filter
 			$dispatcher->register_action(
 				'restrict_manage_posts',
@@ -655,14 +658,6 @@ class Ai1ec_Front_Controller {
 			$dispatcher->register_action(
 				'admin_menu',
 				array( 'view.admin.add-ons', 'add_page' )
-			);
-			$dispatcher->register_action(
-				'admin_menu',
-				array( 'view.admin.ticketing-invitation', 'add_page' )
-			);
-			$dispatcher->register_action(
-				'admin_menu',
-				array( 'view.admin.ticketing-invitation', 'add_meta_box' )
 			);
 			$dispatcher->register_action(
 				'admin_menu',
@@ -741,12 +736,6 @@ class Ai1ec_Front_Controller {
 			$dispatcher->register_action(
 				'save_post',
 				array( 'model.event.creating', 'save_post' ),
-				10,
-				3
-			);
-			$dispatcher->register_action(
-				'save_post',
-				array( 'view.admin.ticketing-invitation', 'handle_post' ),
 				10,
 				3
 			);

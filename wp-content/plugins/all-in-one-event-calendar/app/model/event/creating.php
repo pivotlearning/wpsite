@@ -233,7 +233,7 @@ class Ai1ec_Event_Creating extends Ai1ec_Base {
 			//is treated by another hook (pre_update_event inside api )
 			$api = $this->_registry->get( 'model.api.api-ticketing' );
 			if ( 'tickets' === $cost_type ) {			
-				$result = $api->store_event( $event, $post );
+				$result = $api->store_event( $event, $post, false );
 				if ( true !== $result ) {
 					$_POST['_ticket_store_event_error'] = $result;
 				}
@@ -292,9 +292,10 @@ class Ai1ec_Event_Creating extends Ai1ec_Base {
 			}
 			if ( 0 < count( $fields ) ) {
 				$post    = get_post( $post_id );
-				$message = $api->update_api_event_fields( $post, $fields );
+				$ajax    = defined( 'DOING_AJAX' ) && DOING_AJAX;
+				$message = $api->update_api_event_fields( $post, $fields, 'update', $ajax );
 				if ( null !== $message )  {						
-					if ( defined('DOING_AJAX') && DOING_AJAX ) {
+					if ( $ajax ) {
 						wp_die( $message );
 					} else {
 						wp_redirect( $this->get_sendback_page( $post_id ) );
@@ -310,9 +311,10 @@ class Ai1ec_Event_Creating extends Ai1ec_Base {
 			}
 			if ( 0 < count( $fields ) ) {
 				$post    = get_post( $post_id );
-				$message = $api->update_api_event_fields( $post, $fields );
+				$ajax    = defined( 'DOING_AJAX' ) && DOING_AJAX;
+				$message = $api->update_api_event_fields( $post, $fields, 'update', $ajax );
 				if ( null !== $message )  {			
-					if ( defined('DOING_AJAX') && DOING_AJAX ) {
+					if ( $ajax ) {
 						wp_die( $message );
 					} else {	
 						wp_redirect( $this->get_sendback_page( $post_id ) );
@@ -334,13 +336,13 @@ class Ai1ec_Event_Creating extends Ai1ec_Base {
 			$event     = $data['event'];	  
 			$cost_type = isset( $_REQUEST['ai1ec_cost_type'] ) ? $_REQUEST['ai1ec_cost_type'] : '';
 			if ( 'tickets' === $cost_type ) {
-				$result = $api->store_event( $event, $post );
+				$result = $api->store_event( $event, $post, true );
 		    	if ( true !== $result ) {    		
 					wp_redirect( $this->get_sendback_page( $post_id ) );
 					exit();	
 		    	}				
 			} else {
-				$message = $api->delete_api_event( $post_id );
+				$message = $api->delete_api_event( $post_id, 'update', false );
 				if ( null !== $message )  {											
 					wp_redirect( $this->get_sendback_page( $post_id ) );
 					exit();	
