@@ -2,8 +2,8 @@
 Contributors: jkudish, kwight
 Tags: eventbrite, events, api, WordPress.com
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 1.0.10
+Tested up to: 4.5
+Stable tag: 1.0.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,8 @@ If the eventbrite API plugin is installed but missing Keyring or an eventbrite.c
 1. Upload `eventbrite-api.zip` or search for it from the Plugins > Add New admin page.
 2. Activate the plugin through the Plugins menu.
 3. Repeat these steps for the [Keyring plugin](https://wordpress.org/plugins/keyring/).
-4. [Assign](http://codex.wordpress.org/Page_Templates#Selecting_a_Page_Template) the Eventbrite Events page template to a page. This will be the page that shows your Eventbrite events.
+4. Log in to your Eventbrite account, create an app, and authorize Keyring.
+5. [Assign](http://codex.wordpress.org/Page_Templates#Selecting_a_Page_Template) the Eventbrite Events page template to a page. This will be the page that shows your Eventbrite events.
 
 For more detailed instructions, see the Eventbrite API [user assistance page](http://automattic.github.io/eventbrite-api/users.html).
 
@@ -84,6 +85,11 @@ All development for Eventbrite API plugin is done through the [GitHub repo](http
 This plugin was developed by [Automattic](http://automattic.com/), in direct partnership with [Eventbrite](http://eventbrite.com). The Eventbrite name and logo are used by permission.
 
 == Changelog ==
+
+= 1.0.11 - May 30, 2016 =
+* Support the `status` parameter in Eventbrite_Query when displaying private events.
+* Have date formats reflect the admin settings.
+* Improve the URL format to avoid ocaccional issues with the Eventbrite API.
 
 = 1.0.10 - October 7, 2015 =
 * Fix bug from when `Eventbrite_Query` args conflict with the loading URL.
